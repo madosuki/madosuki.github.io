@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://madosuki.github.io/2016/09/22/Xubuntuインストール直後のIntel-HD-Graphicsでのティアリング問題/index.html">
 <meta property="og:site_name" content="自堕落日記">
 <meta property="og:description" content="別にXubuntuに限らず、Intel HD Graphicsシリーズを使っているLinux環境なら該当する話ですが、ティアフリーオプションが有効になっていない場合があります。これが有効になっていないと画面がちらついたりします。特に、動きが多い動画を視聴するとわかりやすいでしょう。ブラウザのスクロールなんかでもティアリングが発生しますので、個人的には勘弁願いたいです。ですが残念なことにクリーンイン">
-<meta property="og:updated_time" content="2016-09-22T04:38:08.720Z">
+<meta property="og:updated_time" content="2016-09-22T04:41:52.205Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Xubuntuインストール直後のIntel HD Graphicsでのティアリング問題">
 <meta name="twitter:description" content="別にXubuntuに限らず、Intel HD Graphicsシリーズを使っているLinux環境なら該当する話ですが、ティアフリーオプションが有効になっていない場合があります。これが有効になっていないと画面がちらついたりします。特に、動きが多い動画を視聴するとわかりやすいでしょう。ブラウザのスクロールなんかでもティアリングが発生しますので、個人的には勘弁願いたいです。ですが残念なことにクリーンイン">
@@ -69,7 +69,9 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>別にXubuntuに限らず、Intel HD Graphicsシリーズを使っているLinux環境なら該当する話ですが、ティアフリーオプションが有効になっていない場合があります。<br>これが有効になっていないと画面がちらついたりします。特に、動きが多い動画を視聴するとわかりやすいでしょう。<br>ブラウザのスクロールなんかでもティアリングが発生しますので、個人的には勘弁願いたいです。<br>ですが残念なことにクリーンインストールしたXubuntu 16.04では有効になっていなかったので、<br>    $ sudo mkdir /etc/X11/xorg.conf.d<br>後に、<br>xorg.conf.d内に20-intel.confを作り、<br>    Section “Device”<br>    Identifier  “Intel Graphics”<br>    Driver      “intel”<br>    Option      “TearFree” “true”<br>    EndSection<br>を書き込み再起動すれば良いです。<br>これでもまだティアリングが発生するならばコンポジットを有効にすれば良いです。Xubuntuならば設定→ウィンドウマネージャ（詳細）からコンポジットの設定を行えます。Awesomeなどではコンポジットマネージャーをインストール、起動すれば良いと思います。</p>
+        <p>別にXubuntuに限らず、Intel HD Graphicsシリーズを使っているLinux環境なら該当する話ですが、ティアフリーオプションが有効になっていない場合があります。<br>これが有効になっていないと画面がちらついたりします。特に、動きが多い動画を視聴するとわかりやすいでしょう。<br>ブラウザのスクロールなんかでもティアリングが発生しますので、個人的には勘弁願いたいです。<br>ですが残念なことにクリーンインストールしたXubuntu 16.04では有効になっていなかったので、<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo mkdir /etc/X11/xorg.conf.d</div></pre></td></tr></table></figure></p>
+<p>後に、<br>xorg.conf.d内に20-intel.confを作り、<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Section &quot;Device&quot;</div><div class="line">	Identifier  &quot;Intel Graphics&quot;</div><div class="line">	Driver      &quot;intel&quot;</div><div class="line">	Option      &quot;TearFree&quot; &quot;true&quot;</div><div class="line">EndSection</div></pre></td></tr></table></figure></p>
+<p>を書き込み再起動すれば良いです。<br>これでもまだティアリングが発生するならばコンポジットを有効にすれば良いです。Xubuntuならば設定→ウィンドウマネージャ（詳細）からコンポジットの設定を行えます。Awesomeなどではコンポジットマネージャーをインストール、起動すれば良いと思います。</p>
 
       
     </div>
