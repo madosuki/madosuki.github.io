@@ -66,7 +66,7 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>別にXubuntuに限らず、Intel HD Graphicsシリーズを使っているLinux環境なら該当する話ですが、ティアフリーオプションが有効になっていない場合があります。<br>これが有効になっていないと画面がちらついたりします。特に、動きが多い動画を視聴するとわかりやすいでしょう。<br>ブラウザのスクロールなんかでもティアリングが発生しますので、個人的には勘弁願いたいです。<br>ですが残念なことにクリーンインストールしたXubuntu 16.04では有効になっていなかったので、<br>    $ sudo mkdir /etc/X11/xorg.conf.d<br>後に、<br>xorg.conf.d内に20-intel.confを作り、<br>    Section “Device”<br>       Identifier  “Intel Graphics”<br>       Driver      “intel”<br>       Option      “TearFree” “true”<br>    EndSection<br>を書き込み再起動すれば良いです。<br>これでもまだティアリングが発生するならばコンポジットを有効にすれば良いです。Xubuntuならば設定→ウィンドウマネージャ（詳細）からコンポジットの設定を行えます。Awesomeなどではコンポジットマネージャーをインストール、起動すれば良いと思います。</p>
+        <p>別にXubuntuに限らず、Intel HD Graphicsシリーズを使っているLinux環境なら該当する話ですが、ティアフリーオプションが有効になっていない場合があります。<br>これが有効になっていないと画面がちらついたりします。特に、動きが多い動画を視聴するとわかりやすいでしょう。<br>ブラウザのスクロールなんかでもティアリングが発生しますので、個人的には勘弁願いたいです。<br>ですが残念なことにクリーンインストールしたXubuntu 16.04では有効になっていなかったので、<br>‘$ sudo mkdir /etc/X11/xorg.conf.d’<br>後に、<br>xorg.conf.d内に20-intel.confを作り、<br>‘Section “Device”<br>   Identifier  “Intel Graphics”<br>   Driver      “intel”<br>   Option      “TearFree” “true”<br>EndSection’<br>を書き込み再起動すれば良いです。<br>これでもまだティアリングが発生するならばコンポジットを有効にすれば良いです。Xubuntuならば設定→ウィンドウマネージャ（詳細）からコンポジットの設定を行えます。Awesomeなどではコンポジットマネージャーをインストール、起動すれば良いと思います。</p>
 
       
     </div>
