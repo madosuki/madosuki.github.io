@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Ubuntuのwine-developパッケージでwinetricksを使う方法 - 自堕落日記</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="いつごろからかは忘れましたがUbuntuではDebian同様にwine-developmentパッケージが用意されそれで開発版のwineを簡単に利用できます。stagin版の場合はPPAを利用するのが一番簡単です。とまあ、そんなことは置いといて、wine-developはコマンド名も違うためそのままではリポジトリにあるwinetricksは動いてくれません。12export WINE=/usr/b">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntuのwine-developパッケージでwinetricksを使う方法">
+<meta property="og:url" content="http://madosuki.github.io/2016/09/24/Ubuntuのwine-developパッケージでwinetricksを使う方法/index.html">
+<meta property="og:site_name" content="自堕落日記">
+<meta property="og:description" content="いつごろからかは忘れましたがUbuntuではDebian同様にwine-developmentパッケージが用意されそれで開発版のwineを簡単に利用できます。stagin版の場合はPPAを利用するのが一番簡単です。とまあ、そんなことは置いといて、wine-developはコマンド名も違うためそのままではリポジトリにあるwinetricksは動いてくれません。12export WINE=/usr/b">
+<meta property="og:updated_time" content="2016-09-24T12:37:12.524Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ubuntuのwine-developパッケージでwinetricksを使う方法">
+<meta name="twitter:description" content="いつごろからかは忘れましたがUbuntuではDebian同様にwine-developmentパッケージが用意されそれで開発版のwineを簡単に利用できます。stagin版の場合はPPAを利用するのが一番簡単です。とまあ、そんなことは置いといて、wine-developはコマンド名も違うためそのままではリポジトリにあるwinetricksは動いてくれません。12export WINE=/usr/b">
+  
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">自堕落日記</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://madosuki.github.io"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-Ubuntuのwine-developパッケージでwinetricksを使う方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Ubuntuのwine-developパッケージでwinetricksを使う方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/09/24/Ubuntuのwine-developパッケージでwinetricksを使う方法/" class="article-date">
+  <time datetime="2016-09-24T12:30:41.000Z" itemprop="datePublished">2016-09-24</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>いつごろからかは忘れましたがUbuntuではDebian同様にwine-developmentパッケージが用意されそれで開発版のwineを簡単に利用できます。stagin版の場合はPPAを利用するのが一番簡単です。<br>とまあ、そんなことは置いといて、wine-developはコマンド名も違うためそのままではリポジトリにあるwinetricksは動いてくれません。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">export WINE=/usr/bin/wine-development</div><div class="line">export WINESERVER=/usr/lib/wine-development/wineserver</div></pre></td></tr></table></figure></p>
+<p>を.bashrcなどに書くか実行すればwinetricksが使えるようになります。</p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/09/22/Xubuntuインストール直後のIntel-HD-Graphicsでのティアリング問題/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Xubuntuインストール直後のIntel HD Graphicsでのティアリング問題&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 madosuki&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>
