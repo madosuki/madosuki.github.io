@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Yamchaのビルドについて - 自堕落日記</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Cabocha何となく使ってみようとしたら汎用 テキストチャンカー/タガーであるYamcha、が必要ということでビルドしようと思ったのですがC++11以降の環境だと失敗します。まぁ、古いC++向けに作られているから当たり前なのですが、Makefileとか弄るの面倒なので、ビルドできるように書き換えてdiffを用意しました。 https://gist.github.com/madosuki/2617">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Yamchaのビルドについて">
+<meta property="og:url" content="http://madosuki.github.io/2017/04/26/Yamchaのビルドについて/index.html">
+<meta property="og:site_name" content="自堕落日記">
+<meta property="og:description" content="Cabocha何となく使ってみようとしたら汎用 テキストチャンカー/タガーであるYamcha、が必要ということでビルドしようと思ったのですがC++11以降の環境だと失敗します。まぁ、古いC++向けに作られているから当たり前なのですが、Makefileとか弄るの面倒なので、ビルドできるように書き換えてdiffを用意しました。 https://gist.github.com/madosuki/2617">
+<meta property="og:updated_time" content="2017-04-26T06:38:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Yamchaのビルドについて">
+<meta name="twitter:description" content="Cabocha何となく使ってみようとしたら汎用 テキストチャンカー/タガーであるYamcha、が必要ということでビルドしようと思ったのですがC++11以降の環境だと失敗します。まぁ、古いC++向けに作られているから当たり前なのですが、Makefileとか弄るの面倒なので、ビルドできるように書き換えてdiffを用意しました。 https://gist.github.com/madosuki/2617">
+  
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">自堕落日記</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://madosuki.github.io"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-Yamchaのビルドについて" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Yamchaのビルドについて
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2017/04/26/Yamchaのビルドについて/" class="article-date">
+  <time datetime="2017-04-26T05:57:22.000Z" itemprop="datePublished">2017-04-26</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Cabocha何となく使ってみようとしたら汎用 テキストチャンカー/タガーであるYamcha、が必要ということでビルドしようと思ったのですがC++11以降の環境だと失敗します。<br>まぁ、古いC++向けに作られているから当たり前なのですが、Makefileとか弄るの面倒なので、ビルドできるように書き換えてdiffを用意しました。</p>
+<p><a href="https://gist.github.com/madosuki/261712bdde524bbe4b1fd977dbfcae4c" target="_blank" rel="external">https://gist.github.com/madosuki/261712bdde524bbe4b1fd977dbfcae4c</a>　に置いたので必要な場合はどうぞ。</p>
+<p>Debian9とCentOS7でビルド出来たことを確認していますが、結構適当に書いたものなので、不具合が出ているかもしれませんのでその辺はあしからず。</p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/12/17/iMac-mid-2011にDebian系ディストリをインストールした際に行うこと/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          iMac mid 2011にDebian系ディストリをインストールした際に行うこと
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 madosuki&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>
