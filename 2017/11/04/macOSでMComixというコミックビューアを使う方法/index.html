@@ -13,7 +13,7 @@
 <meta property="og:description" content="macOS向けでzipを読めるコミックビューアは無いかなーと探していたところPython2で実装されたcomixというコミックビューアがあるのを思い出しました。そういえばUbuntuをメインにしていたときはよく使っていました。随分前に開発が止まっていて今更使う気にはならなかったのですがそれのフォークであるMComixの存在を知りました。これは現在も開発が続けられているようです。Python2、Py">
 <meta property="og:locale" content="ja">
 <meta property="og:image" content="http://madosuki.github.io/img/screenshot.png">
-<meta property="og:updated_time" content="2017-11-04T03:22:23.000Z">
+<meta property="og:updated_time" content="2017-11-04T03:23:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="macOSでMComixというコミックビューアを使う方法">
 <meta name="twitter:description" content="macOS向けでzipを読めるコミックビューアは無いかなーと探していたところPython2で実装されたcomixというコミックビューアがあるのを思い出しました。そういえばUbuntuをメインにしていたときはよく使っていました。随分前に開発が止まっていて今更使う気にはならなかったのですがそれのフォークであるMComixの存在を知りました。これは現在も開発が続けられているようです。Python2、Py">
@@ -75,7 +75,7 @@
         <p>macOS向けでzipを読めるコミックビューアは無いかなーと探していたところPython2で実装されたcomixというコミックビューアがあるのを思い出しました。そういえばUbuntuをメインにしていたときはよく使っていました。<br>随分前に開発が止まっていて今更使う気にはならなかったのですがそれのフォークであるMComixの存在を知りました。これは現在も開発が続けられているようです。<br>Python2、PyGTK、Pillowが必要となりますので、<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install python2 pygtk</div></pre></td></tr></table></figure></p>
 <p>後に<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip2 install pillow</div></pre></td></tr></table></figure></p>
 <p>すれば実行環境が整うはずです。もし、足りなくてエラーメッセージがでる場合はpip2で必要なライブラリをインストールすれば大丈夫なはずです。<br>macOSにはpython2がプリインストールされておりそれでも動くと思いますが、なるべく環境を汚したくないのでここではhomebrew版を使用しています。</p>
-<p>肝心のMComixのソースコードは<a href="https://sourceforge.net/p/mcomix/wiki/Home/からダウンロードできます。" target="_blank" rel="external">https://sourceforge.net/p/mcomix/wiki/Home/からダウンロードできます。</a><br>圧縮ファイルを展開して、該当ディレクトリ内で<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python2 ./setup.py install</div></pre></td></tr></table></figure></p>
+<p>肝心のMComixのソースコードは <a href="https://sourceforge.net/p/mcomix/wiki/Home/" target="_blank" rel="external">https://sourceforge.net/p/mcomix/wiki/Home/</a> からダウンロードできます。<br>圧縮ファイルを展開して、該当ディレクトリ内で<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python2 ./setup.py install</div></pre></td></tr></table></figure></p>
 <p>すればインストールできます。</p>
 <figure><br><img src="/img/screenshot.png"><br><figcaption>このスクリーンショットはCCライセンスで無料配布されている瀬尾浩史作「うぶんちゅ　第一話」のzipファイルを開いているところです。ちなみにUbuntuならsudo apt install mcomixで簡単にインストールできます。</figcaption><br></figure>
 
