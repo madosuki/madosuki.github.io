@@ -44,6 +44,52 @@
   </div>
 </header>
     <section id="main" class="outer">
+      <article id="macos-python3を使う方法のメモ" class="article article-type-macos" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/02/python3を使う方法のメモ/">macOSでboost+python3を使う際のメモ</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2018/03/02/python3を使う方法のメモ/" class="article-date">
+  <time datetime="2018-03-02T11:53:18.000Z" itemprop="datePublished">2018-03-02</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="macOSでPython3-Boostを使う際のメモ"><a href="#macOSでPython3-Boostを使う際のメモ" class="headerlink" title="macOSでPython3 + Boostを使う際のメモ"></a>macOSでPython3 + Boostを使う際のメモ</h1><p>Homebrewを使用しますが、2018年3月2日でHomebrewのpython3がpythonになったのでここでもpython表記のままにしています。<br>Homebrew自体のインストールは割愛。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install python boost boost-python3</span><br></pre></td></tr></table></figure></p>
+<p>上記のコマンドを実行すればとりあえず揃います。<br>それで適当にcppファイルを用意します。<br>下記のもを仮にsample.cppとします。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;boost/python.hpp&gt;</span><br><span class="line"></span><br><span class="line">long long fact(int n) &#123;</span><br><span class="line">    switch(n) &#123;</span><br><span class="line">        case 0:</span><br><span class="line">            return 1;</span><br><span class="line">        default:</span><br><span class="line">            return n * fact(n - 1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">BOOST_PYTHON_MODULE(sample)&#123;</span><br><span class="line">  boost::python::def(&quot;fact&quot;, fact);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>その後、<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ -I/usr/local/Cellar/python/3.6.4_3/Frameworks/Python.framework/Versions/3.6/include/python3.6m/ -DPIC -bundle -fPIC -o sample.so sample.cpp -lboost_python3 -L/usr/local/Cellar/python/3.6.4_3/Frameworks/Python.framework/Versions/3.6/lib -lpython3.6m</span><br></pre></td></tr></table></figure></p>
+<p>といった感じで、/usr/local/Cellar/python/下に必要な物がインストールされています。ここはインストールされているバージョンによって適宜変えてください。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import sample</span><br><span class="line"></span><br><span class="line">sample.hello()</span><br><span class="line">test = sample.fact(10)</span><br><span class="line">print(test)</span><br></pre></td></tr></table></figure>
+<p>同ディレクトリにあるfoo.pyなファイルでこんな感じに呼び出せばOKです。</p>
+
+      
+    </div>
+    
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+    
       <article id="post-macOSでMComixというコミックビューアを使う方法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -67,10 +113,10 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>macOS向けでzipを読めるコミックビューアは無いかなーと探していたところPython2で実装されたcomixというコミックビューアがあるのを思い出しました。そういえばUbuntuをメインにしていたときはよく使っていました。<br>随分前に開発が止まっていて今更使う気にはならなかったのですがそれのフォークであるMComixの存在を知りました。これは現在も開発が続けられているようです。<br>Python2、PyGTK、Pillowが必要となりますので、<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install python2 pygtk</div></pre></td></tr></table></figure></p>
-<p>後に<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip2 install pillow</div></pre></td></tr></table></figure></p>
+        <p>macOS向けでzipを読めるコミックビューアは無いかなーと探していたところPython2で実装されたcomixというコミックビューアがあるのを思い出しました。そういえばUbuntuをメインにしていたときはよく使っていました。<br>随分前に開発が止まっていて今更使う気にはならなかったのですがそれのフォークであるMComixの存在を知りました。これは現在も開発が続けられているようです。<br>Python2、PyGTK、Pillowが必要となりますので、<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install python2 pygtk</span><br></pre></td></tr></table></figure></p>
+<p>後に<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip2 install pillow</span><br></pre></td></tr></table></figure></p>
 <p>すれば実行環境が整うはずです。もし、足りなくてエラーメッセージがでる場合はpip2で必要なライブラリをインストールすれば大丈夫なはずです。<br>macOSにはpython2がプリインストールされておりそれでも動くと思いますが、なるべく環境を汚したくないのでここではhomebrew版を使用しています。</p>
-<p>肝心のMComixのソースコードは <a href="https://sourceforge.net/p/mcomix/wiki/Home/" target="_blank" rel="external">https://sourceforge.net/p/mcomix/wiki/Home/</a> からダウンロードできます。<br>圧縮ファイルを展開して、該当ディレクトリ内で<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python2 ./setup.py install</div></pre></td></tr></table></figure></p>
+<p>肝心のMComixのソースコードは <a href="https://sourceforge.net/p/mcomix/wiki/Home/" target="_blank" rel="noopener">https://sourceforge.net/p/mcomix/wiki/Home/</a> からダウンロードできます。<br>圧縮ファイルを展開して、該当ディレクトリ内で<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python2 ./setup.py install</span><br></pre></td></tr></table></figure></p>
 <p>すればインストールできます。</p>
 <figure><br><img src="/img/screenshot.png"><br><figcaption>このスクリーンショットはCCライセンスで無料配布されている瀬尾浩史作「うぶんちゅ　第一話」のzipファイルを開いているところです。ちなみにUbuntuなら<code>sudo apt install mcomix</code>で簡単にインストールできます。</figcaption><br></figure>
 
@@ -113,7 +159,7 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Vagrant 2.0.0とVirtualbox 5.2.0の組み合わせはこれを執筆時点（2017/10/20）ではバージョンチェックに引っかかって動きません。<br>GitHubにあるマスターブランチでは既にFix済みのようです<br><a href="https://github.com/hashicorp/vagrant/commit/7d73af5637de41f1e53b8f1ef2ea9baf76842dfb" target="_blank" rel="external">https://github.com/hashicorp/vagrant/commit/7d73af5637de41f1e53b8f1ef2ea9baf76842dfb</a><br>なので、この通りに自分でファイル追加と修正をするかファイルをコピーすれば動きます。<br>該当PRの会話を追いますとこの記事の執筆時点から見て来週くらいにダウンロードページにあるものも更新されるらしいです。</p>
+        <p>Vagrant 2.0.0とVirtualbox 5.2.0の組み合わせはこれを執筆時点（2017/10/20）ではバージョンチェックに引っかかって動きません。<br>GitHubにあるマスターブランチでは既にFix済みのようです<br><a href="https://github.com/hashicorp/vagrant/commit/7d73af5637de41f1e53b8f1ef2ea9baf76842dfb" target="_blank" rel="noopener">https://github.com/hashicorp/vagrant/commit/7d73af5637de41f1e53b8f1ef2ea9baf76842dfb</a><br>なので、この通りに自分でファイル追加と修正をするかファイルをコピーすれば動きます。<br>該当PRの会話を追いますとこの記事の執筆時点から見て来週くらいにダウンロードページにあるものも更新されるらしいです。</p>
 
       
     </div>
@@ -155,7 +201,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>Cabocha何となく使ってみようとしたら汎用 テキストチャンカー/タガーであるYamcha、が必要ということでビルドしようと思ったのですがC++11以降の環境だと失敗します。<br>まぁ、古いC++向けに作られているから当たり前なのですが、Makefileとか弄るの面倒なので、ビルドできるように書き換えてdiffを用意しました。</p>
-<p><a href="https://gist.github.com/madosuki/261712bdde524bbe4b1fd977dbfcae4c" target="_blank" rel="external">https://gist.github.com/madosuki/261712bdde524bbe4b1fd977dbfcae4c</a>　に置いたので必要な場合はどうぞ。</p>
+<p><a href="https://gist.github.com/madosuki/261712bdde524bbe4b1fd977dbfcae4c" target="_blank" rel="noopener">https://gist.github.com/madosuki/261712bdde524bbe4b1fd977dbfcae4c</a>　に置いたので必要な場合はどうぞ。</p>
 <p>Debian9とCentOS7でビルド出来たことを確認していますが、結構適当に書いたものなので、不具合が出ているかもしれませんのでその辺はあしからず。</p>
 
       
@@ -197,8 +243,8 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>現在のMacシリーズのEFIなら大丈夫だと思いますが2011頃のMacのEFIはアレでして、UEFIモードで入れてしまうと幾つかの機能が正常に動作しません。<br>WindowsですとBOOTCAMP作成時にレガシーBIOSモードで動くようにしてくれますし、Linuxでも光学ディスクドライブから起動させればBIOSで入れられます。<br>しかし、今時一々光学ディスクに焼く作業は個人的に辛いです。かと言ってUSBメモリー経由でインストールするとUEFIで入ってしまいます。この状態のままでプロプラなドライバなどを突っ込むと大体起動時にフリーズするようになります。<br>ですので、インストールした直後にUEFI GRUBではない方をインストールしましょう。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt install grub-pc</div></pre></td></tr></table></figure></p>
-<p>その後再起動すればBIOSで起動するようになります。<br>ヘッドホンを使う場合は/etc/modprobe.d/alsa-base.confに”options snd-hda-intel model=imac27_122”を下記のように追記してから再起動すれば良いです。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo sh -c &apos;echo &quot;options snd-hda-intel model=imac27_122&quot; &gt;&gt; /etc/modprobe.d/alsa-base.conf&apos;</div></pre></td></tr></table></figure></p>
+        <p>現在のMacシリーズのEFIなら大丈夫だと思いますが2011頃のMacのEFIはアレでして、UEFIモードで入れてしまうと幾つかの機能が正常に動作しません。<br>WindowsですとBOOTCAMP作成時にレガシーBIOSモードで動くようにしてくれますし、Linuxでも光学ディスクドライブから起動させればBIOSで入れられます。<br>しかし、今時一々光学ディスクに焼く作業は個人的に辛いです。かと言ってUSBメモリー経由でインストールするとUEFIで入ってしまいます。この状態のままでプロプラなドライバなどを突っ込むと大体起動時にフリーズするようになります。<br>ですので、インストールした直後にUEFI GRUBではない方をインストールしましょう。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install grub-pc</span><br></pre></td></tr></table></figure></p>
+<p>その後再起動すればBIOSで起動するようになります。<br>ヘッドホンを使う場合は/etc/modprobe.d/alsa-base.confに”options snd-hda-intel model=imac27_122”を下記のように追記してから再起動すれば良いです。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sh -c &apos;echo &quot;options snd-hda-intel model=imac27_122&quot; &gt;&gt; /etc/modprobe.d/alsa-base.conf&apos;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -245,7 +291,7 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>いつごろからかは忘れましたがUbuntuではDebian同様にwine-developmentパッケージが用意されそれで開発版のwineを簡単に利用できます。staging版の場合はPPAを利用するのが一番簡単です。<br>とまあ、そんなことは置いといて、wine-developはコマンド名も違うためそのままではリポジトリにあるwinetricksは動いてくれません。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">export WINE=/usr/bin/wine-development</div><div class="line">export WINESERVER=/usr/lib/wine-development/wineserver</div></pre></td></tr></table></figure></p>
+        <p>いつごろからかは忘れましたがUbuntuではDebian同様にwine-developmentパッケージが用意されそれで開発版のwineを簡単に利用できます。staging版の場合はPPAを利用するのが一番簡単です。<br>とまあ、そんなことは置いといて、wine-developはコマンド名も違うためそのままではリポジトリにあるwinetricksは動いてくれません。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export WINE=/usr/bin/wine-development</span><br><span class="line">export WINESERVER=/usr/lib/wine-development/wineserver</span><br></pre></td></tr></table></figure></p>
 <p>を.bashrcなどに書くか実行すればwinetricksが使えるようになります。</p>
 
       
@@ -293,8 +339,8 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>別にXubuntuに限らず、Intel HD Graphicsシリーズを使っているLinux環境なら該当する話ですが、ティアフリーオプションが有効になっていない場合があります。<br>これが有効になっていないと画面がちらついたりします。特に、動きが多い動画を視聴するとわかりやすいでしょう。<br>ブラウザのスクロールなんかでもティアリングが発生しますので、個人的には勘弁願いたいです。<br>ですが残念なことにクリーンインストールしたXubuntu 16.04では有効になっていなかったので、<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo mkdir /etc/X11/xorg.conf.d</div></pre></td></tr></table></figure></p>
-<p>後に、<br>xorg.conf.d内に20-intel.confを作り、<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Section &quot;Device&quot;</div><div class="line">	Identifier  &quot;Intel Graphics&quot;</div><div class="line">	Driver      &quot;intel&quot;</div><div class="line">	Option      &quot;TearFree&quot; &quot;true&quot;</div><div class="line">EndSection</div></pre></td></tr></table></figure></p>
+        <p>別にXubuntuに限らず、Intel HD Graphicsシリーズを使っているLinux環境なら該当する話ですが、ティアフリーオプションが有効になっていない場合があります。<br>これが有効になっていないと画面がちらついたりします。特に、動きが多い動画を視聴するとわかりやすいでしょう。<br>ブラウザのスクロールなんかでもティアリングが発生しますので、個人的には勘弁願いたいです。<br>ですが残念なことにクリーンインストールしたXubuntu 16.04では有効になっていなかったので、<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mkdir /etc/X11/xorg.conf.d</span><br></pre></td></tr></table></figure></p>
+<p>後に、<br>xorg.conf.d内に20-intel.confを作り、<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Section &quot;Device&quot;</span><br><span class="line">	Identifier  &quot;Intel Graphics&quot;</span><br><span class="line">	Driver      &quot;intel&quot;</span><br><span class="line">	Option      &quot;TearFree&quot; &quot;true&quot;</span><br><span class="line">EndSection</span><br></pre></td></tr></table></figure></p>
 <p>を書き込み再起動すれば良いです。<br>これでもまだティアリングが発生するならばコンポジットを有効にすれば良いです。Xubuntuならば設定→ウィンドウマネージャ（詳細）からコンポジットの設定を行えます。Awesomeなどではコンポジットマネージャーをインストール、起動すれば良いと思います。</p>
 
       
@@ -370,7 +416,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2017 madosuki&nbsp;
+      &copy; 2018 madosuki&nbsp;
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
     </div>
   </div>

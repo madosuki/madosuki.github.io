@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>macOSでboost+python3を使う際のメモ - 自堕落日記</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="macOSでPython3 + Boostを使う際のメモHomebrewを使用しますが、2018年3月2日でHomebrewのpython3がpythonになったのでここでもpython表記のままにしています。Homebrew自体のインストールは割愛。1brew install python boost boost-python3 上記のコマンドを実行すればとりあえず揃います。それで適当にc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="macOSでboost+python3を使う際のメモ">
+<meta property="og:url" content="http://madosuki.github.io/2018/03/02/python3を使う方法のメモ/index.html">
+<meta property="og:site_name" content="自堕落日記">
+<meta property="og:description" content="macOSでPython3 + Boostを使う際のメモHomebrewを使用しますが、2018年3月2日でHomebrewのpython3がpythonになったのでここでもpython表記のままにしています。Homebrew自体のインストールは割愛。1brew install python boost boost-python3 上記のコマンドを実行すればとりあえず揃います。それで適当にc">
+<meta property="og:locale" content="ja">
+<meta property="og:updated_time" content="2018-03-02T12:09:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="macOSでboost+python3を使う際のメモ">
+<meta name="twitter:description" content="macOSでPython3 + Boostを使う際のメモHomebrewを使用しますが、2018年3月2日でHomebrewのpython3がpythonになったのでここでもpython表記のままにしています。Homebrew自体のインストールは割愛。1brew install python boost boost-python3 上記のコマンドを実行すればとりあえず揃います。それで適当にc">
+  
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">自堕落日記</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://madosuki.github.io"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="macos-python3を使う方法のメモ" class="article article-type-macos" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      macOSでboost+python3を使う際のメモ
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2018/03/02/python3を使う方法のメモ/" class="article-date">
+  <time datetime="2018-03-02T11:53:18.000Z" itemprop="datePublished">2018-03-02</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="macOSでPython3-Boostを使う際のメモ"><a href="#macOSでPython3-Boostを使う際のメモ" class="headerlink" title="macOSでPython3 + Boostを使う際のメモ"></a>macOSでPython3 + Boostを使う際のメモ</h1><p>Homebrewを使用しますが、2018年3月2日でHomebrewのpython3がpythonになったのでここでもpython表記のままにしています。<br>Homebrew自体のインストールは割愛。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install python boost boost-python3</span><br></pre></td></tr></table></figure></p>
+<p>上記のコマンドを実行すればとりあえず揃います。<br>それで適当にcppファイルを用意します。<br>下記のもを仮にsample.cppとします。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;boost/python.hpp&gt;</span><br><span class="line"></span><br><span class="line">long long fact(int n) &#123;</span><br><span class="line">    switch(n) &#123;</span><br><span class="line">        case 0:</span><br><span class="line">            return 1;</span><br><span class="line">        default:</span><br><span class="line">            return n * fact(n - 1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">BOOST_PYTHON_MODULE(sample)&#123;</span><br><span class="line">  boost::python::def(&quot;fact&quot;, fact);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>その後、<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ -I/usr/local/Cellar/python/3.6.4_3/Frameworks/Python.framework/Versions/3.6/include/python3.6m/ -DPIC -bundle -fPIC -o sample.so sample.cpp -lboost_python3 -L/usr/local/Cellar/python/3.6.4_3/Frameworks/Python.framework/Versions/3.6/lib -lpython3.6m</span><br></pre></td></tr></table></figure></p>
+<p>といった感じで、/usr/local/Cellar/python/下に必要な物がインストールされています。ここはインストールされているバージョンによって適宜変えてください。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import sample</span><br><span class="line"></span><br><span class="line">sample.hello()</span><br><span class="line">test = sample.fact(10)</span><br><span class="line">print(test)</span><br></pre></td></tr></table></figure>
+<p>同ディレクトリにあるfoo.pyなファイルでこんな感じに呼び出せばOKです。</p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/11/04/macOSでMComixというコミックビューアを使う方法/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">macOSでMComixというコミックビューアを使う方法&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 madosuki&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

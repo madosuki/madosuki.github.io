@@ -71,8 +71,8 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>現在のMacシリーズのEFIなら大丈夫だと思いますが2011頃のMacのEFIはアレでして、UEFIモードで入れてしまうと幾つかの機能が正常に動作しません。<br>WindowsですとBOOTCAMP作成時にレガシーBIOSモードで動くようにしてくれますし、Linuxでも光学ディスクドライブから起動させればBIOSで入れられます。<br>しかし、今時一々光学ディスクに焼く作業は個人的に辛いです。かと言ってUSBメモリー経由でインストールするとUEFIで入ってしまいます。この状態のままでプロプラなドライバなどを突っ込むと大体起動時にフリーズするようになります。<br>ですので、インストールした直後にUEFI GRUBではない方をインストールしましょう。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt install grub-pc</div></pre></td></tr></table></figure></p>
-<p>その後再起動すればBIOSで起動するようになります。<br>ヘッドホンを使う場合は/etc/modprobe.d/alsa-base.confに”options snd-hda-intel model=imac27_122”を下記のように追記してから再起動すれば良いです。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo sh -c &apos;echo &quot;options snd-hda-intel model=imac27_122&quot; &gt;&gt; /etc/modprobe.d/alsa-base.conf&apos;</div></pre></td></tr></table></figure></p>
+        <p>現在のMacシリーズのEFIなら大丈夫だと思いますが2011頃のMacのEFIはアレでして、UEFIモードで入れてしまうと幾つかの機能が正常に動作しません。<br>WindowsですとBOOTCAMP作成時にレガシーBIOSモードで動くようにしてくれますし、Linuxでも光学ディスクドライブから起動させればBIOSで入れられます。<br>しかし、今時一々光学ディスクに焼く作業は個人的に辛いです。かと言ってUSBメモリー経由でインストールするとUEFIで入ってしまいます。この状態のままでプロプラなドライバなどを突っ込むと大体起動時にフリーズするようになります。<br>ですので、インストールした直後にUEFI GRUBではない方をインストールしましょう。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install grub-pc</span><br></pre></td></tr></table></figure></p>
+<p>その後再起動すればBIOSで起動するようになります。<br>ヘッドホンを使う場合は/etc/modprobe.d/alsa-base.confに”options snd-hda-intel model=imac27_122”を下記のように追記してから再起動すれば良いです。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sh -c &apos;echo &quot;options snd-hda-intel model=imac27_122&quot; &gt;&gt; /etc/modprobe.d/alsa-base.conf&apos;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -129,7 +129,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2017 madosuki&nbsp;
+      &copy; 2018 madosuki&nbsp;
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
     </div>
   </div>

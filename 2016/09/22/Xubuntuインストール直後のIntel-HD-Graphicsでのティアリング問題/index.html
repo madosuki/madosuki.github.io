@@ -71,8 +71,8 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>別にXubuntuに限らず、Intel HD Graphicsシリーズを使っているLinux環境なら該当する話ですが、ティアフリーオプションが有効になっていない場合があります。<br>これが有効になっていないと画面がちらついたりします。特に、動きが多い動画を視聴するとわかりやすいでしょう。<br>ブラウザのスクロールなんかでもティアリングが発生しますので、個人的には勘弁願いたいです。<br>ですが残念なことにクリーンインストールしたXubuntu 16.04では有効になっていなかったので、<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo mkdir /etc/X11/xorg.conf.d</div></pre></td></tr></table></figure></p>
-<p>後に、<br>xorg.conf.d内に20-intel.confを作り、<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Section &quot;Device&quot;</div><div class="line">	Identifier  &quot;Intel Graphics&quot;</div><div class="line">	Driver      &quot;intel&quot;</div><div class="line">	Option      &quot;TearFree&quot; &quot;true&quot;</div><div class="line">EndSection</div></pre></td></tr></table></figure></p>
+        <p>別にXubuntuに限らず、Intel HD Graphicsシリーズを使っているLinux環境なら該当する話ですが、ティアフリーオプションが有効になっていない場合があります。<br>これが有効になっていないと画面がちらついたりします。特に、動きが多い動画を視聴するとわかりやすいでしょう。<br>ブラウザのスクロールなんかでもティアリングが発生しますので、個人的には勘弁願いたいです。<br>ですが残念なことにクリーンインストールしたXubuntu 16.04では有効になっていなかったので、<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mkdir /etc/X11/xorg.conf.d</span><br></pre></td></tr></table></figure></p>
+<p>後に、<br>xorg.conf.d内に20-intel.confを作り、<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Section &quot;Device&quot;</span><br><span class="line">	Identifier  &quot;Intel Graphics&quot;</span><br><span class="line">	Driver      &quot;intel&quot;</span><br><span class="line">	Option      &quot;TearFree&quot; &quot;true&quot;</span><br><span class="line">EndSection</span><br></pre></td></tr></table></figure></p>
 <p>を書き込み再起動すれば良いです。<br>これでもまだティアリングが発生するならばコンポジットを有効にすれば良いです。Xubuntuならば設定→ウィンドウマネージャ（詳細）からコンポジットの設定を行えます。Awesomeなどではコンポジットマネージャーをインストール、起動すれば良いと思います。</p>
 
       
@@ -130,7 +130,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2017 madosuki&nbsp;
+      &copy; 2018 madosuki&nbsp;
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
     </div>
   </div>
