@@ -44,6 +44,49 @@
   </div>
 </header>
     <section id="main" class="outer">
+      <article id="post-macOS上のTCL-TKでImgを使う方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/26/macOS上のTCL-TKでImgを使う方法/">macOS上のTCL-TKでImgを使う方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2018/04/26/macOS上のTCL-TKでImgを使う方法/" class="article-date">
+  <time datetime="2018-04-26T07:20:14.000Z" itemprop="datePublished">2018-04-26</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Common LispでGUIアプリを書く際に色々なGUIライブラリがあると思いますが私はcl-ltkをQuickLisp経由で使っています。<br>Tcl Tkを簡単にLispで扱えるようにするライブラリで、Tck Tk向けのエクステンションも使えるのですが、macOSでは導入しようとするとSIPのせいで面倒です。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install tcl-tk</span><br></pre></td></tr></table></figure></p>
+<p>で/usr/local/opt下にインストールし、<br>SourceForgeから<a href="https://sourceforge.net/projects/tkimg/" target="_blank" rel="noopener">tkImg</a>のバイナリをダウンロードして展開後、<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -R tkImg_dir /usr/local/opt/tcl-tk/lib</span><br></pre></td></tr></table></figure></p>
+<p>を行い、/usr/local/opt/tcl-tk/binのパスを通せば使えるようになります。</p>
+
+      
+    </div>
+    
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+    
       <article id="macos-python3を使う方法のメモ" class="article article-type-macos" itemscope itemprop="blogPost">
   <div class="article-inner">
     
