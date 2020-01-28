@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link></link> <atom:link href="/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Wed, 29 Jan 2020 08:47:19 +0900</pubDate> <item> <title>ジェネレーター変えてみたのでテストポスト</title> <link>/posts/ジェネレーター変えてみたのでテストポスト.html</link> <pubDate>2020-01-29 08:44:51</pubDate> <author>madosuki</author> <guid isPermaLink="true">/posts/ジェネレーター変えてみたのでテストポスト.html</guid>  <description><![CDATA[ <!-- **** your post here (remove this line) **** -->
+
+<!-- format: could be 'html' (for raw html) or 'md' (for markdown).  -->
+
+<p>とりあえず，ブログジェネレーターをcoleslawに変えてみました．</p>
+
+<!--more-->
+
+<p>Excerpt separator can also be extracted from content.
+Add <code>excerpt: &lt;string&gt;</code> to the above metadata.
+Excerpt separator is <code>&lt;!--more--&gt;</code> by default.</p>
+ ]]></description> </item> </channel> </rss>
