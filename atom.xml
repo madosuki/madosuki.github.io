@@ -1,5 +1,38 @@
 <?xml version="1.0"?>
-<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href=""/> <link type="application/atom+xml" rel="self" href="/atom.xml"/> <updated>Wed, 29 Jan 2020 08:47:19 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="/posts/ジェネレーター変えてみたのでテストポスト.html"/> <title>ジェネレーター変えてみたのでテストポスト</title> <published>2020-01-29 08:44:51</published> <updated>2020-01-29 08:44:51</updated> <author> <name>madosuki</name> <uri></uri> </author> <content type="html">&lt;!-- **** your post here (remove this line) **** --&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href=""/> <link type="application/atom+xml" rel="self" href="/atom.xml"/> <updated>Sat, 01 Feb 2020 23:00:52 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="/posts/Unofficial-Lineage-OS-171-on-Nexus-6Pの導入方法のメモ.html"/> <title>Unofficial Lineage OS 17.1 on Nexus 6Pの導入方法のメモ</title> <published>2020-02-01 22:26:48</published> <updated>2020-02-01 22:26:48</updated> <author> <name>madosuki</name> <uri></uri> </author> <content type="html">&lt;!-- **** your post here (remove this line) **** --&gt;
+
+&lt;!-- format: could be &#039;html&#039; (for raw html) or &#039;md&#039; (for markdown).  --&gt;
+
+&lt;p&gt;adb，fastboot導入済み且つ，PC側のOSはDebian10，Nexus6Pはファクトリーリセット済みて書かれた記事ということ踏まえて読んでください．&lt;/p&gt;
+
+&lt;p&gt;また，下記を実行して文鎮化しても責任は取れません．やるならあくまでも自己責任で．&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://forum.xda-developers.com/nexus-6p/orig-development/rom-lineageos-17-0-nexus-6p-angler-t4012099&quot;&gt;Xdaへのリンク&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;oem unlockedなNexus 6Pを用意して，上記リンクのスレッドの#3からFBE Recovery(4 Core)をダウンロードして，電源を切り，電源ボタンとボリュームキー下を押し続けるとブートローダー画面になるので下記を実行します．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;fastboot flash recovery twrp-3.3.1.0-FBE-10-angler4core.img&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;後はボリュームキーで操作し，電源ボタンで決定してリカバリーモードを起動させます．&lt;/p&gt;
+
+&lt;p&gt;そうしたら，Wipeメニューからsystem，data，cacheをwipeしてからフォーマットを実行してください．&lt;/p&gt;
+
+&lt;p&gt;USBで繋げるとマウントされるので適当に上記リンク先にあるカスタムROMzipをダウンロードして，必要であるならばopengapps nano or picoをopengapps公式からダウンロードして，internalに放りこんでから，twrpのinstallをタップ，ファイルを選択してください．&lt;/p&gt;
+
+&lt;p&gt;opengappsを入れる場合は先にカスタムROMなzipを選択してから，more zipで追加してください．&lt;/p&gt;
+
+&lt;p&gt;インストールし終ったら，dalvik cacheをwipeするボタンが出るのでしてから，リブートしてください．&lt;/p&gt;
+
+&lt;p&gt;twrpアプリをインストールするか尋ねてきますがしないように．&lt;/p&gt;
+
+&lt;p&gt;リブートしてしばらく経てばOSが起動すると思いますが，失敗することがあるかもしれません．冒頭に書いてあるようにあくまでもやるなら自己責任で．以上． &lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Excerpt separator can also be extracted from content.
+Add &lt;code&gt;excerpt: &amp;lt;string&amp;gt;&lt;/code&gt; to the above metadata.
+Excerpt separator is &lt;code&gt;&amp;lt;!--more--&amp;gt;&lt;/code&gt; by default.&lt;/p&gt;
+</content> </entry><entry> <link type="text/html" rel="alternate" href="/posts/ジェネレーター変えてみたのでテストポスト.html"/> <title>ジェネレーター変えてみたのでテストポスト</title> <published>2020-01-29 08:44:51</published> <updated>2020-01-29 08:44:51</updated> <author> <name>madosuki</name> <uri></uri> </author> <content type="html">&lt;!-- **** your post here (remove this line) **** --&gt;
 
 &lt;!-- format: could be &#039;html&#039; (for raw html) or &#039;md&#039; (for markdown).  --&gt;
 
