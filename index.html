@@ -1,48 +1,47 @@
-<!DOCTYPE html>
-<html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <title>(随筆 :tendency 自堕落)</title> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen"> <link href="/css/custom.css" rel="stylesheet" media="screen"> <link rel="alternate" href="/rss.xml" type="application/rss+xml" /> <script type="text/javascript">
+<!doctype html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>madosuki's Profile Site</title>
+        <link href="css/style.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <header id="header">
+            <h1>madosuki's Profile Site</h1>
+        </header>
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'foo']);
-  _gaq.push(['_trackPageview']);
+        <div id="container">
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+            <div id="self_introduction">
+                <h2>Who is this:</h2>
+                <p>madosukiです．</p>
+                <p>プログラミングを趣味としています．書くのは大体ダウンローダー等の自分用の小物ツールです．</p>
+                <p>エディターはEmacsかNeovimをよく使っています．</p>
+                <p>一番好きな言語はCommon Lispです．</p>
+                <p>デザイン系苦手．</p>
+                <p>GithubやTwitterやってます．興味がありましたら下記のリンクをどうぞ．</p>
+            </div>
 
-</script> </head> <body> <div class="container-fluid"> <div class="row-fluid"> <div class="offset2 span8"> <div class="row-fluid"> <div class="navbar navbar-inverse"> <div class="navbar-inner"> <a class="brand" href="">(随筆 :tendency 自堕落)</a> <ul class="nav"> <li> <a href="https://madosuki.github.io/">Home</a> </li><li> <a href="https://twitter.com/madosuki_public">Twitter</a> </li><li> <a href="https://github.com/madosuki">Code</a> </li> </ul> </div> </div> </div> <div class="row-fluid"> <h1 class="page-header">Recent Content</h1> <div class="row-fluid"> <h1><a href="/posts/Unofficial-Lineage-OS-171-on-Nexus-6Pの導入方法のメモ.html">Unofficial Lineage OS 17.1 on Nexus 6Pの導入方法のメモ</a></h1> <p class="date-posted">posted on 2020-02-01 22:26:48</p> <!-- **** your post here (remove this line) **** -->
+            <div id="contacts">
+                <h2>Contacts:</h2>
+                <ul>
+                    <li>Twitter: <a href="https://twitter.com/madosuki_public">@madosuki_public</a></li>
+                    <li>Github: <a href="https://github.com/madosuki">madosuki</a></li>
+                </ul>
+            </div>
 
-<!-- format: could be 'html' (for raw html) or 'md' (for markdown).  -->
+            <div id="contents">
+                <h2>Contents</h2>
+                <ul>
+                    <li>Blog: <a href="https://madosuki.github.io/">https://madosuki.github.io/</a></li>
+                </ul>
+            </div>
+            
+        </div>
 
-<p>adb，fastboot導入済み且つ，PC側のOSはDebian10，Nexus6Pはファクトリーリセット済みて書かれた記事ということ踏まえて読んでください．</p>
-
-<p>また，下記を実行して文鎮化しても責任は取れません．やるならあくまでも自己責任で．</p>
-
-<p><a href="https://forum.xda-developers.com/nexus-6p/orig-development/rom-lineageos-17-0-nexus-6p-angler-t4012099">Xdaへのリンク</a></p>
-
-<p>oem unlockedなNexus 6Pを用意して，上記リンクのスレッドの#3からFBE Recovery(4 Core)をダウンロードして，電源を切り，電源ボタンとボリュームキー下を押し続けるとブートローダー画面になるので下記を実行します．</p>
-
-<pre><code>fastboot flash recovery twrp-3.3.1.0-FBE-10-angler4core.img</code></pre>
-
-<p>後はボリュームキーで操作し，電源ボタンで決定してリカバリーモードを起動させます．</p>
-
-<p>そうしたら，Wipeメニューからsystem，data，cacheをwipeしてからフォーマットを実行してください．</p>
-
-<p>USBで繋げるとマウントされるので適当に上記リンク先にあるカスタムROMzipをダウンロードして，必要であるならばopengapps nano or picoをopengapps公式からダウンロードして，internalに放りこんでから，twrpのinstallをタップ，ファイルを選択してください．</p>
-
-<p>opengappsを入れる場合は先にカスタムROMなzipを選択してから，more zipで追加してください．</p>
-
-<p>インストールし終ったら，dalvik cacheをwipeするボタンが出るのでしてから，リブートしてください．</p>
-
-<p>twrpアプリをインストールするか尋ねてきますがしないように．</p>
-
-<p>リブートしてしばらく経てばOSが起動すると思いますが，失敗することがあるかもしれません．冒頭に書いてあるようにあくまでもやるなら自己責任で．以上． </p>
-
- </div><div class="row-fluid"> <h1><a href="/posts/ジェネレーター変えてみたのでテストポスト.html">ジェネレーター変えてみたのでテストポスト</a></h1> <p class="date-posted">posted on 2020-01-29 08:44:51</p> <!-- **** your post here (remove this line) **** -->
-
-<!-- format: could be 'html' (for raw html) or 'md' (for markdown).  -->
-
-<p>とりあえず，ブログジェネレーターをcoleslawに変えてみました．</p>
-
- </div> <div id="relative-nav"> <ul class="pager">   </ul> </div> <div class="row-fluid"> <p>This blog covers <a href="/tag/Android.html">Android</a> </p> </div> <div class="row-fluid"> <p>View content from <a href="/date/2020-02.html">2020-02</a>, <a href="/date/2020-01.html">2020-01</a> </p> </div> </div> <div class="row-fluid">  </div> <div class="row-fluid"> <hr> <p class="fineprint">Unless otherwise credited all material <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US"> <img alt="Creative Commons License" style="border-width:0" src="/img/cc-by-sa.png" /> </a> by madosuki <a id="coleslaw-logo" href="https://github.com/redline6561/coleslaw"> <img src="/img/logo_small.jpg" alt="Coleslaw logo" /></p> </a> </div> </div> </div> </div> <script src="/js/bootstrap.min.js"></script> </body> </html>
+        <footer>
+            Copyright madosuki
+        </footer>
+    </body>
+</html>
