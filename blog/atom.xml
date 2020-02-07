@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href=""/> <link type="application/atom+xml" rel="self" href="/atom.xml"/> <updated>Fri, 07 Feb 2020 22:38:00 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="/posts/Unofficial-Lineage-OS-171-on-Nexus-6Pの導入方法のメモ.html"/> <title>Unofficial Lineage OS 17.1 on Nexus 6Pの導入方法のメモ</title> <published>2020-02-01 22:26:48</published> <updated>2020-02-01 22:26:48</updated> <author> <name>madosuki</name> <uri></uri> </author> <content type="html">&lt;!-- **** your post here (remove this line) **** --&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href="https://madosuki.github.io/blog"/> <link type="application/atom+xml" rel="self" href="https://madosuki.github.io/blog/atom.xml"/> <updated>Fri, 07 Feb 2020 23:03:45 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Unofficial-Lineage-OS-171-on-Nexus-6Pの導入方法のメモ.html"/> <title>Unofficial Lineage OS 17.1 on Nexus 6Pの導入方法のメモ</title> <published>2020-02-01 22:26:48</published> <updated>2020-02-01 22:26:48</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;!-- **** your post here (remove this line) **** --&gt;
 
 &lt;!-- format: could be &#039;html&#039; (for raw html) or &#039;md&#039; (for markdown).  --&gt;
 
@@ -32,7 +32,7 @@
 &lt;p&gt;Excerpt separator can also be extracted from content.
 Add &lt;code&gt;excerpt: &amp;lt;string&amp;gt;&lt;/code&gt; to the above metadata.
 Excerpt separator is &lt;code&gt;&amp;lt;!--more--&amp;gt;&lt;/code&gt; by default.&lt;/p&gt;
-</content> </entry><entry> <link type="text/html" rel="alternate" href="/posts/ジェネレーター変えてみたのでテストポスト.html"/> <title>ジェネレーター変えてみたのでテストポスト</title> <published>2020-01-29 08:44:51</published> <updated>2020-01-29 08:44:51</updated> <author> <name>madosuki</name> <uri></uri> </author> <content type="html">&lt;!-- **** your post here (remove this line) **** --&gt;
+</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/ジェネレーター変えてみたのでテストポスト.html"/> <title>ジェネレーター変えてみたのでテストポスト</title> <published>2020-01-29 08:44:51</published> <updated>2020-01-29 08:44:51</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;!-- **** your post here (remove this line) **** --&gt;
 
 &lt;!-- format: could be &#039;html&#039; (for raw html) or &#039;md&#039; (for markdown).  --&gt;
 

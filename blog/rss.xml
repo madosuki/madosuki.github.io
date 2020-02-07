@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link></link> <atom:link href="/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Fri, 07 Feb 2020 22:38:00 +0900</pubDate> <item> <title>Unofficial Lineage OS 17.1 on Nexus 6Pの導入方法のメモ</title> <link>/posts/Unofficial-Lineage-OS-171-on-Nexus-6Pの導入方法のメモ.html</link> <pubDate>2020-02-01 22:26:48</pubDate> <author>madosuki</author> <guid isPermaLink="true">/posts/Unofficial-Lineage-OS-171-on-Nexus-6Pの導入方法のメモ.html</guid> <category><![CDATA[ Android ]]></category> <description><![CDATA[ <!-- **** your post here (remove this line) **** -->
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Fri, 07 Feb 2020 23:03:45 +0900</pubDate> <item> <title>Unofficial Lineage OS 17.1 on Nexus 6Pの導入方法のメモ</title> <link>https://madosuki.github.io/blog/posts/Unofficial-Lineage-OS-171-on-Nexus-6Pの導入方法のメモ.html</link> <pubDate>2020-02-01 22:26:48</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Unofficial-Lineage-OS-171-on-Nexus-6Pの導入方法のメモ.html</guid> <category><![CDATA[ Android ]]></category> <description><![CDATA[ <!-- **** your post here (remove this line) **** -->
 
 <!-- format: could be 'html' (for raw html) or 'md' (for markdown).  -->
 
@@ -32,7 +32,7 @@
 <p>Excerpt separator can also be extracted from content.
 Add <code>excerpt: &lt;string&gt;</code> to the above metadata.
 Excerpt separator is <code>&lt;!--more--&gt;</code> by default.</p>
- ]]></description> </item><item> <title>ジェネレーター変えてみたのでテストポスト</title> <link>/posts/ジェネレーター変えてみたのでテストポスト.html</link> <pubDate>2020-01-29 08:44:51</pubDate> <author>madosuki</author> <guid isPermaLink="true">/posts/ジェネレーター変えてみたのでテストポスト.html</guid>  <description><![CDATA[ <!-- **** your post here (remove this line) **** -->
+ ]]></description> </item><item> <title>ジェネレーター変えてみたのでテストポスト</title> <link>https://madosuki.github.io/blog/posts/ジェネレーター変えてみたのでテストポスト.html</link> <pubDate>2020-01-29 08:44:51</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/ジェネレーター変えてみたのでテストポスト.html</guid>  <description><![CDATA[ <!-- **** your post here (remove this line) **** -->
 
 <!-- format: could be 'html' (for raw html) or 'md' (for markdown).  -->
 
