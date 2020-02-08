@@ -15,6 +15,10 @@ div#self_introduction {
     width: 75%;
 }
 
+a:link {
+    color: #ADD8E6;
+}
+
 a:visited {
     color: #FFFFE0;
 }
