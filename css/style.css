@@ -31,6 +31,10 @@ div#contents {
     width: 75%;
 }
 
+div#cryptecurrency {
+    width: 75%;
+}
+
 div#container {
     display: flex;
     justify-content: center;
