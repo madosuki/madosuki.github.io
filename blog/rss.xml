@@ -1,5 +1,28 @@
 <?xml version="1.0"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Fri, 07 Feb 2020 23:03:45 +0900</pubDate> <item> <title>Unofficial Lineage OS 17.1 on Nexus 6Pの導入方法のメモ</title> <link>https://madosuki.github.io/blog/posts/Unofficial-Lineage-OS-171-on-Nexus-6Pの導入方法のメモ.html</link> <pubDate>2020-02-01 22:26:48</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Unofficial-Lineage-OS-171-on-Nexus-6Pの導入方法のメモ.html</guid> <category><![CDATA[ Android ]]></category> <description><![CDATA[ <!-- **** your post here (remove this line) **** -->
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Tue, 24 Mar 2020 17:47:33 +0900</pubDate> <item> <title>Caveman2を利用する時の備忘録的なやつ</title> <link>https://madosuki.github.io/blog/posts/Caveman2を利用する時の備忘録的なやつ.html</link> <pubDate>2020-03-24 17:17:29</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Caveman2を利用する時の備忘録的なやつ.html</guid> <category><![CDATA[ CommonLisp ]]></category> <description><![CDATA[ <p>Sessionはデフォルトだとインメモリーに保存されていますがapp.lispを編集すればDBに保存できます．</p>
+
+<p>やり方自体はリポジトリにあるREADME読んでやれば良いですが，sessionsテーブルを要求してくるので作っておく必要があります（私のご認識かもしれませんのであしからず）．</p>
+
+<p>以下のSQL文のyour_database_nameを各自変更し実行すればいけると思います．</p>
+
+<pre><code>CREATE TABLE your_database_name.sessions (id CHAR(72) PRIMARY KEY, session_data TEXT, created_at DATETIME, updated_at DATETIME);</code></pre>
+
+<p>'(vector (unsigned-byte 8))を返す時にはlack形式で渡す必要があるのでdefroute内で下記の様にする．</p>
+
+<pre><code>(let ((octet (sb-ext:string-to-octets :external-format :CP932))
+      (content-lengt (length octet))
+      (status 200)
+      (content-type "text/plain"))
+   `(,status (:content-type ,content-type :content-length content-length) ,octet))</code></pre>
+
+<p>尚ファイルを読み込む場合は上記の様に面倒なことせずpathnameを帰り値にすれば良いです．</p>
+
+<!--more-->
+
+<p>Excerpt separator can also be extracted from content.
+Add <code>excerpt: &lt;string&gt;</code> to the above metadata.
+Excerpt separator is <code>&lt;!--more--&gt;</code> by default.</p>
+ ]]></description> </item><item> <title>Unofficial Lineage OS 17.1 on Nexus 6Pの導入方法のメモ</title> <link>https://madosuki.github.io/blog/posts/Unofficial-Lineage-OS-171-on-Nexus-6Pの導入方法のメモ.html</link> <pubDate>2020-02-01 22:26:48</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Unofficial-Lineage-OS-171-on-Nexus-6Pの導入方法のメモ.html</guid> <category><![CDATA[ Android ]]></category> <description><![CDATA[ <!-- **** your post here (remove this line) **** -->
 
 <!-- format: could be 'html' (for raw html) or 'md' (for markdown).  -->
 
