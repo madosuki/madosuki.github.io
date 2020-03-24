@@ -3,7 +3,7 @@
 <h1 class="page-header">Caveman2を利用する時の備忘録的なやつ</h1>
 <p> Tagged as <a href="https://madosuki.github.io/blog/tag/CommonLisp.html">CommonLisp</a> </p> <p class="date-posted"> Written on 2020-03-24 17:17:29 </p> <p>Sessionはデフォルトだとインメモリーに保存されていますがapp.lispを編集すればDBに保存できます．</p>
 
-<p>やり方自体はリポジトリにあるREADME読んでやれば良いですが，sessionsテーブルを要求してくるので作っておく必要があります（私のご認識かもしれませんのであしからず）．</p>
+<p>やり方自体はリポジトリにあるREADME読んでやれば良いですが，sessionsテーブルを要求してくるので作っておく必要があります（私の誤認識かもしれませんのであしからず）．</p>
 
 <p>以下のSQL文のyour_database_nameを各自変更し実行すればいけると思います．</p>
 
@@ -12,7 +12,7 @@
 <p>'(vector (unsigned-byte 8))を返す時にはlack形式で渡す必要があるのでdefroute内で下記の様にする．</p>
 
 <pre><code>(let ((octet (sb-ext:string-to-octets :external-format :CP932))
-      (content-lengt (length octet))
+      (content-length (length octet))
       (status 200)
       (content-type "text/plain"))
    `(,status (:content-type ,content-type :content-length content-length) ,octet))</code></pre>
