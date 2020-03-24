@@ -13,7 +13,7 @@
       (content-length (length octet))
       (status 200)
       (content-type "text/plain"))
-   `(,status (:content-type ,content-type :content-length content-length) ,octet))</code></pre>
+   `(,status (:content-type ,content-type :content-length ,content-length) ,octet))</code></pre>
 
 <p>尚ファイルを読み込む場合は上記の様に面倒なことせずpathnameを帰り値にすれば良いです．</p>
 
