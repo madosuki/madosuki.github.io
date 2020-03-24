@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Tue, 24 Mar 2020 20:22:22 +0900</pubDate> <item> <title>Caveman2を利用する時の備忘録的なやつ</title> <link>https://madosuki.github.io/blog/posts/Caveman2を利用する時の備忘録的なやつ.html</link> <pubDate>2020-03-24 17:17:29</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Caveman2を利用する時の備忘録的なやつ.html</guid> <category><![CDATA[ CommonLisp ]]></category> <description><![CDATA[ <p>Sessionはデフォルトだとインメモリーに保存されていますがapp.lispを編集すればDBに保存できます．</p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Tue, 24 Mar 2020 20:25:02 +0900</pubDate> <item> <title>Caveman2を利用する時の備忘録的なやつ</title> <link>https://madosuki.github.io/blog/posts/Caveman2を利用する時の備忘録的なやつ.html</link> <pubDate>2020-03-24 17:17:29</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Caveman2を利用する時の備忘録的なやつ.html</guid> <category><![CDATA[ CommonLisp ]]></category> <description><![CDATA[ <p>Sessionはデフォルトだとインメモリーに保存されていますがapp.lispを編集すればDBに保存できます．</p>
 
 <p>やり方自体はリポジトリにあるREADME読んでやれば良いですが，sessionsテーブルを要求してくるので作っておく必要があります（私の誤認識かもしれませんのであしからず）．</p>
 
@@ -15,7 +15,7 @@
       (content-type "text/plain"))
    `(,status (:content-type ,content-type :content-length ,content-length) ,octet))</code></pre>
 
-<p>尚ファイルを読み込む場合は上記の様に面倒なことせずpathnameを返り値にすれば良いです．</p>
+<p>尚ファイルを読み込む場合は上記の様な面倒なことはせずにpathnameを返り値にすれば良いです．</p>
 
 <!--more-->
 
