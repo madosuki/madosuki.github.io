@@ -1,5 +1,17 @@
 <?xml version="1.0"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Tue, 24 Mar 2020 20:25:02 +0900</pubDate> <item> <title>Caveman2を利用する時の備忘録的なやつ</title> <link>https://madosuki.github.io/blog/posts/Caveman2を利用する時の備忘録的なやつ.html</link> <pubDate>2020-03-24 17:17:29</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Caveman2を利用する時の備忘録的なやつ.html</guid> <category><![CDATA[ CommonLisp ]]></category> <description><![CDATA[ <p>Sessionはデフォルトだとインメモリーに保存されていますがapp.lispを編集すればDBに保存できます．</p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Sat, 15 Aug 2020 12:20:45 +0900</pubDate> <item> <title>Gaming PCを組んでみて</title> <link>https://madosuki.github.io/blog/posts/Gaming-PCを組んでみて.html</link> <pubDate>2020-08-15 11:53:19</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Gaming-PCを組んでみて.html</guid> <category><![CDATA[ none ]]></category> <description><![CDATA[ <p>長い間iMac mid 2011 21.5incをメインで使いつづけていたのですが、macOSはHigh Sierraまでしか使えずスペックも流石に辛く、PCを新調することしました。<br/>
+最初はBTOにしようかと考えていたのですが、最終税抜価格に10%の消費税かかるのはエゲつなさを感じましたし、電源などのパーツでどのメーカーのを使っているのかとか考えると納得はできず、結局自作です。<br/>
+一度もやったことないので工具とか揃えたので予想よりは高くついたのですがまぁまぁ楽しかったです。<br/>
+電源はちゃんとしたメーカーのを使わないと気が気じゃないので。  </p>
+
+<p>Ryzen3600x + Radeon 5700XT(Sapphire Nitro+) + nvme m2 SSDは想像以上に快適でさいこーってなってます。いやまぁiMac mid 2011からの移行ならどれでもそうだろうと言われそうですがそうですねはい。</p>
+
+<!--more-->
+
+<p>Excerpt separator can also be extracted from content.
+Add <code>excerpt: &lt;string&gt;</code> to the above metadata.
+Excerpt separator is <code>&lt;!--more--&gt;</code> by default.</p>
+ ]]></description> </item><item> <title>Caveman2を利用する時の備忘録的なやつ</title> <link>https://madosuki.github.io/blog/posts/Caveman2を利用する時の備忘録的なやつ.html</link> <pubDate>2020-03-24 17:17:29</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Caveman2を利用する時の備忘録的なやつ.html</guid> <category><![CDATA[ CommonLisp ]]></category> <description><![CDATA[ <p>Sessionはデフォルトだとインメモリーに保存されていますがapp.lispを編集すればDBに保存できます．</p>
 
 <p>やり方自体はリポジトリにあるREADME読んでやれば良いですが，sessionsテーブルを要求してくるので作っておく必要があります（私の誤認識かもしれませんのであしからず）．</p>
 
