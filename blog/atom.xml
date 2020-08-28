@@ -1,5 +1,12 @@
 <?xml version="1.0"?>
-<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href="https://madosuki.github.io/blog"/> <link type="application/atom+xml" rel="self" href="https://madosuki.github.io/blog/atom.xml"/> <updated>Sat, 15 Aug 2020 12:20:45 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Gaming-PCを組んでみて.html"/> <title>Gaming PCを組んでみて</title> <published>2020-08-15 11:53:19</published> <updated>2020-08-15 11:53:19</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;長い間iMac mid 2011 21.5incをメインで使いつづけていたのですが、macOSはHigh Sierraまでしか使えずスペックも流石に辛く、PCを新調することしました。&lt;br/&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href="https://madosuki.github.io/blog"/> <link type="application/atom+xml" rel="self" href="https://madosuki.github.io/blog/atom.xml"/> <updated>Fri, 28 Aug 2020 22:53:19 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/最近はKotlinやRustをちょくちょくやってるというお話.html"/> <title>最近はKotlinやRustをちょくちょくやってるというお話</title> <published>2020-08-28 22:42:08</published> <updated>2020-08-28 22:42:08</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;特にこれといったことはないのだが，RustはNightly依存のライブラリにちょくちょく遭遇するのでstable運用したい時に困るなぁとかKotlinで簡単なAndroidアプリを作ってみたがAPI周りに苦しんだりJavaで書かれたサンプルばかりに遭遇するので面倒とかいう感想だけです．つらみ．&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Excerpt separator can also be extracted from content.
+Add &lt;code&gt;excerpt: &amp;lt;string&amp;gt;&lt;/code&gt; to the above metadata.
+Excerpt separator is &lt;code&gt;&amp;lt;!--more--&amp;gt;&lt;/code&gt; by default.&lt;/p&gt;
+</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Gaming-PCを組んでみて.html"/> <title>Gaming PCを組んでみて</title> <published>2020-08-15 11:53:19</published> <updated>2020-08-15 11:53:19</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;長い間iMac mid 2011 21.5incをメインで使いつづけていたのですが、macOSはHigh Sierraまでしか使えずスペックも流石に辛く、PCを新調することしました。&lt;br/&gt;
 最初はBTOにしようかと考えていたのですが、最終税抜価格に10%の消費税かかるのはエゲつなさを感じましたし、電源などのパーツでどのメーカーのを使っているのかとか考えると納得はできず、結局自作です。&lt;br/&gt;
 一度もやったことないので工具とか揃えたので予想よりは高くついたのですがまぁまぁ楽しかったです。&lt;br/&gt;
 電源はちゃんとしたメーカーのを使わないと気が気じゃないので。  &lt;/p&gt;
