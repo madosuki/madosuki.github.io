@@ -1,5 +1,19 @@
 <?xml version="1.0"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Wed, 28 Oct 2020 00:07:45 +0900</pubDate> <item> <title>Windows10 20H2 on KVMでvirtioを後から使う際にINACCESSIBLE_BOOT_DEVICEに遭遇した</title> <link>https://madosuki.github.io/blog/posts/Windows10-20H2-on-KVMでvirtioを後から使う際にINACCESSIBLEBOOTDEVICEに遭遇した.html</link> <pubDate>2020-10-27 23:55:02</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Windows10-20H2-on-KVMでvirtioを後から使う際にINACCESSIBLEBOOTDEVICEに遭遇した.html</guid> <category><![CDATA[ KVM ]]></category><category><![CDATA[ Linux ]]></category><category><![CDATA[ Windows ]]></category> <description><![CDATA[ <p>解決方法を調べてみるとネットで転がっているのはbcdeditを使うものばかりですが，私の環境では上手くいきませんでした．<br/>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Tue, 03 Nov 2020 10:23:29 +0900</pubDate> <item> <title>Tidalを試しにインストールした際に躓いた点</title> <link>https://madosuki.github.io/blog/posts/Tidalを試しにインストールした際に躓いた点.html</link> <pubDate>2020-11-03 10:11:15</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Tidalを試しにインストールした際に躓いた点.html</guid> <category><![CDATA[ tidal ]]></category><category><![CDATA[ haskell ]]></category> <description><![CDATA[ <p>TidalCyclesはライブコーディングで作曲等ができるというものですが，インストールが若干面倒です．
+SuperColiderとかDirtのインストールは躓く要素が無いので省きます． </p>
+
+<p>Tidalはwikiに書かれている方法だと導入方法がcabal install tidalですがWindows環境でどうもこれが上手く行きません．GHCIでインポートしようにも見つからないという旨のエラーが出ます． </p>
+
+<p><a href="https://github.com/tidalcycles/tidal-chocolatey/issues/3" >https://github.com/tidalcycles/tidal-chocolatey/issues/3</a>を参照すると<code>cabal v1-install tidal</code>すると動くらしくて実際に私の環境ではこっちで動作しました． </p>
+
+<p>Windows上でのHaskell周りさっぱり分かりません．</p>
+
+<!--more-->
+
+<p>Excerpt separator can also be extracted from content.
+Add <code>excerpt: &lt;string&gt;</code> to the above metadata.
+Excerpt separator is <code>&lt;!--more--&gt;</code> by default.</p>
+ ]]></description> </item><item> <title>Windows10 20H2 on KVMでvirtioを後から使う際にINACCESSIBLE_BOOT_DEVICEに遭遇した</title> <link>https://madosuki.github.io/blog/posts/Windows10-20H2-on-KVMでvirtioを後から使う際にINACCESSIBLEBOOTDEVICEに遭遇した.html</link> <pubDate>2020-10-27 23:55:02</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Windows10-20H2-on-KVMでvirtioを後から使う際にINACCESSIBLEBOOTDEVICEに遭遇した.html</guid> <category><![CDATA[ KVM ]]></category><category><![CDATA[ Linux ]]></category><category><![CDATA[ Windows ]]></category> <description><![CDATA[ <p>解決方法を調べてみるとネットで転がっているのはbcdeditを使うものばかりですが，私の環境では上手くいきませんでした．<br/>
 まぁ要するにvirtioドライバを読み込むようにすれば良いのでWindowsが入っているストレージはSATA等の正常に起動できるやつに戻しておいて，<br/>
 ブートに関係ないセカンドストレージとして適当にvirtioなストレージを追加して普通にブートするだけでbcdeditで解決する例と同じことができます．    </p>
 

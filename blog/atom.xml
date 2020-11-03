@@ -1,5 +1,19 @@
 <?xml version="1.0"?>
-<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href="https://madosuki.github.io/blog"/> <link type="application/atom+xml" rel="self" href="https://madosuki.github.io/blog/atom.xml"/> <updated>Wed, 28 Oct 2020 00:07:45 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Windows10-20H2-on-KVMでvirtioを後から使う際にINACCESSIBLEBOOTDEVICEに遭遇した.html"/> <title>Windows10 20H2 on KVMでvirtioを後から使う際にINACCESSIBLE_BOOT_DEVICEに遭遇した</title> <published>2020-10-27 23:55:02</published> <updated>2020-10-27 23:55:02</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;解決方法を調べてみるとネットで転がっているのはbcdeditを使うものばかりですが，私の環境では上手くいきませんでした．&lt;br/&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href="https://madosuki.github.io/blog"/> <link type="application/atom+xml" rel="self" href="https://madosuki.github.io/blog/atom.xml"/> <updated>Tue, 03 Nov 2020 10:23:29 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Tidalを試しにインストールした際に躓いた点.html"/> <title>Tidalを試しにインストールした際に躓いた点</title> <published>2020-11-03 10:11:15</published> <updated>2020-11-03 10:11:15</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;TidalCyclesはライブコーディングで作曲等ができるというものですが，インストールが若干面倒です．
+SuperColiderとかDirtのインストールは躓く要素が無いので省きます． &lt;/p&gt;
+
+&lt;p&gt;Tidalはwikiに書かれている方法だと導入方法がcabal install tidalですがWindows環境でどうもこれが上手く行きません．GHCIでインポートしようにも見つからないという旨のエラーが出ます． &lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/tidalcycles/tidal-chocolatey/issues/3&quot; &gt;https://github.com/tidalcycles/tidal-chocolatey/issues/3&lt;/a&gt;を参照すると&lt;code&gt;cabal v1-install tidal&lt;/code&gt;すると動くらしくて実際に私の環境ではこっちで動作しました． &lt;/p&gt;
+
+&lt;p&gt;Windows上でのHaskell周りさっぱり分かりません．&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Excerpt separator can also be extracted from content.
+Add &lt;code&gt;excerpt: &amp;lt;string&amp;gt;&lt;/code&gt; to the above metadata.
+Excerpt separator is &lt;code&gt;&amp;lt;!--more--&amp;gt;&lt;/code&gt; by default.&lt;/p&gt;
+</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Windows10-20H2-on-KVMでvirtioを後から使う際にINACCESSIBLEBOOTDEVICEに遭遇した.html"/> <title>Windows10 20H2 on KVMでvirtioを後から使う際にINACCESSIBLE_BOOT_DEVICEに遭遇した</title> <published>2020-10-27 23:55:02</published> <updated>2020-10-27 23:55:02</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;解決方法を調べてみるとネットで転がっているのはbcdeditを使うものばかりですが，私の環境では上手くいきませんでした．&lt;br/&gt;
 まぁ要するにvirtioドライバを読み込むようにすれば良いのでWindowsが入っているストレージはSATA等の正常に起動できるやつに戻しておいて，&lt;br/&gt;
 ブートに関係ないセカンドストレージとして適当にvirtioなストレージを追加して普通にブートするだけでbcdeditで解決する例と同じことができます．    &lt;/p&gt;
 
