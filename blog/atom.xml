@@ -1,5 +1,28 @@
 <?xml version="1.0"?>
-<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href="https://madosuki.github.io/blog"/> <link type="application/atom+xml" rel="self" href="https://madosuki.github.io/blog/atom.xml"/> <updated>Tue, 03 Nov 2020 10:23:29 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Tidalを試しにインストールした際に躓いた点.html"/> <title>Tidalを試しにインストールした際に躓いた点</title> <published>2020-11-03 10:11:15</published> <updated>2020-11-03 10:11:15</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;TidalCyclesはライブコーディングで作曲等ができるというものですが，インストールが若干面倒です．
+<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href="https://madosuki.github.io/blog"/> <link type="application/atom+xml" rel="self" href="https://madosuki.github.io/blog/atom.xml"/> <updated>Tue, 20 Apr 2021 00:08:19 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Caveman2でcookieのkeyとexpiresを変更する方法.html"/> <title>Caveman2でcookieのkeyとexpiresを変更する方法</title> <published>2021-04-19 23:47:20</published> <updated>2021-04-19 23:47:20</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;Caveman2でセッションを有効するには，app.lispにあるbuilderマクロで&lt;code&gt;:session&lt;/code&gt;を書けばいいことはREADMEに書かれているのでそこは問題無いのですが，cookieのexpiresやデフォルトではlack.sessionにkeyを書き換えたいとなるとこれではさっぱりわからず依存しているlackのソース共々読む必要があります．&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/fukamachi/lack/blob/master/src/builder.lisp&quot; &gt;https://github.com/fukamachi/lack/blob/master/src/builder.lisp&lt;/a&gt;を読むとlackのミドルウェアか判別して実行する展開する箇所があります．
+:sessionを渡すとlack.middleware.sessionを実行するということなので，
+&lt;a href=&quot;https://github.com/fukamachi/lack/blob/master/src/middleware/session.lisp&quot; &gt;https://github.com/fukamachi/lack/blob/master/src/middleware/session.lisp&lt;/a&gt;を読むとstateキーのデフォルトとしてmake-cookie-stateを使っているのわかります．
+app.lisp内で:lack.middleware.session.state.cookieをインポートして，builder内で&lt;br/&gt;
+&lt;code&gt;
+ (:session
+  :state (make-cookie-state
+          :httponly t
+          :cookie-key &amp;quot;myapp.session&amp;quot;
+          :expires 1800)
+&lt;/code&gt;
+すればset-cookieの値が変わっているはずです．
+cookieを生成した現在時刻+ここでした秒数が最終的なexpiresになるのでこの例だと30分有効ということになります．
+個人的にはsamesiteを入れたいのですが入り組んでいて私ではわかりづらく難航しています．
+まぁ元のlackの該当箇所を書き換えてしまった方が早いですがね．  &lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Excerpt separator can also be extracted from content.
+Add &lt;code&gt;excerpt: &amp;lt;string&amp;gt;&lt;/code&gt; to the above metadata.
+Excerpt separator is &lt;code&gt;&amp;lt;!--more--&amp;gt;&lt;/code&gt; by default.&lt;/p&gt;
+</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Tidalを試しにインストールした際に躓いた点.html"/> <title>Tidalを試しにインストールした際に躓いた点</title> <published>2020-11-03 10:11:15</published> <updated>2020-11-03 10:11:15</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;TidalCyclesはライブコーディングで作曲等ができるというものですが，インストールが若干面倒です．
 SuperColiderとかDirtのインストールは躓く要素が無いので省きます． &lt;/p&gt;
 
 &lt;p&gt;Tidalはwikiに書かれている方法だと導入方法がcabal install tidalですがWindows環境でどうもこれが上手く行きません．GHCIでインポートしようにも見つからないという旨のエラーが出ます． &lt;/p&gt;
