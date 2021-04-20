@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Tue, 20 Apr 2021 00:12:54 +0900</pubDate> <item> <title>Caveman2でcookieのkeyとexpiresを変更する方法</title> <link>https://madosuki.github.io/blog/posts/Caveman2でcookieのkeyとexpiresを変更する方法.html</link> <pubDate>2021-04-19 23:47:20</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Caveman2でcookieのkeyとexpiresを変更する方法.html</guid> <category><![CDATA[ common lisp ]]></category> <description><![CDATA[ <p>Caveman2でセッションを有効するには，app.lispにあるbuilderマクロで<code>:session</code>を書けばいいことはREADMEに書かれているのでそこは問題無いのですが，cookieのexpiresやデフォルトではlack.sessionにkeyを書き換えたいとなるとこれではさっぱりわからず依存しているlackのソース共々読む必要があります．  </p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Tue, 20 Apr 2021 10:06:08 +0900</pubDate> <item> <title>Caveman2でcookieのkeyとexpiresを変更する方法</title> <link>https://madosuki.github.io/blog/posts/Caveman2でcookieのkeyとexpiresを変更する方法.html</link> <pubDate>2021-04-19 23:47:20</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Caveman2でcookieのkeyとexpiresを変更する方法.html</guid> <category><![CDATA[ common lisp ]]></category> <description><![CDATA[ <p>Caveman2でセッションを有効するには，app.lispにあるbuilderマクロで<code>:session</code>を書けばいいことはREADMEに書かれているのでそこは問題無いのですが，cookieのexpiresやセッション名となっているcookieキーの変更方法は書かれておらずソースを読む必要がありました．   </p>
 
 <p><a href="https://github.com/fukamachi/lack/blob/master/src/builder.lisp" >https://github.com/fukamachi/lack/blob/master/src/builder.lisp</a>を読むとlackのミドルウェアか判別して実行する展開する箇所があります．
 :sessionを渡すとlack.middleware.sessionを実行するということなので，<br/>
@@ -11,15 +11,17 @@
   :state (make-cookie-state
           :httponly t
           :cookie-key &quot;myapp.session&quot;
-          :expires 1800)
+          :expires 1800))
 </code>
-すればset-cookieの値が変わっているはずです．  </p>
+すればset-cookieの値が変わっているはずです．</p>
 
-<p>cookieを生成した現在時刻+ここでした秒数が最終的なexpiresになるのでこの例だと30分有効ということになります．  </p>
+<p>このcookie-stateは構造体であり<a href="https://github.com/fukamachi/lack/blob/master/src/middleware/session/state/cookie.lisp" >https://github.com/fukamachi/lack/blob/master/src/middleware/session/state/cookie.lisp</a>で定義されています．   </p>
+
+<p>「cookieを生成した現在時刻+make-cookie-stateのexpiresキーで渡した秒数」が最終的なexpiresになるのでこの例だと30分有効ということになります．  </p>
 
 <p>個人的にはsamesiteを入れたいのですが入り組んでいて私ではわかりづらく難航しています．   </p>
 
-<p>まぁ元のlackの該当箇所を書き換えてしまった方が早いですがね．   </p>
+<p>まぁ元のlackの該当箇所を書き換えてしまった方が早いですが．   </p>
 
 <!--more-->
 
