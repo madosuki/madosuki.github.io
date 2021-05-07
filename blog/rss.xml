@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Fri, 07 May 2021 11:04:34 +0900</pubDate> <item> <title>Caveman2でcookieのkeyとexpiresを変更する方法</title> <link>https://madosuki.github.io/blog/posts/Caveman2でcookieのkeyとexpiresを変更する方法.html</link> <pubDate>2021-04-19 23:47:20</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Caveman2でcookieのkeyとexpiresを変更する方法.html</guid> <category><![CDATA[ common lisp ]]></category> <description><![CDATA[ <p>Caveman2でセッションを有効するには，app.lispにあるbuilderマクロで<code>:session</code>を書けばいいことはREADMEに書かれているのでそこは問題無いのですが，cookieのexpiresやセッション名となっているcookieキーの変更方法は書かれておらずソースを読む必要がありました．   </p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Fri, 07 May 2021 16:53:17 +0900</pubDate> <item> <title>Caveman2でcookieのkeyとexpiresを変更する方法</title> <link>https://madosuki.github.io/blog/posts/Caveman2でcookieのkeyとexpiresを変更する方法.html</link> <pubDate>2021-04-19 23:47:20</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Caveman2でcookieのkeyとexpiresを変更する方法.html</guid> <category><![CDATA[ common lisp ]]></category> <description><![CDATA[ <p>Caveman2でセッションを有効するには，app.lispにあるbuilderマクロで<code>:session</code>を書けばいいことはREADMEに書かれているのでそこは問題無いのですが，cookieのexpiresやセッション名となっているcookieキーの変更方法は書かれておらずソースを読む必要がありました．   </p>
 
 <p><a href="https://github.com/fukamachi/lack/blob/master/src/builder.lisp" >https://github.com/fukamachi/lack/blob/master/src/builder.lisp</a>を読むとlackのミドルウェアか判別して実行する展開する箇所があります．
 :sessionを渡すとlack.middleware.sessionを実行するということなので，<br/>
@@ -23,7 +23,7 @@
 
 <p>まぁ元のlackの該当箇所を書き換えてしまった方が早いですが．</p>
 
-<h2>追記(2021-05-07)</h2>
+<h3>追記(2021-05-07)</h3>
 
 <p>私がlackに出していたPRがマージされたので現在のバージョンであれば，<br/>
 <code>
@@ -33,7 +33,11 @@
 </code>
 の様にキーワードで渡してsamesiteキーワードに渡してやればSet-CookieにSameSite=Laxが追加されます．<br/>
 何も指定しなければNoneになります．<br/>
-Strictにするには:strictキーワードをどうぞ．   </p>
+Strictにするには:strictキーワードをどうぞ．</p>
+
+<h3>追記(2021/05/07 16:50 JST)</h3>
+
+<p>caveman2 projectのproject-name.asdの:depends-on内で&quot;lack.middleware.session&quot;かそれをインポートしているライブラリを指定する必要があるということを書いておくのを忘れていました．  </p>
 
 <!--more-->
 
