@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href="https://madosuki.github.io/blog"/> <link type="application/atom+xml" rel="self" href="https://madosuki.github.io/blog/atom.xml"/> <updated>Tue, 20 Apr 2021 10:06:08 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Caveman2でcookieのkeyとexpiresを変更する方法.html"/> <title>Caveman2でcookieのkeyとexpiresを変更する方法</title> <published>2021-04-19 23:47:20</published> <updated>2021-04-19 23:47:20</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;Caveman2でセッションを有効するには，app.lispにあるbuilderマクロで&lt;code&gt;:session&lt;/code&gt;を書けばいいことはREADMEに書かれているのでそこは問題無いのですが，cookieのexpiresやセッション名となっているcookieキーの変更方法は書かれておらずソースを読む必要がありました．   &lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href="https://madosuki.github.io/blog"/> <link type="application/atom+xml" rel="self" href="https://madosuki.github.io/blog/atom.xml"/> <updated>Fri, 07 May 2021 11:04:34 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Caveman2でcookieのkeyとexpiresを変更する方法.html"/> <title>Caveman2でcookieのkeyとexpiresを変更する方法</title> <published>2021-04-19 23:47:20</published> <updated>2021-04-19 23:47:20</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;Caveman2でセッションを有効するには，app.lispにあるbuilderマクロで&lt;code&gt;:session&lt;/code&gt;を書けばいいことはREADMEに書かれているのでそこは問題無いのですが，cookieのexpiresやセッション名となっているcookieキーの変更方法は書かれておらずソースを読む必要がありました．   &lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/fukamachi/lack/blob/master/src/builder.lisp&quot; &gt;https://github.com/fukamachi/lack/blob/master/src/builder.lisp&lt;/a&gt;を読むとlackのミドルウェアか判別して実行する展開する箇所があります．
 :sessionを渡すとlack.middleware.sessionを実行するということなので，&lt;br/&gt;
@@ -21,7 +21,19 @@
 
 &lt;p&gt;個人的にはsamesiteを入れたいのですが入り組んでいて私ではわかりづらく難航しています．   &lt;/p&gt;
 
-&lt;p&gt;まぁ元のlackの該当箇所を書き換えてしまった方が早いですが．   &lt;/p&gt;
+&lt;p&gt;まぁ元のlackの該当箇所を書き換えてしまった方が早いですが．&lt;/p&gt;
+
+&lt;h2&gt;追記(2021-05-07)&lt;/h2&gt;
+
+&lt;p&gt;私がlackに出していたPRがマージされたので現在のバージョンであれば，&lt;br/&gt;
+&lt;code&gt;
+(:session
+    :state (make-cookie-state
+            :samesite :lax))
+&lt;/code&gt;
+の様にキーワードで渡してsamesiteキーワードに渡してやればSet-CookieにSameSite=Laxが追加されます．&lt;br/&gt;
+何も指定しなければNoneになります．&lt;br/&gt;
+Strictにするには:strictキーワードをどうぞ．   &lt;/p&gt;
 
 &lt;!--more--&gt;
 

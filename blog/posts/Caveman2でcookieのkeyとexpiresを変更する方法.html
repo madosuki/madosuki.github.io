@@ -23,7 +23,19 @@
 
 <p>個人的にはsamesiteを入れたいのですが入り組んでいて私ではわかりづらく難航しています．   </p>
 
-<p>まぁ元のlackの該当箇所を書き換えてしまった方が早いですが．   </p>
+<p>まぁ元のlackの該当箇所を書き換えてしまった方が早いですが．</p>
+
+<h2>追記(2021-05-07)</h2>
+
+<p>私がlackに出していたPRがマージされたので現在のバージョンであれば，<br/>
+<code>
+(:session
+    :state (make-cookie-state
+            :samesite :lax))
+</code>
+の様にキーワードで渡してsamesiteキーワードに渡してやればSet-CookieにSameSite=Laxが追加されます．<br/>
+何も指定しなければNoneになります．<br/>
+Strictにするには:strictキーワードをどうぞ．   </p>
 
 <!--more-->
 

@@ -21,7 +21,19 @@
 
 <p>個人的にはsamesiteを入れたいのですが入り組んでいて私ではわかりづらく難航しています．   </p>
 
-<p>まぁ元のlackの該当箇所を書き換えてしまった方が早いですが．   </p>
+<p>まぁ元のlackの該当箇所を書き換えてしまった方が早いですが．</p>
+
+<h2>追記(2021-05-07)</h2>
+
+<p>私がlackに出していたPRがマージされたので現在のバージョンであれば，<br/>
+<code>
+(:session
+    :state (make-cookie-state
+            :samesite :lax))
+</code>
+の様にキーワードで渡してsamesiteキーワードに渡してやればSet-CookieにSameSite=Laxが追加されます．<br/>
+何も指定しなければNoneになります．<br/>
+Strictにするには:strictキーワードをどうぞ．   </p>
 
  </div><div class="row-fluid"> <h1><a href="https://madosuki.github.io/blog/posts/Tidalを試しにインストールした際に躓いた点.html">Tidalを試しにインストールした際に躓いた点</a></h1> <p class="date-posted">posted on 2020-11-03 10:11:15</p> <p>TidalCyclesはライブコーディングで作曲等ができるというものですが，インストールが若干面倒です．
 SuperColiderとかDirtのインストールは躓く要素が無いので省きます． </p>
