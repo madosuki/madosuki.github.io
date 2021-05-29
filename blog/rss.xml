@@ -1,5 +1,136 @@
 <?xml version="1.0"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Fri, 07 May 2021 16:53:17 +0900</pubDate> <item> <title>Caveman2でcookieのkeyとexpiresを変更する方法</title> <link>https://madosuki.github.io/blog/posts/Caveman2でcookieのkeyとexpiresを変更する方法.html</link> <pubDate>2021-04-19 23:47:20</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Caveman2でcookieのkeyとexpiresを変更する方法.html</guid> <category><![CDATA[ common lisp ]]></category> <description><![CDATA[ <p>Caveman2でセッションを有効するには，app.lispにあるbuilderマクロで<code>:session</code>を書けばいいことはREADMEに書かれているのでそこは問題無いのですが，cookieのexpiresやセッション名となっているcookieキーの変更方法は書かれておらずソースを読む必要がありました．   </p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Sat, 29 May 2021 12:57:22 +0900</pubDate> <item> <title>Fableを試してみる前にやったこと</title> <link>https://madosuki.github.io/blog/posts/Fableを試してみる前にやったこと.html</link> <pubDate>2021-05-29 11:26:48</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Fableを試してみる前にやったこと.html</guid> <category><![CDATA[ Fsharp ]]></category> <description><![CDATA[ <p>FableはF#コードをJavaScriptに変換してくれるやつです．<br/>
+サンプルを試すだけなら<a href="https://github.com/fable-compiler/fable3-samples" >https://github.com/fable-compiler/fable3-samples</a>をgit cloneしてよしなにすれば良いのですが，自プロジェクトだと1から用意したくなります．なりますよね？  </p>
+
+<p>公式チュートリアルだとテンプレートをインポートさせてdotnet newで簡単にできるようにする方法が紹介されていますが，この記事執筆時点では公式が用意しているテンプレートですとFable3に対応していないという注意書きも書かれています．  </p>
+
+<p>仕方ないので手動で用意するかってなりました．まぁ私が知らないだけでもっとスマートなやり方がある気がしますが．  </p>
+
+<p>dotnet sdkとnodejsのインストールはmustなので割愛します．  </p>
+
+<p>上記のサンプルにありますbrowserサンプルを参考にしているので適宜参照します．  </p>
+
+<p>webpack.config.jsの中身とかはそこからの流用です．  </p>
+
+<p>それと間違っていることを書いてしまっている可能性があるのでここに書いてあることは参考程度に留めておくのがいいです．  </p>
+
+<p>一番良いのは公式のドキュメントやサンプルをチェックしていって試行錯誤していくことですが，ただそれだと私の様なアホだとサンプルコード読んでお終いとなりがちなので（私だけかもしれないが）自分でFableプロジェクトを作る方法ぐらいはここに自分用にメモして忘れた時に読む用にというのがこの記事の目的です．  </p>
+
+<h1>Process</h1>
+
+<ul>
+<li><p>Step 1: Create Project Directory
+適当にmkdirでproject dirを作りましょう．  </p></li>
+<li><p>Step 2: Create package.json
+project dir内でnpm initなりyarn initなりでpackage.jsonを作成しておきます．  </p></li>
+<li><p>Step 3: Install dependencies webpack
+npmなら--save-dev，yarnなら-dをつけて，webpack，webpack-cli，webpack-dev-serverをインストールしておきます．  </p></li>
+<li><p>Step 4: Write Script in package.json
+<code>
+&quot;scripts&quot;: {
+&quot;postinstall&quot;: &quot;dotnet tool restore&quot;,
+&quot;start&quot;: &quot;dotnet fable watch src --run webpack serve&quot;
+}
+</code>
+をpackage.json内に記述してください．<br/>
+上記のはfable3-samples/browser内のをコピペしただけですので，単純にそっちからコピーしてきても良いです．  </p></li>
+<li><p>Step 5: Create webpack.config.js
+webpack.config.jsをproject dir内で作成し，
+<code>
+var path = require(&quot;path&quot;)
+module.exports = {
+mode: &quot;development&quot;,
+entry: &quot;./src/App.fs.js&quot;,
+output: {
+    path: path.join(__dirname, &quot;./public&quot;),
+    filename: &quot;bundle.js&quot;,
+},
+devServer: {
+    contentBase: &quot;./public&quot;,
+    port: 8080,
+}
+}
+</code>
+をwebpack.config.js内に記述します．<br/>
+上記のはfable3-samples/browser内のをコピペしただけですので，単純にそっちからコピーしてきても良いです．  </p></li>
+<li><p>Step 6: Install Fable command
+<code>
+dotnet new tool-manifest # if you are setting up this repo
+dotnet tool install --local Fable --version 3.2.1
+</code>
+以上をproject dir内で行うと.configディレクトリとその中にdotnet-tools.jsonが作られます．<br/>
+これでscriptを動かすために必要なコマンドが揃いました．  </p></li>
+<li><p>Step 7: Create src directory
+今まで書いてきた設定ファイルに沿ったdir nameにします．<br/>
+つまりproject dirでmkdir srcします．<br/>
+次からはこのsrcディレクトリ内で作業します  </p></li>
+<li><p>Step 8: Create App.fsproj
+```
+<Project Sdk="Microsoft.NET.Sdk"></p></li>
+</ul>
+
+<p><PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup></p>
+
+<p><ItemGroup>
+    <Compile Include="App.fs" />
+  </ItemGroup></p>
+
+<p><ItemGroup>
+    <PackageReference Include="Fable.Browser.Dom" Version="2.4.4" />
+    <PackageReference Include="Fable.Core" Version="3.2.7" />
+  </ItemGroup></p>
+
+<p></Project>
+```
+App.fsprojに上記内容を記述．  </p>
+
+<ul>
+<li>Step 9: Create App.fs
+```
+module App
+open Fable.Core.JsInterop</li>
+</ul>
+
+<p>let window = Browser.Dom.window</p>
+
+<p>let mutable hOne : Browser.Types.HTMLElement = unbox window.document.getElementById &quot;title&quot;
+hOne.innerText &lt;- &quot;Replaced on Fable&quot;
+```
+上記を記述．<br/>
+このファイルがjsに変換されます．  </p>
+
+<ul>
+<li><p>Step 10: Set public files
+project dirに戻り，mkdir publicして，中にindex.htmlを用意します．<br/>
+index.htmlの中身は
+<code>
+&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Fable&lt;/title&gt;
+  &lt;meta http-equiv='Content-Type' content='text/html; charset=utf-8'&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;link rel=&quot;shortcut icon&quot; href=&quot;fable.ico&quot; /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1 id=&quot;title&quot;&gt;Test&lt;/h1&gt;
+&lt;script src=&quot;bundle.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code>
+でいいです．  </p></li>
+<li><p>Step 11: Run
+再びproject dirに戻り，npm run startなりyarn startなりすれば動くと思います．  </p></li>
+</ul>
+
+<!--more-->
+
+<p>Excerpt separator can also be extracted from content.
+Add <code>excerpt: &lt;string&gt;</code> to the above metadata.
+Excerpt separator is <code>&lt;!--more--&gt;</code> by default.</p>
+ ]]></description> </item><item> <title>Caveman2でcookieのkeyとexpiresを変更する方法</title> <link>https://madosuki.github.io/blog/posts/Caveman2でcookieのkeyとexpiresを変更する方法.html</link> <pubDate>2021-04-19 23:47:20</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Caveman2でcookieのkeyとexpiresを変更する方法.html</guid> <category><![CDATA[ common lisp ]]></category> <description><![CDATA[ <p>Caveman2でセッションを有効するには，app.lispにあるbuilderマクロで<code>:session</code>を書けばいいことはREADMEに書かれているのでそこは問題無いのですが，cookieのexpiresやセッション名となっているcookieキーの変更方法は書かれておらずソースを読む必要がありました．   </p>
 
 <p><a href="https://github.com/fukamachi/lack/blob/master/src/builder.lisp" >https://github.com/fukamachi/lack/blob/master/src/builder.lisp</a>を読むとlackのミドルウェアか判別して実行する展開する箇所があります．
 :sessionを渡すとlack.middleware.sessionを実行するということなので，<br/>
