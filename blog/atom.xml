@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href="https://madosuki.github.io/blog"/> <link type="application/atom+xml" rel="self" href="https://madosuki.github.io/blog/atom.xml"/> <updated>Sat, 29 May 2021 13:03:33 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Fableプロジェクトを1から手動で作る方法的な私的メモ.html"/> <title>Fableプロジェクトを1から手動で作る方法的な私的メモ</title> <published>2021-05-29 11:26:48</published> <updated>2021-05-29 11:26:48</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;FableはF#コードをJavaScriptに変換してくれるやつです．&lt;br/&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href="https://madosuki.github.io/blog"/> <link type="application/atom+xml" rel="self" href="https://madosuki.github.io/blog/atom.xml"/> <updated>Sat, 29 May 2021 13:11:53 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Fableプロジェクトを1から手動で作る方法的な私的メモ.html"/> <title>Fableプロジェクトを1から手動で作る方法的な私的メモ</title> <published>2021-05-29 11:26:48</published> <updated>2021-05-29 11:26:48</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;FableはF#コードをJavaScriptに変換してくれるやつです．&lt;br/&gt;
 サンプルを試すだけなら&lt;a href=&quot;https://github.com/fable-compiler/fable3-samples&quot; &gt;https://github.com/fable-compiler/fable3-samples&lt;/a&gt;をgit cloneしてよしなにすれば良いのですが，自プロジェクトだと1から用意したくなります．なりますよね？  &lt;/p&gt;
 
 &lt;p&gt;公式チュートリアルだとテンプレートをインポートさせてdotnet newで簡単にできるようにする方法が紹介されていますが，この記事執筆時点では公式が用意しているテンプレートですとFable3に対応していないという注意書きも書かれています．  &lt;/p&gt;
@@ -64,27 +64,27 @@ dotnet tool install --local Fable --version 3.2.1
 今まで書いてきた設定ファイルに沿ったdir nameにします．&lt;br/&gt;
 つまりproject dirでmkdir srcします．&lt;br/&gt;
 次からはこのsrcディレクトリ内で作業します  &lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Step 8: Create App.fsproj&lt;br/&gt;
-```
-&lt;Project Sdk=&quot;Microsoft.NET.Sdk&quot;&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Step 8: Create App.fsproj  &lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;PropertyGroup&gt;
-    &lt;TargetFramework&gt;netstandard2.0&lt;/TargetFramework&gt;
-  &lt;/PropertyGroup&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;Project Sdk=&quot;Microsoft.NET.Sdk&quot;&amp;gt;
 
-&lt;p&gt;&lt;ItemGroup&gt;
-    &lt;Compile Include=&quot;App.fs&quot; /&gt;
-  &lt;/ItemGroup&gt;&lt;/p&gt;
+  &amp;lt;PropertyGroup&amp;gt;
+    &amp;lt;TargetFramework&amp;gt;netstandard2.0&amp;lt;/TargetFramework&amp;gt;
+  &amp;lt;/PropertyGroup&amp;gt;
 
-&lt;p&gt;&lt;ItemGroup&gt;
-    &lt;PackageReference Include=&quot;Fable.Browser.Dom&quot; Version=&quot;2.4.4&quot; /&gt;
-    &lt;PackageReference Include=&quot;Fable.Core&quot; Version=&quot;3.2.7&quot; /&gt;
-  &lt;/ItemGroup&gt;&lt;/p&gt;
+  &amp;lt;ItemGroup&amp;gt;
+    &amp;lt;Compile Include=&quot;App.fs&quot; /&amp;gt;
+  &amp;lt;/ItemGroup&amp;gt;
 
-&lt;p&gt;&lt;/Project&gt;
-```
-App.fsprojに上記内容を記述．  &lt;/p&gt;
+  &amp;lt;ItemGroup&amp;gt;
+    &amp;lt;PackageReference Include=&quot;Fable.Browser.Dom&quot; Version=&quot;2.4.4&quot; /&amp;gt;
+    &amp;lt;PackageReference Include=&quot;Fable.Core&quot; Version=&quot;3.2.7&quot; /&amp;gt;
+  &amp;lt;/ItemGroup&amp;gt;
+
+&amp;lt;/Project&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;App.fsprojに上記内容を記述．  &lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Step 9: Create App.fs&lt;br/&gt;

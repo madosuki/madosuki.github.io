@@ -64,27 +64,27 @@ dotnet tool install --local Fable --version 3.2.1
 今まで書いてきた設定ファイルに沿ったdir nameにします．<br/>
 つまりproject dirでmkdir srcします．<br/>
 次からはこのsrcディレクトリ内で作業します  </p></li>
-<li><p>Step 8: Create App.fsproj<br/>
-```
-<Project Sdk="Microsoft.NET.Sdk"></p></li>
+<li><p>Step 8: Create App.fsproj  </p></li>
 </ul>
 
-<p><PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup></p>
+<pre><code>&lt;Project Sdk="Microsoft.NET.Sdk"&gt;
 
-<p><ItemGroup>
-    <Compile Include="App.fs" />
-  </ItemGroup></p>
+  &lt;PropertyGroup&gt;
+    &lt;TargetFramework&gt;netstandard2.0&lt;/TargetFramework&gt;
+  &lt;/PropertyGroup&gt;
 
-<p><ItemGroup>
-    <PackageReference Include="Fable.Browser.Dom" Version="2.4.4" />
-    <PackageReference Include="Fable.Core" Version="3.2.7" />
-  </ItemGroup></p>
+  &lt;ItemGroup&gt;
+    &lt;Compile Include="App.fs" /&gt;
+  &lt;/ItemGroup&gt;
 
-<p></Project>
-```
-App.fsprojに上記内容を記述．  </p>
+  &lt;ItemGroup&gt;
+    &lt;PackageReference Include="Fable.Browser.Dom" Version="2.4.4" /&gt;
+    &lt;PackageReference Include="Fable.Core" Version="3.2.7" /&gt;
+  &lt;/ItemGroup&gt;
+
+&lt;/Project&gt;</code></pre>
+
+<p>App.fsprojに上記内容を記述．  </p>
 
 <ul>
 <li>Step 9: Create App.fs<br/>
