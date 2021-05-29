@@ -55,18 +55,17 @@ module.exports = {
         contentBase: "./public",
         port: 8080,
     }
-}
-```  
-  
-をwebpack.config.js内に記述します．  
-上記のはfable3-samples/browser内のをコピペしただけですので，単純にそっちからコピーしてきても良いです．  
+}</code></pre>
 
-- Step 6: Install Fable command  
-  </code></pre>
+<p>をwebpack.config.js内に記述します．<br/>
+上記のはfable3-samples/browser内のをコピペしただけですので，単純にそっちからコピーしてきても良いです．  </p>
 
-<p>dotnet new tool-manifest # if you are setting up this repo
-dotnet tool install --local Fable --version 3.2.1
-```  </p>
+<ul>
+<li>Step 6: Install Fable command</li>
+</ul>
+
+<pre><code>dotnet new tool-manifest # if you are setting up this repo
+dotnet tool install --local Fable --version 3.2.1</code></pre>
 
 <p>以上をproject dir内で行うと.configディレクトリとその中にdotnet-tools.jsonが作られます．<br/>
 これでscriptを動かすために必要なコマンドが揃いました．  </p>
@@ -108,31 +107,30 @@ open Fable.Core.JsInterop
 let window = Browser.Dom.window
 
 let mutable hOne : Browser.Types.HTMLElement = unbox window.document.getElementById "title"
-hOne.innerText &lt;- "Replaced on Fable"
-```  
-  
-上記を記述．  
-このファイルがjsに変換されます．  
+hOne.innerText &lt;- "Replaced on Fable"</code></pre>
 
-- Step 10: Set public files  
-project dirに戻り，mkdir publicして，中にindex.htmlを用意します．  
-index.htmlの中身は  
-  </code></pre>
+<p>上記を記述．<br/>
+このファイルがjsに変換されます．  </p>
 
-<p>&lt;!doctype html&gt;
-<html>
-<head>
-  <title>Fable</title>
-  <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" href="fable.ico" />
-</head>
-<body>
-    <h1 id="title">Test</h1>
-    <script src="bundle.js"></script>
-</body>
-</html>
-```  </p>
+<ul>
+<li>Step 10: Set public files<br/>
+project dirに戻り，mkdir publicして，中にindex.htmlを用意します．<br/>
+index.htmlの中身は</li>
+</ul>
+
+<pre><code>&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Fable&lt;/title&gt;
+  &lt;meta http-equiv='Content-Type' content='text/html; charset=utf-8'&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  &lt;link rel="shortcut icon" href="fable.ico" /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1 id="title"&gt;Test&lt;/h1&gt;
+    &lt;script src="bundle.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
 
 <p>でいいです．  </p>
 
