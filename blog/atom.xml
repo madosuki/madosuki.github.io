@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href="https://madosuki.github.io/blog"/> <link type="application/atom+xml" rel="self" href="https://madosuki.github.io/blog/atom.xml"/> <updated>Sat, 29 May 2021 12:57:22 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Fableを試してみる前にやったこと.html"/> <title>Fableを試してみる前にやったこと</title> <published>2021-05-29 11:26:48</published> <updated>2021-05-29 11:26:48</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;FableはF#コードをJavaScriptに変換してくれるやつです．&lt;br/&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href="https://madosuki.github.io/blog"/> <link type="application/atom+xml" rel="self" href="https://madosuki.github.io/blog/atom.xml"/> <updated>Sat, 29 May 2021 13:03:33 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Fableプロジェクトを1から手動で作る方法的な私的メモ.html"/> <title>Fableプロジェクトを1から手動で作る方法的な私的メモ</title> <published>2021-05-29 11:26:48</published> <updated>2021-05-29 11:26:48</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;FableはF#コードをJavaScriptに変換してくれるやつです．&lt;br/&gt;
 サンプルを試すだけなら&lt;a href=&quot;https://github.com/fable-compiler/fable3-samples&quot; &gt;https://github.com/fable-compiler/fable3-samples&lt;/a&gt;をgit cloneしてよしなにすれば良いのですが，自プロジェクトだと1から用意したくなります．なりますよね？  &lt;/p&gt;
 
 &lt;p&gt;公式チュートリアルだとテンプレートをインポートさせてdotnet newで簡単にできるようにする方法が紹介されていますが，この記事執筆時点では公式が用意しているテンプレートですとFable3に対応していないという注意書きも書かれています．  &lt;/p&gt;
@@ -19,13 +19,13 @@
 &lt;h1&gt;Process&lt;/h1&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Step 1: Create Project Directory
+&lt;li&gt;&lt;p&gt;Step 1: Create Project Directory&lt;br/&gt;
 適当にmkdirでproject dirを作りましょう．  &lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Step 2: Create package.json
+&lt;li&gt;&lt;p&gt;Step 2: Create package.json&lt;br/&gt;
 project dir内でnpm initなりyarn initなりでpackage.jsonを作成しておきます．  &lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Step 3: Install dependencies webpack
+&lt;li&gt;&lt;p&gt;Step 3: Install dependencies webpack&lt;br/&gt;
 npmなら--save-dev，yarnなら-dをつけて，webpack，webpack-cli，webpack-dev-serverをインストールしておきます．  &lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Step 4: Write Script in package.json
+&lt;li&gt;&lt;p&gt;Step 4: Write Script in package.json&lt;br/&gt;
 &lt;code&gt;
 &amp;quot;scripts&amp;quot;: {
 &amp;quot;postinstall&amp;quot;: &amp;quot;dotnet tool restore&amp;quot;,
@@ -34,7 +34,7 @@ npmなら--save-dev，yarnなら-dをつけて，webpack，webpack-cli，webpack
 &lt;/code&gt;
 をpackage.json内に記述してください．&lt;br/&gt;
 上記のはfable3-samples/browser内のをコピペしただけですので，単純にそっちからコピーしてきても良いです．  &lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Step 5: Create webpack.config.js
+&lt;li&gt;&lt;p&gt;Step 5: Create webpack.config.js&lt;br/&gt;
 webpack.config.jsをproject dir内で作成し，
 &lt;code&gt;
 var path = require(&amp;quot;path&amp;quot;)
@@ -53,18 +53,18 @@ devServer: {
 &lt;/code&gt;
 をwebpack.config.js内に記述します．&lt;br/&gt;
 上記のはfable3-samples/browser内のをコピペしただけですので，単純にそっちからコピーしてきても良いです．  &lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Step 6: Install Fable command
+&lt;li&gt;&lt;p&gt;Step 6: Install Fable command&lt;br/&gt;
 &lt;code&gt;
 dotnet new tool-manifest # if you are setting up this repo
 dotnet tool install --local Fable --version 3.2.1
 &lt;/code&gt;
 以上をproject dir内で行うと.configディレクトリとその中にdotnet-tools.jsonが作られます．&lt;br/&gt;
 これでscriptを動かすために必要なコマンドが揃いました．  &lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Step 7: Create src directory
+&lt;li&gt;&lt;p&gt;Step 7: Create src directory&lt;br/&gt;
 今まで書いてきた設定ファイルに沿ったdir nameにします．&lt;br/&gt;
 つまりproject dirでmkdir srcします．&lt;br/&gt;
 次からはこのsrcディレクトリ内で作業します  &lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Step 8: Create App.fsproj
+&lt;li&gt;&lt;p&gt;Step 8: Create App.fsproj&lt;br/&gt;
 ```
 &lt;Project Sdk=&quot;Microsoft.NET.Sdk&quot;&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -87,7 +87,7 @@ dotnet tool install --local Fable --version 3.2.1
 App.fsprojに上記内容を記述．  &lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Step 9: Create App.fs
+&lt;li&gt;Step 9: Create App.fs&lt;br/&gt;
 ```
 module App
 open Fable.Core.JsInterop&lt;/li&gt;
@@ -102,7 +102,7 @@ hOne.innerText &amp;lt;- &amp;quot;Replaced on Fable&amp;quot;
 このファイルがjsに変換されます．  &lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Step 10: Set public files
+&lt;li&gt;&lt;p&gt;Step 10: Set public files&lt;br/&gt;
 project dirに戻り，mkdir publicして，中にindex.htmlを用意します．&lt;br/&gt;
 index.htmlの中身は
 &lt;code&gt;
@@ -121,7 +121,7 @@ index.htmlの中身は
 &amp;lt;/html&amp;gt;
 &lt;/code&gt;
 でいいです．  &lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Step 11: Run
+&lt;li&gt;&lt;p&gt;Step 11: Run&lt;br/&gt;
 再びproject dirに戻り，npm run startなりyarn startなりすれば動くと思います．  &lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 

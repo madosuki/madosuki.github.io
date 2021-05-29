@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <title>(随筆 :tendency 自堕落)</title> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <link href="https://madosuki.github.io/blog/css/bootstrap.min.css" rel="stylesheet" media="screen"> <link href="https://madosuki.github.io/blog/css/custom.css" rel="stylesheet" media="screen"> <link rel="alternate" href="https://madosuki.github.io/blog/rss.xml" type="application/rss+xml" />  </head> <body> <div class="container-fluid"> <div class="row-fluid"> <div class="offset2 span8"> <div class="row-fluid"> <div class="navbar navbar-inverse"> <div class="navbar-inner"> <a class="brand" href="https://madosuki.github.io/blog">(随筆 :tendency 自堕落)</a> <ul class="nav"> <li> <a href="https://madosuki.github.io/">Home</a> </li><li> <a href="https://twitter.com/madosuki_public">Twitter</a> </li><li> <a href="https://github.com/madosuki">Code</a> </li> </ul> </div> </div> </div> <div class="row-fluid"> <h1 class="page-header">Content tagged Fsharp</h1> <div class="row-fluid"> <h1><a href="https://madosuki.github.io/blog/posts/Fableを試してみる前にやったこと.html">Fableを試してみる前にやったこと</a></h1> <p class="date-posted">posted on 2021-05-29 11:26:48</p> <p>FableはF#コードをJavaScriptに変換してくれるやつです．<br/>
+<html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <title>(随筆 :tendency 自堕落)</title> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <link href="https://madosuki.github.io/blog/css/bootstrap.min.css" rel="stylesheet" media="screen"> <link href="https://madosuki.github.io/blog/css/custom.css" rel="stylesheet" media="screen"> <link rel="alternate" href="https://madosuki.github.io/blog/rss.xml" type="application/rss+xml" />  </head> <body> <div class="container-fluid"> <div class="row-fluid"> <div class="offset2 span8"> <div class="row-fluid"> <div class="navbar navbar-inverse"> <div class="navbar-inner"> <a class="brand" href="https://madosuki.github.io/blog">(随筆 :tendency 自堕落)</a> <ul class="nav"> <li> <a href="https://madosuki.github.io/">Home</a> </li><li> <a href="https://twitter.com/madosuki_public">Twitter</a> </li><li> <a href="https://github.com/madosuki">Code</a> </li> </ul> </div> </div> </div> <div class="row-fluid"> <h1 class="page-header">Content tagged Fsharp</h1> <div class="row-fluid"> <h1><a href="https://madosuki.github.io/blog/posts/Fableプロジェクトを1から手動で作る方法的な私的メモ.html">Fableプロジェクトを1から手動で作る方法的な私的メモ</a></h1> <p class="date-posted">posted on 2021-05-29 11:26:48</p> <p>FableはF#コードをJavaScriptに変換してくれるやつです．<br/>
 サンプルを試すだけなら<a href="https://github.com/fable-compiler/fable3-samples" >https://github.com/fable-compiler/fable3-samples</a>をgit cloneしてよしなにすれば良いのですが，自プロジェクトだと1から用意したくなります．なりますよね？  </p>
 
 <p>公式チュートリアルだとテンプレートをインポートさせてdotnet newで簡単にできるようにする方法が紹介されていますが，この記事執筆時点では公式が用意しているテンプレートですとFable3に対応していないという注意書きも書かれています．  </p>
@@ -19,13 +19,13 @@
 <h1>Process</h1>
 
 <ul>
-<li><p>Step 1: Create Project Directory
+<li><p>Step 1: Create Project Directory<br/>
 適当にmkdirでproject dirを作りましょう．  </p></li>
-<li><p>Step 2: Create package.json
+<li><p>Step 2: Create package.json<br/>
 project dir内でnpm initなりyarn initなりでpackage.jsonを作成しておきます．  </p></li>
-<li><p>Step 3: Install dependencies webpack
+<li><p>Step 3: Install dependencies webpack<br/>
 npmなら--save-dev，yarnなら-dをつけて，webpack，webpack-cli，webpack-dev-serverをインストールしておきます．  </p></li>
-<li><p>Step 4: Write Script in package.json
+<li><p>Step 4: Write Script in package.json<br/>
 <code>
 &quot;scripts&quot;: {
 &quot;postinstall&quot;: &quot;dotnet tool restore&quot;,
@@ -34,7 +34,7 @@ npmなら--save-dev，yarnなら-dをつけて，webpack，webpack-cli，webpack
 </code>
 をpackage.json内に記述してください．<br/>
 上記のはfable3-samples/browser内のをコピペしただけですので，単純にそっちからコピーしてきても良いです．  </p></li>
-<li><p>Step 5: Create webpack.config.js
+<li><p>Step 5: Create webpack.config.js<br/>
 webpack.config.jsをproject dir内で作成し，
 <code>
 var path = require(&quot;path&quot;)
@@ -53,18 +53,18 @@ devServer: {
 </code>
 をwebpack.config.js内に記述します．<br/>
 上記のはfable3-samples/browser内のをコピペしただけですので，単純にそっちからコピーしてきても良いです．  </p></li>
-<li><p>Step 6: Install Fable command
+<li><p>Step 6: Install Fable command<br/>
 <code>
 dotnet new tool-manifest # if you are setting up this repo
 dotnet tool install --local Fable --version 3.2.1
 </code>
 以上をproject dir内で行うと.configディレクトリとその中にdotnet-tools.jsonが作られます．<br/>
 これでscriptを動かすために必要なコマンドが揃いました．  </p></li>
-<li><p>Step 7: Create src directory
+<li><p>Step 7: Create src directory<br/>
 今まで書いてきた設定ファイルに沿ったdir nameにします．<br/>
 つまりproject dirでmkdir srcします．<br/>
 次からはこのsrcディレクトリ内で作業します  </p></li>
-<li><p>Step 8: Create App.fsproj
+<li><p>Step 8: Create App.fsproj<br/>
 ```
 <Project Sdk="Microsoft.NET.Sdk"></p></li>
 </ul>
@@ -87,7 +87,7 @@ dotnet tool install --local Fable --version 3.2.1
 App.fsprojに上記内容を記述．  </p>
 
 <ul>
-<li>Step 9: Create App.fs
+<li>Step 9: Create App.fs<br/>
 ```
 module App
 open Fable.Core.JsInterop</li>
@@ -102,7 +102,7 @@ hOne.innerText &lt;- &quot;Replaced on Fable&quot;
 このファイルがjsに変換されます．  </p>
 
 <ul>
-<li><p>Step 10: Set public files
+<li><p>Step 10: Set public files<br/>
 project dirに戻り，mkdir publicして，中にindex.htmlを用意します．<br/>
 index.htmlの中身は
 <code>
@@ -121,7 +121,7 @@ index.htmlの中身は
 &lt;/html&gt;
 </code>
 でいいです．  </p></li>
-<li><p>Step 11: Run
+<li><p>Step 11: Run<br/>
 再びproject dirに戻り，npm run startなりyarn startなりすれば動くと思います．  </p></li>
 </ul>
 

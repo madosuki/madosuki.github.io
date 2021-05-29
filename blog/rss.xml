@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Sat, 29 May 2021 12:57:22 +0900</pubDate> <item> <title>Fableを試してみる前にやったこと</title> <link>https://madosuki.github.io/blog/posts/Fableを試してみる前にやったこと.html</link> <pubDate>2021-05-29 11:26:48</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Fableを試してみる前にやったこと.html</guid> <category><![CDATA[ Fsharp ]]></category> <description><![CDATA[ <p>FableはF#コードをJavaScriptに変換してくれるやつです．<br/>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Sat, 29 May 2021 13:03:33 +0900</pubDate> <item> <title>Fableプロジェクトを1から手動で作る方法的な私的メモ</title> <link>https://madosuki.github.io/blog/posts/Fableプロジェクトを1から手動で作る方法的な私的メモ.html</link> <pubDate>2021-05-29 11:26:48</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Fableプロジェクトを1から手動で作る方法的な私的メモ.html</guid> <category><![CDATA[ Fsharp ]]></category> <description><![CDATA[ <p>FableはF#コードをJavaScriptに変換してくれるやつです．<br/>
 サンプルを試すだけなら<a href="https://github.com/fable-compiler/fable3-samples" >https://github.com/fable-compiler/fable3-samples</a>をgit cloneしてよしなにすれば良いのですが，自プロジェクトだと1から用意したくなります．なりますよね？  </p>
 
 <p>公式チュートリアルだとテンプレートをインポートさせてdotnet newで簡単にできるようにする方法が紹介されていますが，この記事執筆時点では公式が用意しているテンプレートですとFable3に対応していないという注意書きも書かれています．  </p>
@@ -19,13 +19,13 @@
 <h1>Process</h1>
 
 <ul>
-<li><p>Step 1: Create Project Directory
+<li><p>Step 1: Create Project Directory<br/>
 適当にmkdirでproject dirを作りましょう．  </p></li>
-<li><p>Step 2: Create package.json
+<li><p>Step 2: Create package.json<br/>
 project dir内でnpm initなりyarn initなりでpackage.jsonを作成しておきます．  </p></li>
-<li><p>Step 3: Install dependencies webpack
+<li><p>Step 3: Install dependencies webpack<br/>
 npmなら--save-dev，yarnなら-dをつけて，webpack，webpack-cli，webpack-dev-serverをインストールしておきます．  </p></li>
-<li><p>Step 4: Write Script in package.json
+<li><p>Step 4: Write Script in package.json<br/>
 <code>
 &quot;scripts&quot;: {
 &quot;postinstall&quot;: &quot;dotnet tool restore&quot;,
@@ -34,7 +34,7 @@ npmなら--save-dev，yarnなら-dをつけて，webpack，webpack-cli，webpack
 </code>
 をpackage.json内に記述してください．<br/>
 上記のはfable3-samples/browser内のをコピペしただけですので，単純にそっちからコピーしてきても良いです．  </p></li>
-<li><p>Step 5: Create webpack.config.js
+<li><p>Step 5: Create webpack.config.js<br/>
 webpack.config.jsをproject dir内で作成し，
 <code>
 var path = require(&quot;path&quot;)
@@ -53,18 +53,18 @@ devServer: {
 </code>
 をwebpack.config.js内に記述します．<br/>
 上記のはfable3-samples/browser内のをコピペしただけですので，単純にそっちからコピーしてきても良いです．  </p></li>
-<li><p>Step 6: Install Fable command
+<li><p>Step 6: Install Fable command<br/>
 <code>
 dotnet new tool-manifest # if you are setting up this repo
 dotnet tool install --local Fable --version 3.2.1
 </code>
 以上をproject dir内で行うと.configディレクトリとその中にdotnet-tools.jsonが作られます．<br/>
 これでscriptを動かすために必要なコマンドが揃いました．  </p></li>
-<li><p>Step 7: Create src directory
+<li><p>Step 7: Create src directory<br/>
 今まで書いてきた設定ファイルに沿ったdir nameにします．<br/>
 つまりproject dirでmkdir srcします．<br/>
 次からはこのsrcディレクトリ内で作業します  </p></li>
-<li><p>Step 8: Create App.fsproj
+<li><p>Step 8: Create App.fsproj<br/>
 ```
 <Project Sdk="Microsoft.NET.Sdk"></p></li>
 </ul>
@@ -87,7 +87,7 @@ dotnet tool install --local Fable --version 3.2.1
 App.fsprojに上記内容を記述．  </p>
 
 <ul>
-<li>Step 9: Create App.fs
+<li>Step 9: Create App.fs<br/>
 ```
 module App
 open Fable.Core.JsInterop</li>
@@ -102,7 +102,7 @@ hOne.innerText &lt;- &quot;Replaced on Fable&quot;
 このファイルがjsに変換されます．  </p>
 
 <ul>
-<li><p>Step 10: Set public files
+<li><p>Step 10: Set public files<br/>
 project dirに戻り，mkdir publicして，中にindex.htmlを用意します．<br/>
 index.htmlの中身は
 <code>
@@ -121,7 +121,7 @@ index.htmlの中身は
 &lt;/html&gt;
 </code>
 でいいです．  </p></li>
-<li><p>Step 11: Run
+<li><p>Step 11: Run<br/>
 再びproject dirに戻り，npm run startなりyarn startなりすれば動くと思います．  </p></li>
 </ul>
 
