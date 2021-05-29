@@ -27,41 +27,51 @@
 project dir内でnpm initなりyarn initなりでpackage.jsonを作成しておきます．  </p></li>
 <li><p>Step 3: Install dependencies webpack<br/>
 npmなら--save-dev，yarnなら-dをつけて，webpack，webpack-cli，webpack-dev-serverをインストールしておきます．  </p></li>
-<li><p>Step 4: Write Script in package.json<br/>
-<code>
-&quot;scripts&quot;: {
-&quot;postinstall&quot;: &quot;dotnet tool restore&quot;,
-&quot;start&quot;: &quot;dotnet fable watch src --run webpack serve&quot;
-}
-</code>
-をpackage.json内に記述してください．<br/>
-上記のはfable3-samples/browser内のをコピペしただけですので，単純にそっちからコピーしてきても良いです．  </p></li>
-<li><p>Step 5: Create webpack.config.js<br/>
-webpack.config.jsをproject dir内で作成し，
-<code>
-var path = require(&quot;path&quot;)
+<li><p>Step 4: Write Script in package.json  </p></li>
+</ul>
+
+<pre><code>"scripts": {
+    "postinstall": "dotnet tool restore",
+    "start": "dotnet fable watch src --run webpack serve"
+}</code></pre>
+
+<p>をpackage.json内に記述してください．<br/>
+上記のはfable3-samples/browser内のをコピペしただけですので，単純にそっちからコピーしてきても良いです．  </p>
+
+<ul>
+<li>Step 5: Create webpack.config.js<br/>
+webpack.config.jsをproject dir内で作成し，</li>
+</ul>
+
+<pre><code>var path = require("path")
 module.exports = {
-mode: &quot;development&quot;,
-entry: &quot;./src/App.fs.js&quot;,
-output: {
-    path: path.join(__dirname, &quot;./public&quot;),
-    filename: &quot;bundle.js&quot;,
-},
-devServer: {
-    contentBase: &quot;./public&quot;,
-    port: 8080,
+    mode: "development",
+    entry: "./src/App.fs.js",
+    output: {
+        path: path.join(__dirname, "./public"),
+        filename: "bundle.js",
+    },
+    devServer: {
+        contentBase: "./public",
+        port: 8080,
+    }
 }
-}
-</code>
-をwebpack.config.js内に記述します．<br/>
-上記のはfable3-samples/browser内のをコピペしただけですので，単純にそっちからコピーしてきても良いです．  </p></li>
-<li><p>Step 6: Install Fable command<br/>
-<code>
-dotnet new tool-manifest # if you are setting up this repo
+```  
+  
+をwebpack.config.js内に記述します．  
+上記のはfable3-samples/browser内のをコピペしただけですので，単純にそっちからコピーしてきても良いです．  
+
+- Step 6: Install Fable command  
+  </code></pre>
+
+<p>dotnet new tool-manifest # if you are setting up this repo
 dotnet tool install --local Fable --version 3.2.1
-</code>
-以上をproject dir内で行うと.configディレクトリとその中にdotnet-tools.jsonが作られます．<br/>
-これでscriptを動かすために必要なコマンドが揃いました．  </p></li>
+```  </p>
+
+<p>以上をproject dir内で行うと.configディレクトリとその中にdotnet-tools.jsonが作られます．<br/>
+これでscriptを動かすために必要なコマンドが揃いました．  </p>
+
+<ul>
 <li><p>Step 7: Create src directory<br/>
 今まで書いてきた設定ファイルに沿ったdir nameにします．<br/>
 つまりproject dirでmkdir srcします．<br/>
@@ -89,42 +99,46 @@ dotnet tool install --local Fable --version 3.2.1
 <p>App.fsprojに上記内容を記述．  </p>
 
 <ul>
-<li>Step 9: Create App.fs<br/>
-```
-module App
-open Fable.Core.JsInterop</li>
+<li>Step 9: Create App.fs</li>
 </ul>
 
-<p>let window = Browser.Dom.window</p>
+<pre><code>module App
+open Fable.Core.JsInterop
 
-<p>let mutable hOne : Browser.Types.HTMLElement = unbox window.document.getElementById &quot;title&quot;
-hOne.innerText &lt;- &quot;Replaced on Fable&quot;
-```
-上記を記述．<br/>
-このファイルがjsに変換されます．  </p>
+let window = Browser.Dom.window
+
+let mutable hOne : Browser.Types.HTMLElement = unbox window.document.getElementById "title"
+hOne.innerText &lt;- "Replaced on Fable"
+```  
+  
+上記を記述．  
+このファイルがjsに変換されます．  
+
+- Step 10: Set public files  
+project dirに戻り，mkdir publicして，中にindex.htmlを用意します．  
+index.htmlの中身は  
+  </code></pre>
+
+<p>&lt;!doctype html&gt;
+<html>
+<head>
+  <title>Fable</title>
+  <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="fable.ico" />
+</head>
+<body>
+    <h1 id="title">Test</h1>
+    <script src="bundle.js"></script>
+</body>
+</html>
+```  </p>
+
+<p>でいいです．  </p>
 
 <ul>
-<li><p>Step 10: Set public files<br/>
-project dirに戻り，mkdir publicして，中にindex.htmlを用意します．<br/>
-index.htmlの中身は
-<code>
-&lt;!doctype html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;Fable&lt;/title&gt;
-  &lt;meta http-equiv='Content-Type' content='text/html; charset=utf-8'&gt;
-  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-  &lt;link rel=&quot;shortcut icon&quot; href=&quot;fable.ico&quot; /&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;h1 id=&quot;title&quot;&gt;Test&lt;/h1&gt;
-&lt;script src=&quot;bundle.js&quot;&gt;&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code>
-でいいです．  </p></li>
-<li><p>Step 11: Run<br/>
-再びproject dirに戻り，npm run startなりyarn startなりすれば動くと思います．  </p></li>
+<li>Step 11: Run<br/>
+再びproject dirに戻り，npm run startなりyarn startなりすれば動くと思います．</li>
 </ul>
 
 <!--more-->
