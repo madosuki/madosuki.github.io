@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Sat, 29 May 2021 13:19:12 +0900</pubDate> <item> <title>Fableプロジェクトを1から手動で作る方法的な私的メモ</title> <link>https://madosuki.github.io/blog/posts/Fableプロジェクトを1から手動で作る方法的な私的メモ.html</link> <pubDate>2021-05-29 11:26:48</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Fableプロジェクトを1から手動で作る方法的な私的メモ.html</guid> <category><![CDATA[ Fsharp ]]></category> <description><![CDATA[ <p>FableはF#コードをJavaScriptに変換してくれるやつです．<br/>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Wed, 16 Jun 2021 20:35:21 +0900</pubDate> <item> <title>Fableプロジェクトを1から手動で作る方法的な私的メモ</title> <link>https://madosuki.github.io/blog/posts/Fableプロジェクトを1から手動で作る方法的な私的メモ.html</link> <pubDate>2021-05-29 11:26:48</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Fableプロジェクトを1から手動で作る方法的な私的メモ.html</guid> <category><![CDATA[ Fsharp ]]></category> <description><![CDATA[ <p>FableはF#コードをJavaScriptに変換してくれるやつです．<br/>
 サンプルを試すだけなら<a href="https://github.com/fable-compiler/fable3-samples" >https://github.com/fable-compiler/fable3-samples</a>をgit cloneしてよしなにすれば良いのですが，自プロジェクトだと1から用意したくなります．なりますよね？  </p>
 
 <p>公式チュートリアルだとテンプレートをインポートさせてdotnet newで簡単にできるようにする方法が紹介されていますが，この記事執筆時点では公式が用意しているテンプレートですとFable3に対応していないという注意書きも書かれています．  </p>
@@ -181,6 +181,10 @@ Strictにするには:strictキーワードをどうぞ．</p>
 <h3>追記(2021/05/07 16:50 JST)</h3>
 
 <p>caveman2 projectのproject-name.asdの:depends-on内で&quot;lack.middleware.session&quot;かそれをインポートしているライブラリを指定する必要があるということを書いておくのを忘れていました．  </p>
+
+<h3>追記修正(2021/06/16 JST)</h3>
+
+<p>上記の&quot;lack.middleware.session&quot;ではなく&quot;lack-middleware-session&quot;でした．  </p>
 
 <!--more-->
 
