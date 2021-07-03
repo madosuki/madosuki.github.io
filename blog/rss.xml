@@ -1,5 +1,68 @@
 <?xml version="1.0"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Wed, 16 Jun 2021 20:35:21 +0900</pubDate> <item> <title>Fableプロジェクトを1から手動で作る方法的な私的メモ</title> <link>https://madosuki.github.io/blog/posts/Fableプロジェクトを1から手動で作る方法的な私的メモ.html</link> <pubDate>2021-05-29 11:26:48</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Fableプロジェクトを1から手動で作る方法的な私的メモ.html</guid> <category><![CDATA[ Fsharp ]]></category> <description><![CDATA[ <p>FableはF#コードをJavaScriptに変換してくれるやつです．<br/>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Sat, 03 Jul 2021 11:07:02 +0900</pubDate> <item> <title>インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ</title> <link>https://madosuki.github.io/blog/posts/インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ.html</link> <pubDate>2021-07-03 09:42:56</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ.html</guid> <category><![CDATA[ Gentoo ]]></category><category><![CDATA[ Linux ]]></category> <description><![CDATA[ <p>前提条件としてセキュアブートをオフにしてインストールしたGentooかつ，ブートローダーにGRUB2をinitにsystemdを採用し尚且つsys-boot/shim，app-crypt/sbsigntools，sys-boot/efibootmgrをインストール済みの状態であることを想定している．<br/>
+GRUBインストール時のオプションは<br/>
+<code>
+sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi --modules=&quot;tpm&quot; --disable-shim-lock
+</code><br/>
+を想定．これについては<a href="https://forum.manjaro.org/t/grub-fails-to-load-with-shim-and-secure-boot-enabled/62522/2" >こちら</a>を参照．しておかないとブート時にエラーが出る．UEFIでTPMを有効しないといけないかは検証していない（多分要る気はする）．<br/>
+セキュアブートとTPMの有効方法はマザーボードごとに違ったりするのでここでは触れない．<br/>
+またここに書かれていることは2021-07-03時点の物であり，環境差もあるので動作を保証しない．  </p>
+
+<h1>setup shim</h1>
+
+<p><code>
+cp /usr/share/shim/BOOTX64.EFI /boot/efi/EFI/gentoo/ &amp;&amp; cp /usr/share/shim/mmx64.efi /boot/efi/EFIT/gentoo/
+</code>  </p>
+
+<h2>EFIに登録する</h2>
+
+<p>```  </p>
+
+<p>efibootmgr -c -d /dev/nvme0n1 -p 1 -L &quot;shim&quot; -l &quot;\EFI\gentoo\BOOTX64.EFI&quot; 
+```<br/>
+dオプションはEFIパーティションのあるデバイスをpオプションにはパーティションナンバーを入れる．  </p>
+
+<h1>Sign to kernel and grub</h1>
+
+<p>opensslを使う．<br/>
+<a href="https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface/Secure_Boot#shim" >参考URL</a><br/>
+<code>
+openssl req -newkey rsa:4096 -nodes -keyout MOK.key -new -x509 -sha256 -subj &quot;/CN= My Key /&quot; -out MOK.crt  
+</code><br/>
+daysオプションで有効期限を設定した方が良いかと思ったが煩わしいのでやめた．  </p>
+
+<p><code>
+openssl x509 -outform DER -in MOK.crt -out MOK.cer
+</code><br/>
+ このcerファイルは/boot/efi/EFI/gentoo/に放り込んでおく．<br/>
+ セキュアブートで起動した時に証明書が無いとmmx64.efiが起動し，keyを指定してenrollしろと言われるのでMOK.cerを置いた場所を指定する必要があるのでよしなにして．  </p>
+
+<p><code>
+ sbsign --key MOK.key --cert MOK.crt --output vmlinuz-path vmlinuz-path
+</code><br/>
+vmlinux-pathのところを/boot/下にある署名したいvmlinuzファイルのパスに置き換えて実行．  </p>
+
+<p><code>
+sbsign --key MOK.key --cert MOK.crt --output /boot/efi/EFI/gentoo/grubx64.efi /boot/efit/EFI/gentoo/grubx64.efi
+</code>  </p>
+
+<p>以上．<br/>
+UEFIに戻ってセキュアブートを有効にして，shimラベルのやつをブートに指定すればmmx64.efiが起動して証明書を指定するように言われるのでそれをして再起動すればブートできると思う．  </p>
+
+<h1>参考文献</h1>
+
+<ul>
+<li><a href="https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface/Secure_Boot#shim" >https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface/Secure_Boot#shim</a></li>
+<li><a href="https://forums.gentoo.org/viewtopic-t-1132536-start-0.html" >https://forums.gentoo.org/viewtopic-t-1132536-start-0.html</a></li>
+<li><a href="https://forum.manjaro.org/t/grub-fails-to-load-with-shim-and-secure-boot-enabled/62522/2" >https://forum.manjaro.org/t/grub-fails-to-load-with-shim-and-secure-boot-enabled/62522/2</a></li>
+</ul>
+
+<!--more-->
+
+<p>Excerpt separator can also be extracted from content.
+Add <code>excerpt: &lt;string&gt;</code> to the above metadata.
+Excerpt separator is <code>&lt;!--more--&gt;</code> by default.</p>
+ ]]></description> </item><item> <title>Fableプロジェクトを1から手動で作る方法的な私的メモ</title> <link>https://madosuki.github.io/blog/posts/Fableプロジェクトを1から手動で作る方法的な私的メモ.html</link> <pubDate>2021-05-29 11:26:48</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Fableプロジェクトを1から手動で作る方法的な私的メモ.html</guid> <category><![CDATA[ Fsharp ]]></category> <description><![CDATA[ <p>FableはF#コードをJavaScriptに変換してくれるやつです．<br/>
 サンプルを試すだけなら<a href="https://github.com/fable-compiler/fable3-samples" >https://github.com/fable-compiler/fable3-samples</a>をgit cloneしてよしなにすれば良いのですが，自プロジェクトだと1から用意したくなります．なりますよね？  </p>
 
 <p>公式チュートリアルだとテンプレートをインポートさせてdotnet newで簡単にできるようにする方法が紹介されていますが，この記事執筆時点では公式が用意しているテンプレートですとFable3に対応していないという注意書きも書かれています．  </p>
@@ -291,17 +354,6 @@ Excerpt separator is <code>&lt;!--more--&gt;</code> by default.</p>
 <p>twrpアプリをインストールするか尋ねてきますがしないように．</p>
 
 <p>リブートしてしばらく経てばOSが起動すると思いますが，失敗することがあるかもしれません．冒頭に書いてあるようにあくまでもやるなら自己責任で．以上． </p>
-
-<!--more-->
-
-<p>Excerpt separator can also be extracted from content.
-Add <code>excerpt: &lt;string&gt;</code> to the above metadata.
-Excerpt separator is <code>&lt;!--more--&gt;</code> by default.</p>
- ]]></description> </item><item> <title>ジェネレーター変えてみたのでテストポスト</title> <link>https://madosuki.github.io/blog/posts/ジェネレーター変えてみたのでテストポスト.html</link> <pubDate>2020-01-29 08:44:51</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/ジェネレーター変えてみたのでテストポスト.html</guid>  <description><![CDATA[ <!-- **** your post here (remove this line) **** -->
-
-<!-- format: could be 'html' (for raw html) or 'md' (for markdown).  -->
-
-<p>とりあえず，ブログジェネレーターをcoleslawに変えてみました．</p>
 
 <!--more-->
 

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <title>(随筆 :tendency 自堕落)</title> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <link href="https://madosuki.github.io/blog/css/bootstrap.min.css" rel="stylesheet" media="screen"> <link href="https://madosuki.github.io/blog/css/custom.css" rel="stylesheet" media="screen"> <link rel="alternate" href="https://madosuki.github.io/blog/rss.xml" type="application/rss+xml" />  </head> <body> <div class="container-fluid"> <div class="row-fluid"> <div class="offset2 span8"> <div class="row-fluid"> <div class="navbar navbar-inverse"> <div class="navbar-inner"> <a class="brand" href="https://madosuki.github.io/blog">(随筆 :tendency 自堕落)</a> <ul class="nav"> <li> <a href="https://madosuki.github.io/">Home</a> </li><li> <a href="https://twitter.com/madosuki_public">Twitter</a> </li><li> <a href="https://github.com/madosuki">Code</a> </li> </ul> </div> </div> </div> <div class="row-fluid"> <div class="row-fluid">
+<h1 class="page-header">インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ</h1>
+<p> Tagged as <a href="https://madosuki.github.io/blog/tag/Gentoo.html">Gentoo</a>, <a href="https://madosuki.github.io/blog/tag/Linux.html">Linux</a> </p> <p class="date-posted"> Written on 2021-07-03 09:42:56 </p> <p>前提条件としてセキュアブートをオフにしてインストールしたGentooかつ，ブートローダーにGRUB2をinitにsystemdを採用し尚且つsys-boot/shim，app-crypt/sbsigntools，sys-boot/efibootmgrをインストール済みの状態であることを想定している．<br/>
+GRUBインストール時のオプションは<br/>
+<code>
+sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi --modules=&quot;tpm&quot; --disable-shim-lock
+</code><br/>
+を想定．これについては<a href="https://forum.manjaro.org/t/grub-fails-to-load-with-shim-and-secure-boot-enabled/62522/2" >こちら</a>を参照．しておかないとブート時にエラーが出る．UEFIでTPMを有効しないといけないかは検証していない（多分要る気はする）．<br/>
+セキュアブートとTPMの有効方法はマザーボードごとに違ったりするのでここでは触れない．<br/>
+またここに書かれていることは2021-07-03時点の物であり，環境差もあるので動作を保証しない．  </p>
+
+<h1>setup shim</h1>
+
+<p><code>
+cp /usr/share/shim/BOOTX64.EFI /boot/efi/EFI/gentoo/ &amp;&amp; cp /usr/share/shim/mmx64.efi /boot/efi/EFIT/gentoo/
+</code>  </p>
+
+<h2>EFIに登録する</h2>
+
+<p>```  </p>
+
+<p>efibootmgr -c -d /dev/nvme0n1 -p 1 -L &quot;shim&quot; -l &quot;\EFI\gentoo\BOOTX64.EFI&quot; 
+```<br/>
+dオプションはEFIパーティションのあるデバイスをpオプションにはパーティションナンバーを入れる．  </p>
+
+<h1>Sign to kernel and grub</h1>
+
+<p>opensslを使う．<br/>
+<a href="https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface/Secure_Boot#shim" >参考URL</a><br/>
+<code>
+openssl req -newkey rsa:4096 -nodes -keyout MOK.key -new -x509 -sha256 -subj &quot;/CN= My Key /&quot; -out MOK.crt  
+</code><br/>
+daysオプションで有効期限を設定した方が良いかと思ったが煩わしいのでやめた．  </p>
+
+<p><code>
+openssl x509 -outform DER -in MOK.crt -out MOK.cer
+</code><br/>
+ このcerファイルは/boot/efi/EFI/gentoo/に放り込んでおく．<br/>
+ セキュアブートで起動した時に証明書が無いとmmx64.efiが起動し，keyを指定してenrollしろと言われるのでMOK.cerを置いた場所を指定する必要があるのでよしなにして．  </p>
+
+<p><code>
+ sbsign --key MOK.key --cert MOK.crt --output vmlinuz-path vmlinuz-path
+</code><br/>
+vmlinux-pathのところを/boot/下にある署名したいvmlinuzファイルのパスに置き換えて実行．  </p>
+
+<p><code>
+sbsign --key MOK.key --cert MOK.crt --output /boot/efi/EFI/gentoo/grubx64.efi /boot/efit/EFI/gentoo/grubx64.efi
+</code>  </p>
+
+<p>以上．<br/>
+UEFIに戻ってセキュアブートを有効にして，shimラベルのやつをブートに指定すればmmx64.efiが起動して証明書を指定するように言われるのでそれをして再起動すればブートできると思う．  </p>
+
+<h1>参考文献</h1>
+
+<ul>
+<li><a href="https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface/Secure_Boot#shim" >https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface/Secure_Boot#shim</a></li>
+<li><a href="https://forums.gentoo.org/viewtopic-t-1132536-start-0.html" >https://forums.gentoo.org/viewtopic-t-1132536-start-0.html</a></li>
+<li><a href="https://forum.manjaro.org/t/grub-fails-to-load-with-shim-and-secure-boot-enabled/62522/2" >https://forum.manjaro.org/t/grub-fails-to-load-with-shim-and-secure-boot-enabled/62522/2</a></li>
+</ul>
+
+<!--more-->
+
+<p>Excerpt separator can also be extracted from content.
+Add <code>excerpt: &lt;string&gt;</code> to the above metadata.
+Excerpt separator is <code>&lt;!--more--&gt;</code> by default.</p>
+ <ul class="pager"> <li class="previous"><a href="https://madosuki.github.io/blog/posts/Fableプロジェクトを1から手動で作る方法的な私的メモ.html">&larr; Previous</a></li>
+
+</ul> </div>
+ </div> <div class="row-fluid"> <div id="disqus_thread"></div>
+     <script type="text/javascript">
+       /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+       var disqus_shortname = 'my-site-name';
+       /* * * DON'T EDIT BELOW THIS LINE * * */
+       (function() {
+         var dsq = document.createElement('script');
+         dsq.type = 'text/javascript';
+         dsq.async = true;
+         dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+     </script>
+     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a> </div> <div class="row-fluid"> <hr> <p class="fineprint">Unless otherwise credited all material <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US"> <img alt="Creative Commons License" style="border-width:0" src="https://madosuki.github.io/blog/img/cc-by-sa.png" /> </a> by madosuki <a id="coleslaw-logo" href="https://github.com/redline6561/coleslaw"> <img src="https://madosuki.github.io/blog/img/logo_small.jpg" alt="Coleslaw logo" /></p> </a> </div> </div> </div> </div> <script src="https://madosuki.github.io/blog/js/bootstrap.min.js"></script> </body> </html>
