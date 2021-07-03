@@ -16,11 +16,11 @@ cp /usr/share/shim/BOOTX64.EFI /boot/efi/EFI/gentoo/ &amp;&amp; cp /usr/share/sh
 
 <h2>EFIに登録する</h2>
 
-<p>```  </p>
+<p><code>
+efibootmgr -c -d /dev/nvme0n1 -p 1 -L &quot;shim&quot; -l &quot;\EFI\gentoo\BOOTX64.EFI&quot; 
+</code>  </p>
 
-<p>efibootmgr -c -d /dev/nvme0n1 -p 1 -L &quot;shim&quot; -l &quot;\EFI\gentoo\BOOTX64.EFI&quot; 
-```<br/>
-dオプションはEFIパーティションのあるデバイスをpオプションにはパーティションナンバーを入れる．  </p>
+<p>dオプションはEFIパーティションのあるデバイスをpオプションにはパーティションナンバーを入れる．  </p>
 
 <h1>Sign to kernel and grub</h1>
 

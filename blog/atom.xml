@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href="https://madosuki.github.io/blog"/> <link type="application/atom+xml" rel="self" href="https://madosuki.github.io/blog/atom.xml"/> <updated>Sat, 03 Jul 2021 11:08:23 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ.html"/> <title>インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ</title> <published>2021-07-03 09:42:56</published> <updated>2021-07-03 09:42:56</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;前提条件としてセキュアブートをオフにしてインストールしたGentooかつ，ブートローダーにGRUB2をinitにsystemdを採用し尚且つsys-boot/shim，app-crypt/sbsigntools，sys-boot/efibootmgrをインストール済みの状態であることを想定している．&lt;br/&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href="https://madosuki.github.io/blog"/> <link type="application/atom+xml" rel="self" href="https://madosuki.github.io/blog/atom.xml"/> <updated>Sat, 03 Jul 2021 11:11:00 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ.html"/> <title>インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ</title> <published>2021-07-03 09:42:56</published> <updated>2021-07-03 09:42:56</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;前提条件としてセキュアブートをオフにしてインストールしたGentooかつ，ブートローダーにGRUB2をinitにsystemdを採用し尚且つsys-boot/shim，app-crypt/sbsigntools，sys-boot/efibootmgrをインストール済みの状態であることを想定している．&lt;br/&gt;
 GRUBインストール時のオプションは&lt;br/&gt;
 &lt;code&gt;
 sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi --modules=&amp;quot;tpm&amp;quot; --disable-shim-lock
@@ -16,11 +16,11 @@ cp /usr/share/shim/BOOTX64.EFI /boot/efi/EFI/gentoo/ &amp;amp;&amp;amp; cp /usr/
 
 &lt;h2&gt;EFIに登録する&lt;/h2&gt;
 
-&lt;p&gt;```  &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;
+efibootmgr -c -d /dev/nvme0n1 -p 1 -L &amp;quot;shim&amp;quot; -l &amp;quot;\EFI\gentoo\BOOTX64.EFI&amp;quot; 
+&lt;/code&gt;  &lt;/p&gt;
 
-&lt;p&gt;efibootmgr -c -d /dev/nvme0n1 -p 1 -L &amp;quot;shim&amp;quot; -l &amp;quot;\EFI\gentoo\BOOTX64.EFI&amp;quot; 
-```&lt;br/&gt;
-dオプションはEFIパーティションのあるデバイスをpオプションにはパーティションナンバーを入れる．  &lt;/p&gt;
+&lt;p&gt;dオプションはEFIパーティションのあるデバイスをpオプションにはパーティションナンバーを入れる．  &lt;/p&gt;
 
 &lt;h1&gt;Sign to kernel and grub&lt;/h1&gt;
 
