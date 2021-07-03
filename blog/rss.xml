@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Sat, 03 Jul 2021 11:26:27 +0900</pubDate> <item> <title>インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ</title> <link>https://madosuki.github.io/blog/posts/インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ.html</link> <pubDate>2021-07-03 09:42:56</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ.html</guid> <category><![CDATA[ Gentoo ]]></category><category><![CDATA[ Linux ]]></category> <description><![CDATA[ <p>前提条件としてセキュアブートをオフにしてインストールしたGentooかつ，ブートローダーにGRUB2をinitにsystemdを採用し尚且つsys-boot/shim，app-crypt/sbsigntools，sys-boot/efibootmgrをインストール済みの状態であることを想定している．<br/>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Sat, 03 Jul 2021 11:35:02 +0900</pubDate> <item> <title>インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ</title> <link>https://madosuki.github.io/blog/posts/インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ.html</link> <pubDate>2021-07-03 09:42:56</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ.html</guid> <category><![CDATA[ Gentoo ]]></category><category><![CDATA[ Linux ]]></category> <description><![CDATA[ <p>前提条件としてセキュアブートをオフにしてインストールしたGentooかつ，ブートローダーにGRUB2をinitにsystemdを採用し尚且つsys-boot/shim，app-crypt/sbsigntools，sys-boot/efibootmgrをインストール済みの状態であることを想定している．<br/>
 GRUBインストール時のオプションは<br/>
 <code>
 sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi --modules=&quot;tpm&quot; --disable-shim-lock
@@ -51,7 +51,7 @@ UEFIに戻ってセキュアブートを有効にして，shimラベルのやつ
 
 <h1>追記</h1>
 
-<p>カーネルやGRUBをアップデートする度に証明する必要がある．<br/>
+<p>カーネルやGRUBをアップデートする度に署名する必要がある．<br/>
 またgrub-mkconfigで設定をアップデートする際にEFIが書き換えられて手動定義したラベルが消えるっぽいのでefibootmgrで登録し直す必要があるだろう(回避策があるかもしれないが調べるの面倒なので)．  </p>
 
 <h1>参考文献</h1>
