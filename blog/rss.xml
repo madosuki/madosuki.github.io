@@ -1,5 +1,29 @@
 <?xml version="1.0"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Sat, 03 Jul 2021 11:35:02 +0900</pubDate> <item> <title>インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ</title> <link>https://madosuki.github.io/blog/posts/インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ.html</link> <pubDate>2021-07-03 09:42:56</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ.html</guid> <category><![CDATA[ Gentoo ]]></category><category><![CDATA[ Linux ]]></category> <description><![CDATA[ <p>前提条件としてセキュアブートをオフにしてインストールしたGentooかつ，ブートローダーにGRUB2をinitにsystemdを採用し尚且つsys-boot/shim，app-crypt/sbsigntools，sys-boot/efibootmgrをインストール済みの状態であることを想定している．<br/>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Fri, 09 Jul 2021 23:02:33 +0900</pubDate> <item> <title>Caveman2で明示的なセッションIDの更新とセッション終了方法についてのメモ</title> <link>https://madosuki.github.io/blog/posts/Caveman2で明示的なセッションIDの更新とセッション終了方法についてのメモ.html</link> <pubDate>2021-07-09 22:30:43</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Caveman2で明示的なセッションIDの更新とセッション終了方法についてのメモ.html</guid> <category><![CDATA[ Common Lisp ]]></category><category><![CDATA[ Caveman2 ]]></category><category><![CDATA[ Web ]]></category> <description><![CDATA[ <p>ログインログアウト機能を実装する際，ログイン時にセッションIDの変更とログアウト時にセッションを終了させる処理を入れることがセッションハイジャックへの対策の一つであるが，方法がドキュメントには載っていない．<br/>
+なので適当に検索してみたら(http://diary.wshito.com/comp/lisp/clack/lack-middleware-session/#sec-example3)[http://diary.wshito.com/comp/lisp/clack/lack-middleware-session/#sec-example3]が引っかかった．<br/>
+lackを直接使ってる場合の方法ではあるが，役に立った．<br/>
+envにある:lack.session.optionsにある値を見ているらしい．<br/>
+とはいえ記事の例はあくまでもlackを直接使っている場合の物でCaveman2からenvを操作する方法がわからない．<br/>
+どうしたらいいかとCaveman2のソースを読んでみたら，caveman.lispでlack.requestからrequest-envをインポートしているのがわかった．<br/>
+これはlack/src/requst.lispにあり，構造体requestにあるenvスロットのアクセサーだ．このスロットというのはメンバ変数の様なものだ．<br/>
+Common Lispでは構造体のスロットへのアクセスは&quot;(構造体名-スロット名 インスタンス)&quot;という形で行う．<br/>
+ともかくこのenvが前述した記事で使っているenvでは？　と当たりをつけて試してみたらそうだった．<br/>
+尚インスタンスは&quot;*request*&quot;としてningleからインポート&amp;エクスポートされているので，<br/>
+<code>
+(setf (getf (getf (request-env *request*) :lack.session.options) :change-id) t)
+</code><br/>
+とすればセッションIDの更新ができた．<br/>
+change-idをexpireにすればセッションの終了ができる．<br/>
+<code>
+(setf (getf (getf (request-env *request*) :lack.session.options) :expire) t)
+</code>  </p>
+
+<!--more-->
+
+<p>Excerpt separator can also be extracted from content.
+Add <code>excerpt: &lt;string&gt;</code> to the above metadata.
+Excerpt separator is <code>&lt;!--more--&gt;</code> by default.</p>
+ ]]></description> </item><item> <title>インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ</title> <link>https://madosuki.github.io/blog/posts/インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ.html</link> <pubDate>2021-07-03 09:42:56</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ.html</guid> <category><![CDATA[ Gentoo ]]></category><category><![CDATA[ Linux ]]></category> <description><![CDATA[ <p>前提条件としてセキュアブートをオフにしてインストールしたGentooかつ，ブートローダーにGRUB2をinitにsystemdを採用し尚且つsys-boot/shim，app-crypt/sbsigntools，sys-boot/efibootmgrをインストール済みの状態であることを想定している．<br/>
 GRUBインストール時のオプションは<br/>
 <code>
 sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi --modules=&quot;tpm&quot; --disable-shim-lock
@@ -326,39 +350,6 @@ Excerpt separator is <code>&lt;!--more--&gt;</code> by default.</p>
    `(,status (:content-type ,content-type :content-length ,content-length) ,octet))</code></pre>
 
 <p>尚ファイルを読み込む場合は上記の様な面倒なことはせずにpathnameを返り値にすれば良いです．</p>
-
-<!--more-->
-
-<p>Excerpt separator can also be extracted from content.
-Add <code>excerpt: &lt;string&gt;</code> to the above metadata.
-Excerpt separator is <code>&lt;!--more--&gt;</code> by default.</p>
- ]]></description> </item><item> <title>Unofficial Lineage OS 17.1 on Nexus 6Pの導入方法のメモ</title> <link>https://madosuki.github.io/blog/posts/Unofficial-Lineage-OS-171-on-Nexus-6Pの導入方法のメモ.html</link> <pubDate>2020-02-01 22:26:48</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Unofficial-Lineage-OS-171-on-Nexus-6Pの導入方法のメモ.html</guid> <category><![CDATA[ Android ]]></category> <description><![CDATA[ <!-- **** your post here (remove this line) **** -->
-
-<!-- format: could be 'html' (for raw html) or 'md' (for markdown).  -->
-
-<p>adb，fastboot導入済み且つ，PC側のOSはDebian10，Nexus6Pはファクトリーリセット済みて書かれた記事ということ踏まえて読んでください．</p>
-
-<p>また，下記を実行して文鎮化しても責任は取れません．やるならあくまでも自己責任で．</p>
-
-<p><a href="https://forum.xda-developers.com/nexus-6p/orig-development/rom-lineageos-17-0-nexus-6p-angler-t4012099">Xdaへのリンク</a></p>
-
-<p>oem unlockedなNexus 6Pを用意して，上記リンクのスレッドの#3からFBE Recovery(4 Core)をダウンロードして，電源を切り，電源ボタンとボリュームキー下を押し続けるとブートローダー画面になるので下記を実行します．</p>
-
-<pre><code>fastboot flash recovery twrp-3.3.1.0-FBE-10-angler4core.img</code></pre>
-
-<p>後はボリュームキーで操作し，電源ボタンで決定してリカバリーモードを起動させます．</p>
-
-<p>そうしたら，Wipeメニューからsystem，data，cacheをwipeしてからフォーマットを実行してください．</p>
-
-<p>USBで繋げるとマウントされるので適当に上記リンク先にあるカスタムROMzipをダウンロードして，必要であるならばopengapps nano or picoをopengapps公式からダウンロードして，internalに放りこんでから，twrpのinstallをタップ，ファイルを選択してください．</p>
-
-<p>opengappsを入れる場合は先にカスタムROMなzipを選択してから，more zipで追加してください．</p>
-
-<p>インストールし終ったら，dalvik cacheをwipeするボタンが出るのでしてから，リブートしてください．</p>
-
-<p>twrpアプリをインストールするか尋ねてきますがしないように．</p>
-
-<p>リブートしてしばらく経てばOSが起動すると思いますが，失敗することがあるかもしれません．冒頭に書いてあるようにあくまでもやるなら自己責任で．以上． </p>
 
 <!--more-->
 

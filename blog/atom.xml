@@ -1,5 +1,29 @@
 <?xml version="1.0"?>
-<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href="https://madosuki.github.io/blog"/> <link type="application/atom+xml" rel="self" href="https://madosuki.github.io/blog/atom.xml"/> <updated>Sat, 03 Jul 2021 11:35:02 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ.html"/> <title>インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ</title> <published>2021-07-03 09:42:56</published> <updated>2021-07-03 09:42:56</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;前提条件としてセキュアブートをオフにしてインストールしたGentooかつ，ブートローダーにGRUB2をinitにsystemdを採用し尚且つsys-boot/shim，app-crypt/sbsigntools，sys-boot/efibootmgrをインストール済みの状態であることを想定している．&lt;br/&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href="https://madosuki.github.io/blog"/> <link type="application/atom+xml" rel="self" href="https://madosuki.github.io/blog/atom.xml"/> <updated>Fri, 09 Jul 2021 23:02:33 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Caveman2で明示的なセッションIDの更新とセッション終了方法についてのメモ.html"/> <title>Caveman2で明示的なセッションIDの更新とセッション終了方法についてのメモ</title> <published>2021-07-09 22:30:43</published> <updated>2021-07-09 22:30:43</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;ログインログアウト機能を実装する際，ログイン時にセッションIDの変更とログアウト時にセッションを終了させる処理を入れることがセッションハイジャックへの対策の一つであるが，方法がドキュメントには載っていない．&lt;br/&gt;
+なので適当に検索してみたら(http://diary.wshito.com/comp/lisp/clack/lack-middleware-session/#sec-example3)[http://diary.wshito.com/comp/lisp/clack/lack-middleware-session/#sec-example3]が引っかかった．&lt;br/&gt;
+lackを直接使ってる場合の方法ではあるが，役に立った．&lt;br/&gt;
+envにある:lack.session.optionsにある値を見ているらしい．&lt;br/&gt;
+とはいえ記事の例はあくまでもlackを直接使っている場合の物でCaveman2からenvを操作する方法がわからない．&lt;br/&gt;
+どうしたらいいかとCaveman2のソースを読んでみたら，caveman.lispでlack.requestからrequest-envをインポートしているのがわかった．&lt;br/&gt;
+これはlack/src/requst.lispにあり，構造体requestにあるenvスロットのアクセサーだ．このスロットというのはメンバ変数の様なものだ．&lt;br/&gt;
+Common Lispでは構造体のスロットへのアクセスは&amp;quot;(構造体名-スロット名 インスタンス)&amp;quot;という形で行う．&lt;br/&gt;
+ともかくこのenvが前述した記事で使っているenvでは？　と当たりをつけて試してみたらそうだった．&lt;br/&gt;
+尚インスタンスは&amp;quot;*request*&amp;quot;としてningleからインポート&amp;amp;エクスポートされているので，&lt;br/&gt;
+&lt;code&gt;
+(setf (getf (getf (request-env *request*) :lack.session.options) :change-id) t)
+&lt;/code&gt;&lt;br/&gt;
+とすればセッションIDの更新ができた．&lt;br/&gt;
+change-idをexpireにすればセッションの終了ができる．&lt;br/&gt;
+&lt;code&gt;
+(setf (getf (getf (request-env *request*) :lack.session.options) :expire) t)
+&lt;/code&gt;  &lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Excerpt separator can also be extracted from content.
+Add &lt;code&gt;excerpt: &amp;lt;string&amp;gt;&lt;/code&gt; to the above metadata.
+Excerpt separator is &lt;code&gt;&amp;lt;!--more--&amp;gt;&lt;/code&gt; by default.&lt;/p&gt;
+</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ.html"/> <title>インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ</title> <published>2021-07-03 09:42:56</published> <updated>2021-07-03 09:42:56</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;前提条件としてセキュアブートをオフにしてインストールしたGentooかつ，ブートローダーにGRUB2をinitにsystemdを採用し尚且つsys-boot/shim，app-crypt/sbsigntools，sys-boot/efibootmgrをインストール済みの状態であることを想定している．&lt;br/&gt;
 GRUBインストール時のオプションは&lt;br/&gt;
 &lt;code&gt;
 sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi --modules=&amp;quot;tpm&amp;quot; --disable-shim-lock
@@ -326,39 +350,6 @@ Excerpt separator is &lt;code&gt;&amp;lt;!--more--&amp;gt;&lt;/code&gt; by defau
    `(,status (:content-type ,content-type :content-length ,content-length) ,octet))&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;尚ファイルを読み込む場合は上記の様な面倒なことはせずにpathnameを返り値にすれば良いです．&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;p&gt;Excerpt separator can also be extracted from content.
-Add &lt;code&gt;excerpt: &amp;lt;string&amp;gt;&lt;/code&gt; to the above metadata.
-Excerpt separator is &lt;code&gt;&amp;lt;!--more--&amp;gt;&lt;/code&gt; by default.&lt;/p&gt;
-</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Unofficial-Lineage-OS-171-on-Nexus-6Pの導入方法のメモ.html"/> <title>Unofficial Lineage OS 17.1 on Nexus 6Pの導入方法のメモ</title> <published>2020-02-01 22:26:48</published> <updated>2020-02-01 22:26:48</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;!-- **** your post here (remove this line) **** --&gt;
-
-&lt;!-- format: could be &#039;html&#039; (for raw html) or &#039;md&#039; (for markdown).  --&gt;
-
-&lt;p&gt;adb，fastboot導入済み且つ，PC側のOSはDebian10，Nexus6Pはファクトリーリセット済みて書かれた記事ということ踏まえて読んでください．&lt;/p&gt;
-
-&lt;p&gt;また，下記を実行して文鎮化しても責任は取れません．やるならあくまでも自己責任で．&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://forum.xda-developers.com/nexus-6p/orig-development/rom-lineageos-17-0-nexus-6p-angler-t4012099&quot;&gt;Xdaへのリンク&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;oem unlockedなNexus 6Pを用意して，上記リンクのスレッドの#3からFBE Recovery(4 Core)をダウンロードして，電源を切り，電源ボタンとボリュームキー下を押し続けるとブートローダー画面になるので下記を実行します．&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;fastboot flash recovery twrp-3.3.1.0-FBE-10-angler4core.img&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;後はボリュームキーで操作し，電源ボタンで決定してリカバリーモードを起動させます．&lt;/p&gt;
-
-&lt;p&gt;そうしたら，Wipeメニューからsystem，data，cacheをwipeしてからフォーマットを実行してください．&lt;/p&gt;
-
-&lt;p&gt;USBで繋げるとマウントされるので適当に上記リンク先にあるカスタムROMzipをダウンロードして，必要であるならばopengapps nano or picoをopengapps公式からダウンロードして，internalに放りこんでから，twrpのinstallをタップ，ファイルを選択してください．&lt;/p&gt;
-
-&lt;p&gt;opengappsを入れる場合は先にカスタムROMなzipを選択してから，more zipで追加してください．&lt;/p&gt;
-
-&lt;p&gt;インストールし終ったら，dalvik cacheをwipeするボタンが出るのでしてから，リブートしてください．&lt;/p&gt;
-
-&lt;p&gt;twrpアプリをインストールするか尋ねてきますがしないように．&lt;/p&gt;
-
-&lt;p&gt;リブートしてしばらく経てばOSが起動すると思いますが，失敗することがあるかもしれません．冒頭に書いてあるようにあくまでもやるなら自己責任で．以上． &lt;/p&gt;
 
 &lt;!--more--&gt;
 
