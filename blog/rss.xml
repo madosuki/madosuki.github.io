@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Fri, 09 Jul 2021 23:04:21 +0900</pubDate> <item> <title>Caveman2で明示的なセッションIDの更新とセッション終了方法についてのメモ</title> <link>https://madosuki.github.io/blog/posts/Caveman2で明示的なセッションIDの更新とセッション終了方法についてのメモ.html</link> <pubDate>2021-07-09 22:30:43</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Caveman2で明示的なセッションIDの更新とセッション終了方法についてのメモ.html</guid> <category><![CDATA[ Common Lisp ]]></category><category><![CDATA[ Caveman2 ]]></category><category><![CDATA[ Web ]]></category> <description><![CDATA[ <p>ログインログアウト機能を実装する際，ログイン時にセッションIDの変更とログアウト時にセッションを終了させる処理を入れることがセッションハイジャックへの対策の一つであるが，方法がドキュメントには載っていない．<br/>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Mon, 21 Feb 2022 14:12:15 +0900</pubDate> <item> <title>Caveman2で明示的なセッションIDの更新とセッション終了方法についてのメモ</title> <link>https://madosuki.github.io/blog/posts/Caveman2で明示的なセッションIDの更新とセッション終了方法についてのメモ.html</link> <pubDate>2021-07-09 22:30:43</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Caveman2で明示的なセッションIDの更新とセッション終了方法についてのメモ.html</guid> <category><![CDATA[ Common Lisp ]]></category><category><![CDATA[ Caveman2 ]]></category><category><![CDATA[ Web ]]></category> <description><![CDATA[ <p>ログインログアウト機能を実装する際，ログイン時にセッションIDの変更とログアウト時にセッションを終了させる処理を入れることがセッションハイジャックへの対策の一つであるが，方法がドキュメントには載っていない．<br/>
 なので適当に検索してみたら<a href="http://diary.wshito.com/comp/lisp/clack/lack-middleware-session/#sec-example3" >http://diary.wshito.com/comp/lisp/clack/lack-middleware-session/#sec-example3</a>が引っかかった．<br/>
 lackを直接使ってる場合の方法ではあるが，役に立った．<br/>
 envにある:lack.session.optionsにある値を見ているらしい．<br/>
@@ -49,7 +49,7 @@ efibootmgr -c -d /dev/nvme0n1 -p 1 -L &quot;shim&quot; -l &quot;\EFI\gentoo\BOOT
 <h1>Sign to kernel and grub</h1>
 
 <p>opensslを使う．<br/>
-<a href="https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface/Secure_Boot#shim" >参考URL</a><br/>
+<a href="https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface/Secure_Boot#shim" >参考URL:https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface/Secure_Boot#shim</a><br/>
 <code>
 openssl req -newkey rsa:4096 -nodes -keyout MOK.key -new -x509 -sha256 -subj &quot;/CN= My Key /&quot; -out MOK.crt  
 </code><br/>
@@ -64,10 +64,12 @@ openssl x509 -outform DER -in MOK.crt -out MOK.cer
 <p><code>
  sbsign --key MOK.key --cert MOK.crt --output vmlinuz-path vmlinuz-path
 </code><br/>
-vmlinux-pathのところを/boot/下にある署名したいvmlinuzファイルのパスに置き換えて実行．  </p>
+vmlinuz-pathのところを/boot/下にある署名したいvmlinuzファイルのパスに置き換えて実行．  </p>
+
+<h2>Example:</h2>
 
 <p><code>
-sbsign --key MOK.key --cert MOK.crt --output /boot/efi/EFI/gentoo/grubx64.efi /boot/efit/EFI/gentoo/grubx64.efi
+sbsign --key MOK.key --cert MOK.crt --output /boot/efi/EFI/gentoo/grubx64.efi /boot/efi/EFI/gentoo/grubx64.efi
 </code>  </p>
 
 <p>以上．<br/>
@@ -85,12 +87,6 @@ UEFIに戻ってセキュアブートを有効にして，shimラベルのやつ
 <li><a href="https://forums.gentoo.org/viewtopic-t-1132536-start-0.html" >https://forums.gentoo.org/viewtopic-t-1132536-start-0.html</a></li>
 <li><a href="https://forum.manjaro.org/t/grub-fails-to-load-with-shim-and-secure-boot-enabled/62522/2" >https://forum.manjaro.org/t/grub-fails-to-load-with-shim-and-secure-boot-enabled/62522/2</a></li>
 </ul>
-
-<!--more-->
-
-<p>Excerpt separator can also be extracted from content.
-Add <code>excerpt: &lt;string&gt;</code> to the above metadata.
-Excerpt separator is <code>&lt;!--more--&gt;</code> by default.</p>
  ]]></description> </item><item> <title>Fableプロジェクトを1から手動で作る方法的な私的メモ</title> <link>https://madosuki.github.io/blog/posts/Fableプロジェクトを1から手動で作る方法的な私的メモ.html</link> <pubDate>2021-05-29 11:26:48</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Fableプロジェクトを1から手動で作る方法的な私的メモ.html</guid> <category><![CDATA[ Fsharp ]]></category> <description><![CDATA[ <p>FableはF#コードをJavaScriptに変換してくれるやつです．<br/>
 サンプルを試すだけなら<a href="https://github.com/fable-compiler/fable3-samples" >https://github.com/fable-compiler/fable3-samples</a>をgit cloneしてよしなにすれば良いのですが，自プロジェクトだと1から用意したくなります．なりますよね？  </p>
 

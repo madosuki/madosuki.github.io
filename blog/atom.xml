@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href="https://madosuki.github.io/blog"/> <link type="application/atom+xml" rel="self" href="https://madosuki.github.io/blog/atom.xml"/> <updated>Fri, 09 Jul 2021 23:04:21 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Caveman2で明示的なセッションIDの更新とセッション終了方法についてのメモ.html"/> <title>Caveman2で明示的なセッションIDの更新とセッション終了方法についてのメモ</title> <published>2021-07-09 22:30:43</published> <updated>2021-07-09 22:30:43</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;ログインログアウト機能を実装する際，ログイン時にセッションIDの変更とログアウト時にセッションを終了させる処理を入れることがセッションハイジャックへの対策の一つであるが，方法がドキュメントには載っていない．&lt;br/&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href="https://madosuki.github.io/blog"/> <link type="application/atom+xml" rel="self" href="https://madosuki.github.io/blog/atom.xml"/> <updated>Mon, 21 Feb 2022 14:12:15 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Caveman2で明示的なセッションIDの更新とセッション終了方法についてのメモ.html"/> <title>Caveman2で明示的なセッションIDの更新とセッション終了方法についてのメモ</title> <published>2021-07-09 22:30:43</published> <updated>2021-07-09 22:30:43</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;ログインログアウト機能を実装する際，ログイン時にセッションIDの変更とログアウト時にセッションを終了させる処理を入れることがセッションハイジャックへの対策の一つであるが，方法がドキュメントには載っていない．&lt;br/&gt;
 なので適当に検索してみたら&lt;a href=&quot;http://diary.wshito.com/comp/lisp/clack/lack-middleware-session/#sec-example3&quot; &gt;http://diary.wshito.com/comp/lisp/clack/lack-middleware-session/#sec-example3&lt;/a&gt;が引っかかった．&lt;br/&gt;
 lackを直接使ってる場合の方法ではあるが，役に立った．&lt;br/&gt;
 envにある:lack.session.optionsにある値を見ているらしい．&lt;br/&gt;
@@ -49,7 +49,7 @@ efibootmgr -c -d /dev/nvme0n1 -p 1 -L &amp;quot;shim&amp;quot; -l &amp;quot;\EFI
 &lt;h1&gt;Sign to kernel and grub&lt;/h1&gt;
 
 &lt;p&gt;opensslを使う．&lt;br/&gt;
-&lt;a href=&quot;https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface/Secure_Boot#shim&quot; &gt;参考URL&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface/Secure_Boot#shim&quot; &gt;参考URL:https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface/Secure_Boot#shim&lt;/a&gt;&lt;br/&gt;
 &lt;code&gt;
 openssl req -newkey rsa:4096 -nodes -keyout MOK.key -new -x509 -sha256 -subj &amp;quot;/CN= My Key /&amp;quot; -out MOK.crt  
 &lt;/code&gt;&lt;br/&gt;
@@ -64,10 +64,12 @@ openssl x509 -outform DER -in MOK.crt -out MOK.cer
 &lt;p&gt;&lt;code&gt;
  sbsign --key MOK.key --cert MOK.crt --output vmlinuz-path vmlinuz-path
 &lt;/code&gt;&lt;br/&gt;
-vmlinux-pathのところを/boot/下にある署名したいvmlinuzファイルのパスに置き換えて実行．  &lt;/p&gt;
+vmlinuz-pathのところを/boot/下にある署名したいvmlinuzファイルのパスに置き換えて実行．  &lt;/p&gt;
+
+&lt;h2&gt;Example:&lt;/h2&gt;
 
 &lt;p&gt;&lt;code&gt;
-sbsign --key MOK.key --cert MOK.crt --output /boot/efi/EFI/gentoo/grubx64.efi /boot/efit/EFI/gentoo/grubx64.efi
+sbsign --key MOK.key --cert MOK.crt --output /boot/efi/EFI/gentoo/grubx64.efi /boot/efi/EFI/gentoo/grubx64.efi
 &lt;/code&gt;  &lt;/p&gt;
 
 &lt;p&gt;以上．&lt;br/&gt;
@@ -85,12 +87,6 @@ UEFIに戻ってセキュアブートを有効にして，shimラベルのやつ
 &lt;li&gt;&lt;a href=&quot;https://forums.gentoo.org/viewtopic-t-1132536-start-0.html&quot; &gt;https://forums.gentoo.org/viewtopic-t-1132536-start-0.html&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://forum.manjaro.org/t/grub-fails-to-load-with-shim-and-secure-boot-enabled/62522/2&quot; &gt;https://forum.manjaro.org/t/grub-fails-to-load-with-shim-and-secure-boot-enabled/62522/2&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;!--more--&gt;
-
-&lt;p&gt;Excerpt separator can also be extracted from content.
-Add &lt;code&gt;excerpt: &amp;lt;string&amp;gt;&lt;/code&gt; to the above metadata.
-Excerpt separator is &lt;code&gt;&amp;lt;!--more--&amp;gt;&lt;/code&gt; by default.&lt;/p&gt;
 </content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Fableプロジェクトを1から手動で作る方法的な私的メモ.html"/> <title>Fableプロジェクトを1から手動で作る方法的な私的メモ</title> <published>2021-05-29 11:26:48</published> <updated>2021-05-29 11:26:48</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;FableはF#コードをJavaScriptに変換してくれるやつです．&lt;br/&gt;
 サンプルを試すだけなら&lt;a href=&quot;https://github.com/fable-compiler/fable3-samples&quot; &gt;https://github.com/fable-compiler/fable3-samples&lt;/a&gt;をgit cloneしてよしなにすれば良いのですが，自プロジェクトだと1から用意したくなります．なりますよね？  &lt;/p&gt;
 
