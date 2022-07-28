@@ -25,7 +25,7 @@ efibootmgr -c -d /dev/nvme0n1 -p 1 -L &quot;shim&quot; -l &quot;\EFI\gentoo\BOOT
 <h1>Sign to kernel and grub</h1>
 
 <p>opensslを使う．<br/>
-<a href="https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface/Secure_Boot#shim" >参考URL</a><br/>
+<a href="https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface/Secure_Boot#shim" >参考URL:https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface/Secure_Boot#shim</a><br/>
 <code>
 openssl req -newkey rsa:4096 -nodes -keyout MOK.key -new -x509 -sha256 -subj &quot;/CN= My Key /&quot; -out MOK.crt  
 </code><br/>
@@ -40,10 +40,12 @@ openssl x509 -outform DER -in MOK.crt -out MOK.cer
 <p><code>
  sbsign --key MOK.key --cert MOK.crt --output vmlinuz-path vmlinuz-path
 </code><br/>
-vmlinux-pathのところを/boot/下にある署名したいvmlinuzファイルのパスに置き換えて実行．  </p>
+vmlinuz-pathのところを/boot/下にある署名したいvmlinuzファイルのパスに置き換えて実行．  </p>
+
+<h2>Example:</h2>
 
 <p><code>
-sbsign --key MOK.key --cert MOK.crt --output /boot/efi/EFI/gentoo/grubx64.efi /boot/efit/EFI/gentoo/grubx64.efi
+sbsign --key MOK.key --cert MOK.crt --output /boot/efi/EFI/gentoo/grubx64.efi /boot/efi/EFI/gentoo/grubx64.efi
 </code>  </p>
 
 <p>以上．<br/>
@@ -61,7 +63,6 @@ UEFIに戻ってセキュアブートを有効にして，shimラベルのやつ
 <li><a href="https://forums.gentoo.org/viewtopic-t-1132536-start-0.html" >https://forums.gentoo.org/viewtopic-t-1132536-start-0.html</a></li>
 <li><a href="https://forum.manjaro.org/t/grub-fails-to-load-with-shim-and-secure-boot-enabled/62522/2" >https://forum.manjaro.org/t/grub-fails-to-load-with-shim-and-secure-boot-enabled/62522/2</a></li>
 </ul>
-
  </div><div class="row-fluid"> <h1><a href="https://madosuki.github.io/blog/posts/Windows10-20H2-on-KVMでvirtioを後から使う際にINACCESSIBLEBOOTDEVICEに遭遇した.html">Windows10 20H2 on KVMでvirtioを後から使う際にINACCESSIBLE_BOOT_DEVICEに遭遇した</a></h1> <p class="date-posted">posted on 2020-10-27 23:55:02</p> <p>解決方法を調べてみるとネットで転がっているのはbcdeditを使うものばかりですが，私の環境では上手くいきませんでした．<br/>
 まぁ要するにvirtioドライバを読み込むようにすれば良いのでWindowsが入っているストレージはSATA等の正常に起動できるやつに戻しておいて，<br/>
 ブートに関係ないセカンドストレージとして適当にvirtioなストレージを追加して普通にブートするだけでbcdeditで解決する例と同じことができます．    </p>
