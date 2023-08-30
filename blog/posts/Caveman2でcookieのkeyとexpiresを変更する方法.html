@@ -1,7 +1,19 @@
 <!DOCTYPE html>
-<html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <title>(随筆 :tendency 自堕落)</title> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <link href="https://madosuki.github.io/blog/css/bootstrap.min.css" rel="stylesheet" media="screen"> <link href="https://madosuki.github.io/blog/css/custom.css" rel="stylesheet" media="screen"> <link rel="alternate" href="https://madosuki.github.io/blog/rss.xml" type="application/rss+xml" />  </head> <body> <div class="container-fluid"> <div class="row-fluid"> <div class="offset2 span8"> <div class="row-fluid"> <div class="navbar navbar-inverse"> <div class="navbar-inner"> <a class="brand" href="https://madosuki.github.io/blog">(随筆 :tendency 自堕落)</a> <ul class="nav"> <li> <a href="https://madosuki.github.io/">Home</a> </li><li> <a href="https://twitter.com/madosuki_public">Twitter</a> </li><li> <a href="https://github.com/madosuki">Code</a> </li> </ul> </div> </div> </div> <div class="row-fluid"> <div class="row-fluid">
+<html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <title>(随筆 :tendency 自堕落)</title> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <link href="https://madosuki.github.io/css/bootstrap.min.css" rel="stylesheet" media="screen"> <link href="https://madosuki.github.io/css/custom.css" rel="stylesheet" media="screen"> <link rel="alternate" href="https://madosuki.github.io/rss.xml" type="application/rss+xml" /> <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'foo']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script> </head> <body> <div class="container-fluid"> <div class="row-fluid"> <div class="offset2 span8"> <div class="row-fluid"> <div class="navbar navbar-inverse"> <div class="navbar-inner"> <a class="brand" href="https://madosuki.github.io">(随筆 :tendency 自堕落)</a> <ul class="nav"> <li> <a href="http://madosuki.github.com/">Home</a> </li><li> <a href="http://twitter.com/madosuki_public">Twitter</a> </li><li> <a href="http://github.com/madosuki">Code</a> </li> </ul> </div> </div> </div> <div class="row-fluid"> <div class="row-fluid">
 <h1 class="page-header">Caveman2でcookieのkeyとexpiresを変更する方法</h1>
-<p> Tagged as <a href="https://madosuki.github.io/blog/tag/common-lisp.html">common lisp</a> </p> <p class="date-posted"> Written on 2021-04-19 23:47:20 </p> <p>Caveman2でセッションを有効するには，app.lispにあるbuilderマクロで<code>:session</code>を書けばいいことはREADMEに書かれているのでそこは問題無いのですが，cookieのexpiresやセッション名となっているcookieキーの変更方法は書かれておらずソースを読む必要がありました．   </p>
+<p> Tagged as <a href="https://madosuki.github.io/tag/common-lisp.html">common lisp</a> </p> <p class="date-posted"> Written on 2021-04-19 23:47:20 </p> <p>Caveman2でセッションを有効するには，app.lispにあるbuilderマクロで<code>:session</code>を書けばいいことはREADMEに書かれているのでそこは問題無いのですが，cookieのexpiresやセッション名となっているcookieキーの変更方法は書かれておらずソースを読む必要がありました．   </p>
 
 <p><a href="https://github.com/fukamachi/lack/blob/master/src/builder.lisp" >https://github.com/fukamachi/lack/blob/master/src/builder.lisp</a>を読むとlackのミドルウェアか判別して実行する展開する箇所があります．
 :sessionを渡すとlack.middleware.sessionを実行するということなので，<br/>
@@ -50,8 +62,8 @@ Strictにするには:strictキーワードをどうぞ．</p>
 <p>Excerpt separator can also be extracted from content.
 Add <code>excerpt: &lt;string&gt;</code> to the above metadata.
 Excerpt separator is <code>&lt;!--more--&gt;</code> by default.</p>
- <ul class="pager"> <li class="previous"><a href="https://madosuki.github.io/blog/posts/Tidalを試しにインストールした際に躓いた点.html">&larr; Previous</a></li>
-<li class="next"><a href="https://madosuki.github.io/blog/posts/Fableプロジェクトを1から手動で作る方法的な私的メモ.html">Next &rarr;</a></li>
+ <ul class="pager"> <li class="previous"><a href="https://madosuki.github.io/posts/Tidalを試しにインストールした際に躓いた点.html">&larr; Previous</a></li>
+<li class="next"><a href="https://madosuki.github.io/posts/Fableプロジェクトを1から手動で作る方法的な私的メモ.html">Next &rarr;</a></li>
 </ul> </div>
  </div> <div class="row-fluid"> <div id="disqus_thread"></div>
      <script type="text/javascript">
@@ -67,4 +79,4 @@ Excerpt separator is <code>&lt;!--more--&gt;</code> by default.</p>
            })();
      </script>
      <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a> </div> <div class="row-fluid"> <hr> <p class="fineprint">Unless otherwise credited all material <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US"> <img alt="Creative Commons License" style="border-width:0" src="https://madosuki.github.io/blog/img/cc-by-sa.png" /> </a> by madosuki <a id="coleslaw-logo" href="https://github.com/redline6561/coleslaw"> <img src="https://madosuki.github.io/blog/img/logo_small.jpg" alt="Coleslaw logo" /></p> </a> </div> </div> </div> </div> <script src="https://madosuki.github.io/blog/js/bootstrap.min.js"></script> </body> </html>
+     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a> </div> <div class="row-fluid"> <hr> <p class="fineprint">Unless otherwise credited all material <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US"> <img alt="Creative Commons License" style="border-width:0" src="https://madosuki.github.io/img/cc-by-sa.png" /> </a> by madosuki <a id="coleslaw-logo" href="https://github.com/redline6561/coleslaw"> <img src="https://madosuki.github.io/img/logo_small.jpg" alt="Coleslaw logo" /></p> </a> </div> </div> </div> </div> <script src="https://madosuki.github.io/js/bootstrap.min.js"></script> </body> </html>

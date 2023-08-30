@@ -1,5 +1,18 @@
 <?xml version="1.0"?>
-<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href="https://madosuki.github.io/blog"/> <link type="application/atom+xml" rel="self" href="https://madosuki.github.io/blog/atom.xml"/> <updated>Mon, 21 Feb 2022 14:12:15 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Caveman2で明示的なセッションIDの更新とセッション終了方法についてのメモ.html"/> <title>Caveman2で明示的なセッションIDの更新とセッション終了方法についてのメモ</title> <published>2021-07-09 22:30:43</published> <updated>2021-07-09 22:30:43</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;ログインログアウト機能を実装する際，ログイン時にセッションIDの変更とログアウト時にセッションを終了させる処理を入れることがセッションハイジャックへの対策の一つであるが，方法がドキュメントには載っていない．&lt;br/&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href="https://madosuki.github.io"/> <link type="application/atom+xml" rel="self" href="https://madosuki.github.io/atom.xml"/> <updated>Wed, 30 Aug 2023 18:58:47 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/posts/Ubuntu-2304-Lunar-LobsterでHDMIサウンド出力が動画を再生する度に遅延する現象について.html"/> <title>Ubuntu 23.04 Lunar LobsterでHDMIサウンド出力が動画を再生する度に遅延する現象について</title> <published>2023-08-30 18:22:22</published> <updated>2023-08-30 18:22:22</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io</uri> </author> <content type="html">&lt;p&gt;UbuntuでHDMIサウンド出力をすると遅延する現象自体は前のバージョンでも有り，デフォルトでalsaのサスペンド機能が有効になっていて，次の動画を再生すると復帰処理によって冒頭部分が聞けない問題がありました．  &lt;/p&gt;
+
+&lt;p&gt;勿論音が鳴ってからシークして冒頭に戻せば良いのですが面倒ですしストレスです．&lt;br/&gt;
+Ubuntu 23.04では/etc/wireplumber/main.lua.d/50-alsa-config.lua&lt;br/&gt;
+の&lt;code&gt;[&amp;quot;session.suspend-timeout-seconds&amp;quot;]&lt;/code&gt;箇所のコメントアウトを解除して値を0にしましょう．&lt;br/&gt;
+&lt;code&gt;[&amp;quot;session.suspend-timeout-seconds&amp;quot;] = 0,&lt;/code&gt;&lt;br/&gt;
+/etc/wireplumberはUbuntuではデフォルトで存在せず，手動で生成する必要が有ります．&lt;br/&gt;
+/usr/share/wireplumberディレクトリをコピーして使うのが楽です．尚現在ユーザーのみの場合は~/.config/下にwireplumberディレクトリを作っても良いです．&lt;br/&gt;
+同様に/etc/pipewireも/usr/share/pipewireディレクトリをコピーして作っておくのも良いんじゃないかと思います．~/.config下でも良いのは同じです．  &lt;/p&gt;
+
+&lt;p&gt;できたら&lt;br/&gt;
+&lt;code&gt;systemctl restart pipewire pipewire-pulse wireplumber --user&lt;/code&gt;&lt;br/&gt;
+するか，PCを再起動すればalsaのサスペンド機能が無効化されます．  &lt;/p&gt;
+</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/posts/Caveman2で明示的なセッションIDの更新とセッション終了方法についてのメモ.html"/> <title>Caveman2で明示的なセッションIDの更新とセッション終了方法についてのメモ</title> <published>2021-07-09 22:30:43</published> <updated>2021-07-09 22:30:43</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io</uri> </author> <content type="html">&lt;p&gt;ログインログアウト機能を実装する際，ログイン時にセッションIDの変更とログアウト時にセッションを終了させる処理を入れることがセッションハイジャックへの対策の一つであるが，方法がドキュメントには載っていない．&lt;br/&gt;
 なので適当に検索してみたら&lt;a href=&quot;http://diary.wshito.com/comp/lisp/clack/lack-middleware-session/#sec-example3&quot; &gt;http://diary.wshito.com/comp/lisp/clack/lack-middleware-session/#sec-example3&lt;/a&gt;が引っかかった．&lt;br/&gt;
 lackを直接使ってる場合の方法ではあるが，役に立った．&lt;br/&gt;
 envにある:lack.session.optionsにある値を見ているらしい．&lt;br/&gt;
@@ -23,7 +36,7 @@ change-idをexpireにすればセッションの終了ができる．&lt;br/&gt;
 &lt;p&gt;Excerpt separator can also be extracted from content.
 Add &lt;code&gt;excerpt: &amp;lt;string&amp;gt;&lt;/code&gt; to the above metadata.
 Excerpt separator is &lt;code&gt;&amp;lt;!--more--&amp;gt;&lt;/code&gt; by default.&lt;/p&gt;
-</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ.html"/> <title>インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ</title> <published>2021-07-03 09:42:56</published> <updated>2021-07-03 09:42:56</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;前提条件としてセキュアブートをオフにしてインストールしたGentooかつ，ブートローダーにGRUB2をinitにsystemdを採用し尚且つsys-boot/shim，app-crypt/sbsigntools，sys-boot/efibootmgrをインストール済みの状態であることを想定している．&lt;br/&gt;
+</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/posts/インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ.html"/> <title>インストール済みのGentooをセキュアブートで起動できるように設定した時のメモ</title> <published>2021-07-03 09:42:56</published> <updated>2021-07-03 09:42:56</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io</uri> </author> <content type="html">&lt;p&gt;前提条件としてセキュアブートをオフにしてインストールしたGentooかつ，ブートローダーにGRUB2をinitにsystemdを採用し尚且つsys-boot/shim，app-crypt/sbsigntools，sys-boot/efibootmgrをインストール済みの状態であることを想定している．&lt;br/&gt;
 GRUBインストール時のオプションは&lt;br/&gt;
 &lt;code&gt;
 sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi --modules=&amp;quot;tpm&amp;quot; --disable-shim-lock
@@ -87,7 +100,7 @@ UEFIに戻ってセキュアブートを有効にして，shimラベルのやつ
 &lt;li&gt;&lt;a href=&quot;https://forums.gentoo.org/viewtopic-t-1132536-start-0.html&quot; &gt;https://forums.gentoo.org/viewtopic-t-1132536-start-0.html&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://forum.manjaro.org/t/grub-fails-to-load-with-shim-and-secure-boot-enabled/62522/2&quot; &gt;https://forum.manjaro.org/t/grub-fails-to-load-with-shim-and-secure-boot-enabled/62522/2&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Fableプロジェクトを1から手動で作る方法的な私的メモ.html"/> <title>Fableプロジェクトを1から手動で作る方法的な私的メモ</title> <published>2021-05-29 11:26:48</published> <updated>2021-05-29 11:26:48</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;FableはF#コードをJavaScriptに変換してくれるやつです．&lt;br/&gt;
+</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/posts/Fableプロジェクトを1から手動で作る方法的な私的メモ.html"/> <title>Fableプロジェクトを1から手動で作る方法的な私的メモ</title> <published>2021-05-29 11:26:48</published> <updated>2021-05-29 11:26:48</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io</uri> </author> <content type="html">&lt;p&gt;FableはF#コードをJavaScriptに変換してくれるやつです．&lt;br/&gt;
 サンプルを試すだけなら&lt;a href=&quot;https://github.com/fable-compiler/fable3-samples&quot; &gt;https://github.com/fable-compiler/fable3-samples&lt;/a&gt;をgit cloneしてよしなにすれば良いのですが，自プロジェクトだと1から用意したくなります．なりますよね？  &lt;/p&gt;
 
 &lt;p&gt;公式チュートリアルだとテンプレートをインポートさせてdotnet newで簡単にできるようにする方法が紹介されていますが，この記事執筆時点では公式が用意しているテンプレートですとFable3に対応していないという注意書きも書かれています．  &lt;/p&gt;
@@ -230,7 +243,7 @@ index.htmlの中身は&lt;/li&gt;
 &lt;p&gt;Excerpt separator can also be extracted from content.
 Add &lt;code&gt;excerpt: &amp;lt;string&amp;gt;&lt;/code&gt; to the above metadata.
 Excerpt separator is &lt;code&gt;&amp;lt;!--more--&amp;gt;&lt;/code&gt; by default.&lt;/p&gt;
-</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Caveman2でcookieのkeyとexpiresを変更する方法.html"/> <title>Caveman2でcookieのkeyとexpiresを変更する方法</title> <published>2021-04-19 23:47:20</published> <updated>2021-04-19 23:47:20</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;Caveman2でセッションを有効するには，app.lispにあるbuilderマクロで&lt;code&gt;:session&lt;/code&gt;を書けばいいことはREADMEに書かれているのでそこは問題無いのですが，cookieのexpiresやセッション名となっているcookieキーの変更方法は書かれておらずソースを読む必要がありました．   &lt;/p&gt;
+</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/posts/Caveman2でcookieのkeyとexpiresを変更する方法.html"/> <title>Caveman2でcookieのkeyとexpiresを変更する方法</title> <published>2021-04-19 23:47:20</published> <updated>2021-04-19 23:47:20</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io</uri> </author> <content type="html">&lt;p&gt;Caveman2でセッションを有効するには，app.lispにあるbuilderマクロで&lt;code&gt;:session&lt;/code&gt;を書けばいいことはREADMEに書かれているのでそこは問題無いのですが，cookieのexpiresやセッション名となっているcookieキーの変更方法は書かれておらずソースを読む必要がありました．   &lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/fukamachi/lack/blob/master/src/builder.lisp&quot; &gt;https://github.com/fukamachi/lack/blob/master/src/builder.lisp&lt;/a&gt;を読むとlackのミドルウェアか判別して実行する展開する箇所があります．
 :sessionを渡すとlack.middleware.sessionを実行するということなので，&lt;br/&gt;
@@ -279,7 +292,7 @@ Strictにするには:strictキーワードをどうぞ．&lt;/p&gt;
 &lt;p&gt;Excerpt separator can also be extracted from content.
 Add &lt;code&gt;excerpt: &amp;lt;string&amp;gt;&lt;/code&gt; to the above metadata.
 Excerpt separator is &lt;code&gt;&amp;lt;!--more--&amp;gt;&lt;/code&gt; by default.&lt;/p&gt;
-</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Tidalを試しにインストールした際に躓いた点.html"/> <title>Tidalを試しにインストールした際に躓いた点</title> <published>2020-11-03 10:11:15</published> <updated>2020-11-03 10:11:15</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;TidalCyclesはライブコーディングで作曲等ができるというものですが，インストールが若干面倒です．
+</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/posts/Tidalを試しにインストールした際に躓いた点.html"/> <title>Tidalを試しにインストールした際に躓いた点</title> <published>2020-11-03 10:11:15</published> <updated>2020-11-03 10:11:15</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io</uri> </author> <content type="html">&lt;p&gt;TidalCyclesはライブコーディングで作曲等ができるというものですが，インストールが若干面倒です．
 SuperColiderとかDirtのインストールは躓く要素が無いので省きます． &lt;/p&gt;
 
 &lt;p&gt;Tidalはwikiに書かれている方法だと導入方法がcabal install tidalですがWindows環境でどうもこれが上手く行きません．GHCIでインポートしようにも見つからないという旨のエラーが出ます． &lt;/p&gt;
@@ -293,7 +306,7 @@ SuperColiderとかDirtのインストールは躓く要素が無いので省き�
 &lt;p&gt;Excerpt separator can also be extracted from content.
 Add &lt;code&gt;excerpt: &amp;lt;string&amp;gt;&lt;/code&gt; to the above metadata.
 Excerpt separator is &lt;code&gt;&amp;lt;!--more--&amp;gt;&lt;/code&gt; by default.&lt;/p&gt;
-</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Windows10-20H2-on-KVMでvirtioを後から使う際にINACCESSIBLEBOOTDEVICEに遭遇した.html"/> <title>Windows10 20H2 on KVMでvirtioを後から使う際にINACCESSIBLE_BOOT_DEVICEに遭遇した</title> <published>2020-10-27 23:55:02</published> <updated>2020-10-27 23:55:02</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;解決方法を調べてみるとネットで転がっているのはbcdeditを使うものばかりですが，私の環境では上手くいきませんでした．&lt;br/&gt;
+</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/posts/Windows10-20H2-on-KVMでvirtioを後から使う際にINACCESSIBLEBOOTDEVICEに遭遇した.html"/> <title>Windows10 20H2 on KVMでvirtioを後から使う際にINACCESSIBLE_BOOT_DEVICEに遭遇した</title> <published>2020-10-27 23:55:02</published> <updated>2020-10-27 23:55:02</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io</uri> </author> <content type="html">&lt;p&gt;解決方法を調べてみるとネットで転がっているのはbcdeditを使うものばかりですが，私の環境では上手くいきませんでした．&lt;br/&gt;
 まぁ要するにvirtioドライバを読み込むようにすれば良いのでWindowsが入っているストレージはSATA等の正常に起動できるやつに戻しておいて，&lt;br/&gt;
 ブートに関係ないセカンドストレージとして適当にvirtioなストレージを追加して普通にブートするだけでbcdeditで解決する例と同じことができます．    &lt;/p&gt;
 
@@ -302,7 +315,7 @@ Excerpt separator is &lt;code&gt;&amp;lt;!--more--&amp;gt;&lt;/code&gt; by defau
 &lt;p&gt;Excerpt separator can also be extracted from content.
 Add &lt;code&gt;excerpt: &amp;lt;string&amp;gt;&lt;/code&gt; to the above metadata.
 Excerpt separator is &lt;code&gt;&amp;lt;!--more--&amp;gt;&lt;/code&gt; by default.&lt;/p&gt;
-</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/VOICEROIDの旧製品のインストール時のブルスク回避方法.html"/> <title>VOICEROIDの旧製品のインストール時のブルスク回避方法</title> <published>2020-09-04 08:15:05</published> <updated>2020-09-04 08:15:05</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;現行(2010-09-04時点)のWindows10ですとVOICEROID EXで認証に使われているHASPが少なくとも昔私買ったDVD版だと古くてhardlock.sysがクラッシュしてブルスクします．&lt;br/&gt;
+</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/posts/VOICEROIDの旧製品のインストール時のブルスク回避方法.html"/> <title>VOICEROIDの旧製品のインストール時のブルスク回避方法</title> <published>2020-09-04 08:15:05</published> <updated>2020-09-04 08:15:05</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io</uri> </author> <content type="html">&lt;p&gt;現行(2010-09-04時点)のWindows10ですとVOICEROID EXで認証に使われているHASPが少なくとも昔私買ったDVD版だと古くてhardlock.sysがクラッシュしてブルスクします．&lt;br/&gt;
 AIのFAQ&lt;a href=&quot;https://www.ai-j.jp/qa/q6/&quot; &gt;https://www.ai-j.jp/qa/q6/&lt;/a&gt;を見るとThales社のサイトから最新版をダウンロードしてインストールすればう良いようです．&lt;br/&gt;
 ボイロのインストールに失敗した後にやるとその旨のダイアログが出ますが強行すればいけます．&lt;br/&gt;
 &lt;!--more--&gt;&lt;/p&gt;
@@ -310,42 +323,19 @@ AIのFAQ&lt;a href=&quot;https://www.ai-j.jp/qa/q6/&quot; &gt;https://www.ai-j.j
 &lt;p&gt;Excerpt separator can also be extracted from content.
 Add &lt;code&gt;excerpt: &amp;lt;string&amp;gt;&lt;/code&gt; to the above metadata.
 Excerpt separator is &lt;code&gt;&amp;lt;!--more--&amp;gt;&lt;/code&gt; by default.&lt;/p&gt;
-</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/最近はKotlinやRustをちょくちょくやってるというお話.html"/> <title>最近はKotlinやRustをちょくちょくやってるというお話</title> <published>2020-08-28 22:42:08</published> <updated>2020-08-28 22:42:08</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;特にこれといったことはないのだが，RustはNightly依存のライブラリにちょくちょく遭遇するのでstable運用したい時に困るなぁとかKotlinで簡単なAndroidアプリを作ってみたがAPI周りに苦しんだりJavaで書かれたサンプルばかりに遭遇するので面倒とかいう感想だけです．つらみ．&lt;/p&gt;
+</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/posts/最近はKotlinやRustをちょくちょくやってるというお話.html"/> <title>最近はKotlinやRustをちょくちょくやってるというお話</title> <published>2020-08-28 22:42:08</published> <updated>2020-08-28 22:42:08</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io</uri> </author> <content type="html">&lt;p&gt;特にこれといったことはないのだが，RustはNightly依存のライブラリにちょくちょく遭遇するのでstable運用したい時に困るなぁとかKotlinで簡単なAndroidアプリを作ってみたがAPI周りに苦しんだりJavaで書かれたサンプルばかりに遭遇するので面倒とかいう感想だけです．つらみ．&lt;/p&gt;
 
 &lt;!--more--&gt;
 
 &lt;p&gt;Excerpt separator can also be extracted from content.
 Add &lt;code&gt;excerpt: &amp;lt;string&amp;gt;&lt;/code&gt; to the above metadata.
 Excerpt separator is &lt;code&gt;&amp;lt;!--more--&amp;gt;&lt;/code&gt; by default.&lt;/p&gt;
-</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Gaming-PCを組んでみて.html"/> <title>Gaming PCを組んでみて</title> <published>2020-08-15 11:53:19</published> <updated>2020-08-15 11:53:19</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;長い間iMac mid 2011 21.5incをメインで使いつづけていたのですが、macOSはHigh Sierraまでしか使えずスペックも流石に辛く、PCを新調することしました。&lt;br/&gt;
+</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/posts/Gaming-PCを組んでみて.html"/> <title>Gaming PCを組んでみて</title> <published>2020-08-15 11:53:19</published> <updated>2020-08-15 11:53:19</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io</uri> </author> <content type="html">&lt;p&gt;長い間iMac mid 2011 21.5incをメインで使いつづけていたのですが、macOSはHigh Sierraまでしか使えずスペックも流石に辛く、PCを新調することしました。&lt;br/&gt;
 最初はBTOにしようかと考えていたのですが、最終税抜価格に10%の消費税かかるのはエゲつなさを感じましたし、電源などのパーツでどのメーカーのを使っているのかとか考えると納得はできず、結局自作です。&lt;br/&gt;
 一度もやったことないので工具とか揃えたので予想よりは高くついたのですがまぁまぁ楽しかったです。&lt;br/&gt;
 電源はちゃんとしたメーカーのを使わないと気が気じゃないので。  &lt;/p&gt;
 
 &lt;p&gt;Ryzen3600x + Radeon 5700XT(Sapphire Nitro+) + nvme m2 SSDは想像以上に快適でさいこーってなってます。いやまぁiMac mid 2011からの移行ならどれでもそうだろうと言われそうですがそうですねはい。&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;p&gt;Excerpt separator can also be extracted from content.
-Add &lt;code&gt;excerpt: &amp;lt;string&amp;gt;&lt;/code&gt; to the above metadata.
-Excerpt separator is &lt;code&gt;&amp;lt;!--more--&amp;gt;&lt;/code&gt; by default.&lt;/p&gt;
-</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Caveman2を利用する時の備忘録的なやつ.html"/> <title>Caveman2を利用する時の備忘録的なやつ</title> <published>2020-03-24 17:17:29</published> <updated>2020-03-24 17:17:29</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;Sessionはデフォルトだとインメモリーに保存されていますがapp.lispを編集すればDBに保存できます．&lt;/p&gt;
-
-&lt;p&gt;やり方自体はリポジトリにあるREADME読んでやれば良いですが，sessionsテーブルを要求してくるので作っておく必要があります（私の誤認識かもしれませんのであしからず）．&lt;/p&gt;
-
-&lt;p&gt;以下のSQL文のyour_database_nameを各自変更し実行すればいけると思います．&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;CREATE TABLE your_database_name.sessions (id CHAR(72) PRIMARY KEY, session_data TEXT, created_at DATETIME, updated_at DATETIME);&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&#039;(vector (unsigned-byte 8))を返す時にはlack形式で渡す必要があるのでdefroute内で下記の様にする．&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;(let ((octet (sb-ext:string-to-octets :external-format :CP932))
-      (content-length (length octet))
-      (status 200)
-      (content-type &quot;text/plain&quot;))
-   `(,status (:content-type ,content-type :content-length ,content-length) ,octet))&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;尚ファイルを読み込む場合は上記の様な面倒なことはせずにpathnameを返り値にすれば良いです．&lt;/p&gt;
 
 &lt;!--more--&gt;
 
