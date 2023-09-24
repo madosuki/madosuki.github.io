@@ -1,5 +1,18 @@
 <?xml version="1.0"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Mon, 21 Feb 2022 14:12:15 +0900</pubDate> <item> <title>Caveman2で明示的なセッションIDの更新とセッション終了方法についてのメモ</title> <link>https://madosuki.github.io/blog/posts/Caveman2で明示的なセッションIDの更新とセッション終了方法についてのメモ.html</link> <pubDate>2021-07-09 22:30:43</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Caveman2で明示的なセッションIDの更新とセッション終了方法についてのメモ.html</guid> <category><![CDATA[ Common Lisp ]]></category><category><![CDATA[ Caveman2 ]]></category><category><![CDATA[ Web ]]></category> <description><![CDATA[ <p>ログインログアウト機能を実装する際，ログイン時にセッションIDの変更とログアウト時にセッションを終了させる処理を入れることがセッションハイジャックへの対策の一つであるが，方法がドキュメントには載っていない．<br/>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Wed, 30 Aug 2023 19:20:31 +0900</pubDate> <item> <title>Ubuntu 23.04 Lunar LobsterでHDMIサウンド出力が動画を再生する度に遅延する現象について</title> <link>https://madosuki.github.io/blog/posts/Ubuntu-2304-Lunar-LobsterでHDMIサウンド出力が動画を再生する度に遅延する現象について.html</link> <pubDate>2023-08-30 18:22:22</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Ubuntu-2304-Lunar-LobsterでHDMIサウンド出力が動画を再生する度に遅延する現象について.html</guid> <category><![CDATA[ Linux ]]></category> <description><![CDATA[ <p>UbuntuでHDMIサウンド出力をすると遅延する現象自体は前のバージョンでも有り，デフォルトでalsaのサスペンド機能が有効になっていて，次の動画を再生すると復帰処理によって冒頭部分が聞けない問題がありました．  </p>
+
+<p>勿論音が鳴ってからシークして冒頭に戻せば良いのですが面倒ですしストレスです．<br/>
+Ubuntu 23.04では/etc/wireplumber/main.lua.d/50-alsa-config.lua<br/>
+の<code>[&quot;session.suspend-timeout-seconds&quot;]</code>箇所のコメントアウトを解除して値を0にしましょう．<br/>
+<code>[&quot;session.suspend-timeout-seconds&quot;] = 0,</code><br/>
+/etc/wireplumberはUbuntuではデフォルトで存在せず，手動で生成する必要が有ります．<br/>
+/usr/share/wireplumberディレクトリをコピーして使うのが楽です．尚現在ユーザーのみの場合は~/.config/下にwireplumberディレクトリを作っても良いです．<br/>
+同様に/etc/pipewireも/usr/share/pipewireディレクトリをコピーして作っておくのも良いんじゃないかと思います．~/.config下でも良いのは同じです．  </p>
+
+<p>できたら<br/>
+<code>systemctl restart pipewire pipewire-pulse wireplumber --user</code><br/>
+するか，PCを再起動すればalsaのサスペンド機能が無効化されます．  </p>
+ ]]></description> </item><item> <title>Caveman2で明示的なセッションIDの更新とセッション終了方法についてのメモ</title> <link>https://madosuki.github.io/blog/posts/Caveman2で明示的なセッションIDの更新とセッション終了方法についてのメモ.html</link> <pubDate>2021-07-09 22:30:43</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Caveman2で明示的なセッションIDの更新とセッション終了方法についてのメモ.html</guid> <category><![CDATA[ Common Lisp ]]></category><category><![CDATA[ Caveman2 ]]></category><category><![CDATA[ Web ]]></category> <description><![CDATA[ <p>ログインログアウト機能を実装する際，ログイン時にセッションIDの変更とログアウト時にセッションを終了させる処理を入れることがセッションハイジャックへの対策の一つであるが，方法がドキュメントには載っていない．<br/>
 なので適当に検索してみたら<a href="http://diary.wshito.com/comp/lisp/clack/lack-middleware-session/#sec-example3" >http://diary.wshito.com/comp/lisp/clack/lack-middleware-session/#sec-example3</a>が引っかかった．<br/>
 lackを直接使ってる場合の方法ではあるが，役に立った．<br/>
 envにある:lack.session.optionsにある値を見ているらしい．<br/>
@@ -323,29 +336,6 @@ Excerpt separator is <code>&lt;!--more--&gt;</code> by default.</p>
 電源はちゃんとしたメーカーのを使わないと気が気じゃないので。  </p>
 
 <p>Ryzen3600x + Radeon 5700XT(Sapphire Nitro+) + nvme m2 SSDは想像以上に快適でさいこーってなってます。いやまぁiMac mid 2011からの移行ならどれでもそうだろうと言われそうですがそうですねはい。</p>
-
-<!--more-->
-
-<p>Excerpt separator can also be extracted from content.
-Add <code>excerpt: &lt;string&gt;</code> to the above metadata.
-Excerpt separator is <code>&lt;!--more--&gt;</code> by default.</p>
- ]]></description> </item><item> <title>Caveman2を利用する時の備忘録的なやつ</title> <link>https://madosuki.github.io/blog/posts/Caveman2を利用する時の備忘録的なやつ.html</link> <pubDate>2020-03-24 17:17:29</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Caveman2を利用する時の備忘録的なやつ.html</guid> <category><![CDATA[ CommonLisp ]]></category> <description><![CDATA[ <p>Sessionはデフォルトだとインメモリーに保存されていますがapp.lispを編集すればDBに保存できます．</p>
-
-<p>やり方自体はリポジトリにあるREADME読んでやれば良いですが，sessionsテーブルを要求してくるので作っておく必要があります（私の誤認識かもしれませんのであしからず）．</p>
-
-<p>以下のSQL文のyour_database_nameを各自変更し実行すればいけると思います．</p>
-
-<pre><code>CREATE TABLE your_database_name.sessions (id CHAR(72) PRIMARY KEY, session_data TEXT, created_at DATETIME, updated_at DATETIME);</code></pre>
-
-<p>'(vector (unsigned-byte 8))を返す時にはlack形式で渡す必要があるのでdefroute内で下記の様にする．</p>
-
-<pre><code>(let ((octet (sb-ext:string-to-octets :external-format :CP932))
-      (content-length (length octet))
-      (status 200)
-      (content-type "text/plain"))
-   `(,status (:content-type ,content-type :content-length ,content-length) ,octet))</code></pre>
-
-<p>尚ファイルを読み込む場合は上記の様な面倒なことはせずにpathnameを返り値にすれば良いです．</p>
 
 <!--more-->
 
