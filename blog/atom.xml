@@ -1,5 +1,38 @@
 <?xml version="1.0"?>
-<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href="https://madosuki.github.io/blog"/> <link type="application/atom+xml" rel="self" href="https://madosuki.github.io/blog/atom.xml"/> <updated>Wed, 30 Aug 2023 19:20:31 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Ubuntu-2304-Lunar-LobsterでHDMIサウンド出力が動画を再生する度に遅延する現象について.html"/> <title>Ubuntu 23.04 Lunar LobsterでHDMIサウンド出力が動画を再生する度に遅延する現象について</title> <published>2023-08-30 18:22:22</published> <updated>2023-08-30 18:22:22</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;UbuntuでHDMIサウンド出力をすると遅延する現象自体は前のバージョンでも有り，デフォルトでalsaのサスペンド機能が有効になっていて，次の動画を再生すると復帰処理によって冒頭部分が聞けない問題がありました．  &lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href="https://madosuki.github.io/blog"/> <link type="application/atom+xml" rel="self" href="https://madosuki.github.io/blog/atom.xml"/> <updated>Tue, 18 Mar 2025 11:17:14 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/lackのsessionミドルウェアでpostgresqlを使用する際のメモ.html"/> <title>lackのsessionミドルウェアでpostgresqlを使用する際のメモ</title> <published>2025-03-18 10:56:32</published> <updated>2025-03-18 10:56:32</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;Caveman2ではapp.lisp内でlackのbuilderを使ってappを生成してそれに対してclackupを動かすという流れになっている。&lt;br/&gt;
+このbuilderで
+&lt;code&gt;
+ (:session
+  :store (make-dbi-store :connector (lambda ()
+                                      (apply #&#039;dbi:connect
+                                             (your-package-name.db:connection-settings)))))
+&lt;/code&gt;
+とするとRDBMSにセッション情報を保存できるようになる。&lt;br/&gt;
+README.mdのこの箇所にも書かれているが詳細は&lt;a href=&quot;https://github.com/fukamachi/lack/blob/master/src/middleware/session/store/dbi.lisp&quot; &gt;ソース&lt;/a&gt; を読まないわからない。&lt;br/&gt;
+ソースを読めばわかるがfetch-sessionメソッドがwith-db-connectionマクロを使用していて自動的に接続を閉じれるようになっている。&lt;br/&gt;
+しかし、それはdisconnectorキーワードで閉じる際に使用する関数を指定している場合であり、初期値はnilなのでただ単に上記のようにすると開きっぱなしになってしまう。&lt;br/&gt;
+なので、下記の様にdisconnectorキーワード使って関数を渡してやる必要がある。&lt;br/&gt;
+&lt;code&gt;
+ (:session
+  :store (make-dbi-store :connector (lambda ()
+                                      (apply #&#039;dbi:connect
+                                             (your-package-name.db:connection-settings)))
+                         :disconnector #&#039;dbi:disconnect)
+  :state (make-cookie-state
+          :httponly t
+          :cookie-key &amp;quot;session&amp;quot; ;; default value is lack.session
+          :samesite :strict
+          :secure t
+          :expires 1800))
+&lt;/code&gt;
+make-cookie-stateの箇所は必要が無いが使い方のメモとして残しておく。　　&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Excerpt separator can also be extracted from content.
+Add &lt;code&gt;excerpt: &amp;lt;string&amp;gt;&lt;/code&gt; to the above metadata.
+Excerpt separator is &lt;code&gt;&amp;lt;!--more--&amp;gt;&lt;/code&gt; by default.&lt;/p&gt;
+</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Ubuntu-2304-Lunar-LobsterでHDMIサウンド出力が動画を再生する度に遅延する現象について.html"/> <title>Ubuntu 23.04 Lunar LobsterでHDMIサウンド出力が動画を再生する度に遅延する現象について</title> <published>2023-08-30 18:22:22</published> <updated>2023-08-30 18:22:22</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;UbuntuでHDMIサウンド出力をすると遅延する現象自体は前のバージョンでも有り，デフォルトでalsaのサスペンド機能が有効になっていて，次の動画を再生すると復帰処理によって冒頭部分が聞けない問題がありました．  &lt;/p&gt;
 
 &lt;p&gt;勿論音が鳴ってからシークして冒頭に戻せば良いのですが面倒ですしストレスです．&lt;br/&gt;
 Ubuntu 23.04では/etc/wireplumber/main.lua.d/50-alsa-config.lua&lt;br/&gt;
@@ -324,18 +357,6 @@ AIのFAQ&lt;a href=&quot;https://www.ai-j.jp/qa/q6/&quot; &gt;https://www.ai-j.j
 Add &lt;code&gt;excerpt: &amp;lt;string&amp;gt;&lt;/code&gt; to the above metadata.
 Excerpt separator is &lt;code&gt;&amp;lt;!--more--&amp;gt;&lt;/code&gt; by default.&lt;/p&gt;
 </content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/最近はKotlinやRustをちょくちょくやってるというお話.html"/> <title>最近はKotlinやRustをちょくちょくやってるというお話</title> <published>2020-08-28 22:42:08</published> <updated>2020-08-28 22:42:08</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;特にこれといったことはないのだが，RustはNightly依存のライブラリにちょくちょく遭遇するのでstable運用したい時に困るなぁとかKotlinで簡単なAndroidアプリを作ってみたがAPI周りに苦しんだりJavaで書かれたサンプルばかりに遭遇するので面倒とかいう感想だけです．つらみ．&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;p&gt;Excerpt separator can also be extracted from content.
-Add &lt;code&gt;excerpt: &amp;lt;string&amp;gt;&lt;/code&gt; to the above metadata.
-Excerpt separator is &lt;code&gt;&amp;lt;!--more--&amp;gt;&lt;/code&gt; by default.&lt;/p&gt;
-</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Gaming-PCを組んでみて.html"/> <title>Gaming PCを組んでみて</title> <published>2020-08-15 11:53:19</published> <updated>2020-08-15 11:53:19</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;長い間iMac mid 2011 21.5incをメインで使いつづけていたのですが、macOSはHigh Sierraまでしか使えずスペックも流石に辛く、PCを新調することしました。&lt;br/&gt;
-最初はBTOにしようかと考えていたのですが、最終税抜価格に10%の消費税かかるのはエゲつなさを感じましたし、電源などのパーツでどのメーカーのを使っているのかとか考えると納得はできず、結局自作です。&lt;br/&gt;
-一度もやったことないので工具とか揃えたので予想よりは高くついたのですがまぁまぁ楽しかったです。&lt;br/&gt;
-電源はちゃんとしたメーカーのを使わないと気が気じゃないので。  &lt;/p&gt;
-
-&lt;p&gt;Ryzen3600x + Radeon 5700XT(Sapphire Nitro+) + nvme m2 SSDは想像以上に快適でさいこーってなってます。いやまぁiMac mid 2011からの移行ならどれでもそうだろうと言われそうですがそうですねはい。&lt;/p&gt;
 
 &lt;!--more--&gt;
 
