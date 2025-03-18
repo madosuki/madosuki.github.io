@@ -1,17 +1,20 @@
 <?xml version="1.0"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Tue, 18 Mar 2025 11:36:18 +0900</pubDate> <item> <title>lackのsessionミドルウェアでpostgresqlを使用する際のメモ</title> <link>https://madosuki.github.io/blog/posts/lackのsessionミドルウェアでpostgresqlを使用する際のメモ.html</link> <pubDate>2025-03-18 10:56:32</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/lackのsessionミドルウェアでpostgresqlを使用する際のメモ.html</guid> <category><![CDATA[ bar ]]></category><category><![CDATA[ baz ]]></category> <description><![CDATA[ <p>Caveman2ではapp.lisp内でlackのbuilderを使ってappを生成してそれに対してclackupを動かすという流れになっている。<br/>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Tue, 18 Mar 2025 11:47:03 +0900</pubDate> <item> <title>lackのsessionミドルウェアでpostgresqlを使用する際のメモ</title> <link>https://madosuki.github.io/blog/posts/lackのsessionミドルウェアでpostgresqlを使用する際のメモ.html</link> <pubDate>2025-03-18 10:56:32</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/lackのsessionミドルウェアでpostgresqlを使用する際のメモ.html</guid> <category><![CDATA[ bar ]]></category><category><![CDATA[ baz ]]></category> <description><![CDATA[ <p>Caveman2ではapp.lisp内でlackのbuilderを使ってappを生成してそれに対してclackupを動かすという流れになっている。<br/>
 このbuilderで
-<code>lisp
+<pre>
+<code>
  (:session
   :store (make-dbi-store :connector (lambda ()
                                       (apply #'dbi:connect
                                              (your-package-name.db:connection-settings)))))
 </code>
+</pre>
 とするとRDBMSにセッション情報を保存できるようになる。<br/>
 README.mdのこの箇所にも書かれているが詳細は<a href="https://github.com/fukamachi/lack/blob/master/src/middleware/session/store/dbi.lisp" >ソース</a> を読まないわからない。<br/>
 ソースを読めばわかるがfetch-sessionメソッドがwith-db-connectionマクロを使用していて自動的に接続を閉じれるようになっている。<br/>
 しかし、それはdisconnectorキーワードで閉じる際に使用する関数を指定している場合であり、初期値はnilなのでただ単に上記のようにすると開きっぱなしになってしまう。<br/>
 なので、下記の様にdisconnectorキーワード使って関数を渡してやる必要がある。<br/>
+<pre>
 <code>
  (:session
   :store (make-dbi-store :connector (lambda ()
@@ -25,6 +28,7 @@ README.mdのこの箇所にも書かれているが詳細は<a href="https://git
           :secure t
           :expires 1800))
 </code>
+</pre>
 make-cookie-stateの箇所は必要が無いが使い方のメモとして残しておく。　　</p>
  ]]></description> </item><item> <title>Ubuntu 23.04 Lunar LobsterでHDMIサウンド出力が動画を再生する度に遅延する現象について</title> <link>https://madosuki.github.io/blog/posts/Ubuntu-2304-Lunar-LobsterでHDMIサウンド出力が動画を再生する度に遅延する現象について.html</link> <pubDate>2023-08-30 18:22:22</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Ubuntu-2304-Lunar-LobsterでHDMIサウンド出力が動画を再生する度に遅延する現象について.html</guid> <category><![CDATA[ Linux ]]></category> <description><![CDATA[ <p>UbuntuでHDMIサウンド出力をすると遅延する現象自体は前のバージョンでも有り，デフォルトでalsaのサスペンド機能が有効になっていて，次の動画を再生すると復帰処理によって冒頭部分が聞けない問題がありました．  </p>
 
