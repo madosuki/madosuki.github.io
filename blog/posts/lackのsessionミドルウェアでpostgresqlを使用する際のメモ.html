@@ -15,7 +15,7 @@
 <h1 class="page-header">lackのsessionミドルウェアでpostgresqlを使用する際のメモ</h1>
 <p> Tagged as <a href="https://madosuki.github.io/blog/tag/bar.html">bar</a>, <a href="https://madosuki.github.io/blog/tag/baz.html">baz</a> </p> <p class="date-posted"> Written on 2025-03-18 10:56:32 </p> <p>Caveman2ではapp.lisp内でlackのbuilderを使ってappを生成してそれに対してclackupを動かすという流れになっている。<br/>
 このbuilderで
-<code>
+<code>lisp
  (:session
   :store (make-dbi-store :connector (lambda ()
                                       (apply #'dbi:connect
@@ -40,12 +40,6 @@ README.mdのこの箇所にも書かれているが詳細は<a href="https://git
           :expires 1800))
 </code>
 make-cookie-stateの箇所は必要が無いが使い方のメモとして残しておく。　　</p>
-
-<!--more-->
-
-<p>Excerpt separator can also be extracted from content.
-Add <code>excerpt: &lt;string&gt;</code> to the above metadata.
-Excerpt separator is <code>&lt;!--more--&gt;</code> by default.</p>
  <ul class="pager"> <li class="previous"><a href="https://madosuki.github.io/blog/posts/Ubuntu-2304-Lunar-LobsterでHDMIサウンド出力が動画を再生する度に遅延する現象について.html">&larr; Previous</a></li>
 
 </ul> </div>
