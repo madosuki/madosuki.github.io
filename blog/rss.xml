@@ -1,5 +1,17 @@
 <?xml version="1.0"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Tue, 18 Mar 2025 11:47:03 +0900</pubDate> <item> <title>lackのsessionミドルウェアでpostgresqlを使用する際のメモ</title> <link>https://madosuki.github.io/blog/posts/lackのsessionミドルウェアでpostgresqlを使用する際のメモ.html</link> <pubDate>2025-03-18 10:56:32</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/lackのsessionミドルウェアでpostgresqlを使用する際のメモ.html</guid> <category><![CDATA[ bar ]]></category><category><![CDATA[ baz ]]></category> <description><![CDATA[ <p>Caveman2ではapp.lisp内でlackのbuilderを使ってappを生成してそれに対してclackupを動かすという流れになっている。<br/>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"> <channel> <title>(随筆 :tendency 自堕落)</title> <link>https://madosuki.github.io/blog</link> <atom:link href="https://madosuki.github.io/blog/rss.xml" rel="self" type="application/rss+xml" /> <language>en-us</language> <pubDate>Tue, 02 Sep 2025 14:00:23 +0900</pubDate> <item> <title>Live2D Cubism 5 SDK for Web R5 beta 1 Frameworkについて</title> <link>https://madosuki.github.io/blog/posts/Live2D-Cubism-5-SDK-for-Web-R5-beta-1-Frameworkについて.html</link> <pubDate>2025-09-02 13:24:31</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/Live2D-Cubism-5-SDK-for-Web-R5-beta-1-Frameworkについて.html</guid> <category><![CDATA[ TypeScript ]]></category><category><![CDATA[ Live2D ]]></category> <description><![CDATA[ <p>私は、<a href="https://github.com/madosuki/live2dManager" >https://github.com/madosuki/live2dManager</a> というCubism Sdk For Webを使ったライブラリを個人的に作成している。<br/>
+Cubism 5.3のbeta 1が出たということで早速submoduleを更新してドキュメントに書かれていたcreateRendererも修正して動作確認を行ってみたところ以下のエラーがConsoleに出力されmodelのdrawが失敗した。<br/>
+<pre>
+<code>
+Failed to load blend mode shaders: TypeError: Failed to execute 'getAttribLocation' on 'WebGL2RenderingContext': parameter 1 is not of type 'WebGLProgram'.
+</code>
+</pre></p>
+
+<p>シェーダーの読み込みに失敗したという内容だが、あまり思い当たるところがなく、ドキュメントにもChangelogにもそれらしいのが書いておらず仕方なくFrameworkのソースコードを読みに行ったところ、<a href="https://github.com/Live2D/CubismWebFramework/blob/020a0dd899c62e53e65acae1723ef4ed3f80baa3/src/rendering/cubismshader_webgl.ts#L65" >https://github.com/Live2D/CubismWebFramework/blob/020a0dd899c62e53e65acae1723ef4ed3f80baa3/src/rendering/cubismshader_webgl.ts#L65</a> でビルド時ではなく実行時に'../../Framework/Shaders/WebGL/'という相対パスからシェーダーファイル読みだす処理に変更されていた。これ以前は文字列として変数に格納されていたシェーダーを読むという形式だった。<br/>
+Nativeの方は一つ前のバージョンでこの形式に変更されているようで、Nativeは恐らくdllと同じ階層にあるディレクトリから読みに行く形式となっており、CMakeも該当のディレクトリを自動生成するぽく単にそれを同梱すれば良いが、Webの方は単純にそうは行かず、CORSの問題もある上に、Frameworkを使ったライブラリがnode_modeuleに配置されている時などにどこに配置したらいいか困るなど、あまりにも取り扱いが厄介で、Nativeの設計をそのまま無理矢理に持って来てしまったという感じで非常にげんなりした。<br/>
+ファイル分離した方がメンテナンス性があるというのはわかるが、viteなどにある機能を使ってimport fromでビルド時に埋め込むようにすべきであると思う。<br/>
+この記事を投稿した時点ではドキュメントにシェーダーファイルの位置について記述されておらず、流石に書いて欲しいという気持ちが強い。</p>
+ ]]></description> </item><item> <title>lackのsessionミドルウェアでpostgresqlを使用する際のメモ</title> <link>https://madosuki.github.io/blog/posts/lackのsessionミドルウェアでpostgresqlを使用する際のメモ.html</link> <pubDate>2025-03-18 10:56:32</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/lackのsessionミドルウェアでpostgresqlを使用する際のメモ.html</guid> <category><![CDATA[ bar ]]></category><category><![CDATA[ baz ]]></category> <description><![CDATA[ <p>Caveman2ではapp.lisp内でlackのbuilderを使ってappを生成してそれに対してclackupを動かすという流れになっている。<br/>
 このbuilderで
 <pre>
 <code>
@@ -350,13 +362,6 @@ Excerpt separator is <code>&lt;!--more--&gt;</code> by default.</p>
 AIのFAQ<a href="https://www.ai-j.jp/qa/q6/" >https://www.ai-j.jp/qa/q6/</a>を見るとThales社のサイトから最新版をダウンロードしてインストールすればう良いようです．<br/>
 ボイロのインストールに失敗した後にやるとその旨のダイアログが出ますが強行すればいけます．<br/>
 <!--more--></p>
-
-<p>Excerpt separator can also be extracted from content.
-Add <code>excerpt: &lt;string&gt;</code> to the above metadata.
-Excerpt separator is <code>&lt;!--more--&gt;</code> by default.</p>
- ]]></description> </item><item> <title>最近はKotlinやRustをちょくちょくやってるというお話</title> <link>https://madosuki.github.io/blog/posts/最近はKotlinやRustをちょくちょくやってるというお話.html</link> <pubDate>2020-08-28 22:42:08</pubDate> <author>madosuki</author> <guid isPermaLink="true">https://madosuki.github.io/blog/posts/最近はKotlinやRustをちょくちょくやってるというお話.html</guid> <category><![CDATA[ pets ]]></category><category><![CDATA[ animal ]]></category> <description><![CDATA[ <p>特にこれといったことはないのだが，RustはNightly依存のライブラリにちょくちょく遭遇するのでstable運用したい時に困るなぁとかKotlinで簡単なAndroidアプリを作ってみたがAPI周りに苦しんだりJavaで書かれたサンプルばかりに遭遇するので面倒とかいう感想だけです．つらみ．</p>
-
-<!--more-->
 
 <p>Excerpt separator can also be extracted from content.
 Add <code>excerpt: &lt;string&gt;</code> to the above metadata.

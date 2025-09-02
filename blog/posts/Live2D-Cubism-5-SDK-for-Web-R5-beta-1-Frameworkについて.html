@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <title>(随筆 :tendency 自堕落)</title> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <link href="https://madosuki.github.io/blog/css/bootstrap.min.css" rel="stylesheet" media="screen"> <link href="https://madosuki.github.io/blog/css/custom.css" rel="stylesheet" media="screen"> <link rel="alternate" href="https://madosuki.github.io/blog/rss.xml" type="application/rss+xml" /> <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'foo']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script> </head> <body> <div class="container-fluid"> <div class="row-fluid"> <div class="offset2 span8"> <div class="row-fluid"> <div class="navbar navbar-inverse"> <div class="navbar-inner"> <a class="brand" href="https://madosuki.github.io/blog">(随筆 :tendency 自堕落)</a> <ul class="nav"> <li> <a href="http://madosuki.github.com/">Home</a> </li><li> <a href="http://x.com/madosuki_public">X</a> </li><li> <a href="http://github.com/madosuki">Codes</a> </li> </ul> </div> </div> </div> <div class="row-fluid"> <div class="row-fluid">
+<h1 class="page-header">Live2D Cubism 5 SDK for Web R5 beta 1 Frameworkについて</h1>
+<p> Tagged as <a href="https://madosuki.github.io/blog/tag/TypeScript.html">TypeScript</a>, <a href="https://madosuki.github.io/blog/tag/Live2D.html">Live2D</a> </p> <p class="date-posted"> Written on 2025-09-02 13:24:31 </p> <p>私は、<a href="https://github.com/madosuki/live2dManager" >https://github.com/madosuki/live2dManager</a> というCubism Sdk For Webを使ったライブラリを個人的に作成している。<br/>
+Cubism 5.3のbeta 1が出たということで早速submoduleを更新してドキュメントに書かれていたcreateRendererも修正して動作確認を行ってみたところ以下のエラーがConsoleに出力されmodelのdrawが失敗した。<br/>
+<pre>
+<code>
+Failed to load blend mode shaders: TypeError: Failed to execute 'getAttribLocation' on 'WebGL2RenderingContext': parameter 1 is not of type 'WebGLProgram'.
+</code>
+</pre></p>
+
+<p>シェーダーの読み込みに失敗したという内容だが、あまり思い当たるところがなく、ドキュメントにもChangelogにもそれらしいのが書いておらず仕方なくFrameworkのソースコードを読みに行ったところ、<a href="https://github.com/Live2D/CubismWebFramework/blob/020a0dd899c62e53e65acae1723ef4ed3f80baa3/src/rendering/cubismshader_webgl.ts#L65" >https://github.com/Live2D/CubismWebFramework/blob/020a0dd899c62e53e65acae1723ef4ed3f80baa3/src/rendering/cubismshader_webgl.ts#L65</a> でビルド時ではなく実行時に'../../Framework/Shaders/WebGL/'という相対パスからシェーダーファイル読みだす処理に変更されていた。これ以前は文字列として変数に格納されていたシェーダーを読むという形式だった。<br/>
+Nativeの方は一つ前のバージョンでこの形式に変更されているようで、Nativeは恐らくdllと同じ階層にあるディレクトリから読みに行く形式となっており、CMakeも該当のディレクトリを自動生成するぽく単にそれを同梱すれば良いが、Webの方は単純にそうは行かず、CORSの問題もある上に、Frameworkを使ったライブラリがnode_modeuleに配置されている時などにどこに配置したらいいか困るなど、あまりにも取り扱いが厄介で、Nativeの設計をそのまま無理矢理に持って来てしまったという感じで非常にげんなりした。<br/>
+ファイル分離した方がメンテナンス性があるというのはわかるが、viteなどにある機能を使ってimport fromでビルド時に埋め込むようにすべきであると思う。<br/>
+この記事を投稿した時点ではドキュメントにシェーダーファイルの位置について記述されておらず、流石に書いて欲しいという気持ちが強い。</p>
+ <ul class="pager"> <li class="previous"><a href="https://madosuki.github.io/blog/posts/lackのsessionミドルウェアでpostgresqlを使用する際のメモ.html">&larr; Previous</a></li>
+
+</ul> </div>
+ </div> <div class="row-fluid"> <div id="disqus_thread"></div>
+     <script type="text/javascript">
+       /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+       var disqus_shortname = 'my-site-name';
+       /* * * DON'T EDIT BELOW THIS LINE * * */
+       (function() {
+         var dsq = document.createElement('script');
+         dsq.type = 'text/javascript';
+         dsq.async = true;
+         dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+     </script>
+     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a> </div> <div class="row-fluid"> <hr> <p class="fineprint">Unless otherwise credited all material <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US"> <img alt="Creative Commons License" style="border-width:0" src="https://madosuki.github.io/blog/img/cc-by-sa.png" /> </a> by madosuki <a id="coleslaw-logo" href="https://github.com/redline6561/coleslaw"> <img src="https://madosuki.github.io/blog/img/logo_small.jpg" alt="Coleslaw logo" /></p> </a> </div> </div> </div> </div> <script src="https://madosuki.github.io/blog/js/bootstrap.min.js"></script> </body> </html>

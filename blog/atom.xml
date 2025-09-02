@@ -1,5 +1,17 @@
 <?xml version="1.0"?>
-<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href="https://madosuki.github.io/blog"/> <link type="application/atom+xml" rel="self" href="https://madosuki.github.io/blog/atom.xml"/> <updated>Tue, 18 Mar 2025 11:47:03 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/lackのsessionミドルウェアでpostgresqlを使用する際のメモ.html"/> <title>lackのsessionミドルウェアでpostgresqlを使用する際のメモ</title> <published>2025-03-18 10:56:32</published> <updated>2025-03-18 10:56:32</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;Caveman2ではapp.lisp内でlackのbuilderを使ってappを生成してそれに対してclackupを動かすという流れになっている。&lt;br/&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"> <title>(随筆 :tendency 自堕落)</title> <link href="https://madosuki.github.io/blog"/> <link type="application/atom+xml" rel="self" href="https://madosuki.github.io/blog/atom.xml"/> <updated>Tue, 02 Sep 2025 14:00:23 +0900</updated> <author> <name>madosuki</name> </author> <entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/Live2D-Cubism-5-SDK-for-Web-R5-beta-1-Frameworkについて.html"/> <title>Live2D Cubism 5 SDK for Web R5 beta 1 Frameworkについて</title> <published>2025-09-02 13:24:31</published> <updated>2025-09-02 13:24:31</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;私は、&lt;a href=&quot;https://github.com/madosuki/live2dManager&quot; &gt;https://github.com/madosuki/live2dManager&lt;/a&gt; というCubism Sdk For Webを使ったライブラリを個人的に作成している。&lt;br/&gt;
+Cubism 5.3のbeta 1が出たということで早速submoduleを更新してドキュメントに書かれていたcreateRendererも修正して動作確認を行ってみたところ以下のエラーがConsoleに出力されmodelのdrawが失敗した。&lt;br/&gt;
+&lt;pre&gt;
+&lt;code&gt;
+Failed to load blend mode shaders: TypeError: Failed to execute &#039;getAttribLocation&#039; on &#039;WebGL2RenderingContext&#039;: parameter 1 is not of type &#039;WebGLProgram&#039;.
+&lt;/code&gt;
+&lt;/pre&gt;&lt;/p&gt;
+
+&lt;p&gt;シェーダーの読み込みに失敗したという内容だが、あまり思い当たるところがなく、ドキュメントにもChangelogにもそれらしいのが書いておらず仕方なくFrameworkのソースコードを読みに行ったところ、&lt;a href=&quot;https://github.com/Live2D/CubismWebFramework/blob/020a0dd899c62e53e65acae1723ef4ed3f80baa3/src/rendering/cubismshader_webgl.ts#L65&quot; &gt;https://github.com/Live2D/CubismWebFramework/blob/020a0dd899c62e53e65acae1723ef4ed3f80baa3/src/rendering/cubismshader_webgl.ts#L65&lt;/a&gt; でビルド時ではなく実行時に&#039;../../Framework/Shaders/WebGL/&#039;という相対パスからシェーダーファイル読みだす処理に変更されていた。これ以前は文字列として変数に格納されていたシェーダーを読むという形式だった。&lt;br/&gt;
+Nativeの方は一つ前のバージョンでこの形式に変更されているようで、Nativeは恐らくdllと同じ階層にあるディレクトリから読みに行く形式となっており、CMakeも該当のディレクトリを自動生成するぽく単にそれを同梱すれば良いが、Webの方は単純にそうは行かず、CORSの問題もある上に、Frameworkを使ったライブラリがnode_modeuleに配置されている時などにどこに配置したらいいか困るなど、あまりにも取り扱いが厄介で、Nativeの設計をそのまま無理矢理に持って来てしまったという感じで非常にげんなりした。&lt;br/&gt;
+ファイル分離した方がメンテナンス性があるというのはわかるが、viteなどにある機能を使ってimport fromでビルド時に埋め込むようにすべきであると思う。&lt;br/&gt;
+この記事を投稿した時点ではドキュメントにシェーダーファイルの位置について記述されておらず、流石に書いて欲しいという気持ちが強い。&lt;/p&gt;
+</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/lackのsessionミドルウェアでpostgresqlを使用する際のメモ.html"/> <title>lackのsessionミドルウェアでpostgresqlを使用する際のメモ</title> <published>2025-03-18 10:56:32</published> <updated>2025-03-18 10:56:32</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;Caveman2ではapp.lisp内でlackのbuilderを使ってappを生成してそれに対してclackupを動かすという流れになっている。&lt;br/&gt;
 このbuilderで
 &lt;pre&gt;
 &lt;code&gt;
@@ -350,13 +362,6 @@ Excerpt separator is &lt;code&gt;&amp;lt;!--more--&amp;gt;&lt;/code&gt; by defau
 AIのFAQ&lt;a href=&quot;https://www.ai-j.jp/qa/q6/&quot; &gt;https://www.ai-j.jp/qa/q6/&lt;/a&gt;を見るとThales社のサイトから最新版をダウンロードしてインストールすればう良いようです．&lt;br/&gt;
 ボイロのインストールに失敗した後にやるとその旨のダイアログが出ますが強行すればいけます．&lt;br/&gt;
 &lt;!--more--&gt;&lt;/p&gt;
-
-&lt;p&gt;Excerpt separator can also be extracted from content.
-Add &lt;code&gt;excerpt: &amp;lt;string&amp;gt;&lt;/code&gt; to the above metadata.
-Excerpt separator is &lt;code&gt;&amp;lt;!--more--&amp;gt;&lt;/code&gt; by default.&lt;/p&gt;
-</content> </entry><entry> <link type="text/html" rel="alternate" href="https://madosuki.github.io/blog/posts/最近はKotlinやRustをちょくちょくやってるというお話.html"/> <title>最近はKotlinやRustをちょくちょくやってるというお話</title> <published>2020-08-28 22:42:08</published> <updated>2020-08-28 22:42:08</updated> <author> <name>madosuki</name> <uri>https://madosuki.github.io/blog</uri> </author> <content type="html">&lt;p&gt;特にこれといったことはないのだが，RustはNightly依存のライブラリにちょくちょく遭遇するのでstable運用したい時に困るなぁとかKotlinで簡単なAndroidアプリを作ってみたがAPI周りに苦しんだりJavaで書かれたサンプルばかりに遭遇するので面倒とかいう感想だけです．つらみ．&lt;/p&gt;
-
-&lt;!--more--&gt;
 
 &lt;p&gt;Excerpt separator can also be extracted from content.
 Add &lt;code&gt;excerpt: &amp;lt;string&amp;gt;&lt;/code&gt; to the above metadata.
